@@ -34,14 +34,14 @@ OrtScraper is a python tool used to request information in bulk from KEGG (Kyoto
 **Dependencies:**  bs4, grequests
 
 
-We suggest the use of the package manager [pip](https://pip.pypa.io/en/stable/) to install the virtual environment (* *virtualenv* *)
+We suggest the use of the package manager [pip](https://pip.pypa.io/en/stable/) to install the virtual environment (*virtualenv*)
 
 
 ```bash
 pip install virtualenv
 ```
 
-Create a virtual environment to use with this tool.
+Create a virtual environment.
 
 ```bash
 virtualenv venv_OrtScraper
@@ -60,7 +60,7 @@ pip install grequests
 pip install bs4
 ```
 
-Then move to the folder where the file setup.py from the OrtScraper tool is located.
+Next move to the folder where the file setup.py from the OrtScraper tool is located.
 
 ```bash
 cd /path/to/OrtScraper
