@@ -74,7 +74,7 @@ Run the command:
 python setup.py install
 ```
 
-The tool should be ready to use.
+Once the installation is finished the tool should be ready to use.
 
 
 
