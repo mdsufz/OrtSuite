@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-    Setup file for OrthoAnnotator.
+    Setup file for OrtSuite.
 
     This file was generated with PyScaffold 3.1.
     PyScaffold helps you to put up the scaffold of your new Python project.
@@ -23,28 +23,29 @@ with open('README.md') as f:
 
 if __name__ == "__main__":
     setup(use_pyscaffold=True,
-          name='OrthoAnnotator',
+          name='OrtSuite',
           version='0.01',
-          description='Annotation tool for OrthoFinder orthogroups.',
-          licence="MIT",  # Check license
+          description='Prediction of putative microbial interactions.',
+          licence="GNU-LPL",  # Check license
           long_description=long_description,
-          author='Marta Lopes Gomes',
-          author_email='martalopesgomes@hotmail.com',
+          author='Microbial Systems Data Science group',
+          author_email='msds@ufz.de',
           url='',
           # Commands
-          scripts=['src/aux.py', 'src/diamond_mp.py'],
+          scripts=['OrtAn/src/aux.py', 'OrtAn/src/diamond_mp.py','OrtScraper/src/MultipleRequests.py', 'OrtScraper/src/aux.py'],
           # classifiers=[],
           packages=find_packages(),
           install_requires=[],
           entry_points={
               'console_scripts':
-                  ['create_project=src.create_project:run',
-                   'delete_project=src.delete_project:run',
-                   'relaxed_search=src.relaxed_search:run',
-                   'restrictive_search=src.restrictive_search:run',
-                   'check_projects=src.check_projects:run',
-                   'annotation=src.annotation:run',
-                   'create_db=src.create_db:run',
+                  ['create_project=OrtAn/src.create_project:run',
+                   'delete_project=OrtAn/src.delete_project:run',
+                   'relaxed_search=OrtAn/src.relaxed_search:run',
+                   'restrictive_search=OrtAn/src.restrictive_search:run',
+                   'check_projects=OrtAn/src.check_projects:run',
+                   'annotation=OrtAn/src.annotation:run',
+                   'create_db=OrtAn/src.create_db:run',
+                   'download_kos=OrtScraper/src.download_kos:run'
                    ],
           },
           # Data - see this better
