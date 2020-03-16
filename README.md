@@ -20,20 +20,16 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 Resources for Ortsuite will vary depending on the amount of data being processed. Nevertheless, we recommend a minimum of 4 cores and 8GB of RAM for small datasets (<50 identifiers). OrtSuite officially supports only Linux OS. 
 
 
-# OrtScraper
-
-OrtScraper is a python tool used to request information in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database.
-
-1) download_kos: download all protein sequences from KEGG associated with list of identifiers provided by the user.
-
-
-
-
 
 Installation
 ============
 
-Python 3 is required.
+
+# OrtScraper
+
+OrtScraper is a python tool used to request information in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database.
+
+**Dependencies:**  Python 3
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install virtualenv.
 
