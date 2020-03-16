@@ -2,4 +2,4 @@
 
 OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. 
 
-![workflow](https://github.com/msdsufz/OrtSuite/https://github.com/msdsufz/OrtSuite/blob/Figures/Figure_1_OrtAn_workflow.pdf)
+![workflow](https://github.com/msdsufz/OrtSuite/blob/Figures/Figure_1_OrtAn_workflow.pdf)
