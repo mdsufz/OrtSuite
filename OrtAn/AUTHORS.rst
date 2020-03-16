@@ -2,4 +2,5 @@
 Contributors
 ============
 
-* MartaLopesGomes <martalopesgomes@hotmail.com>
+* Marta Gomes <martalopesgomes@hotmail.com>
+* Joao Saraiva <joao.saraiva@ufz.de>
