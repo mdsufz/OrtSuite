@@ -29,9 +29,13 @@ Installation
 
 OrtScraper is a python tool used to request information in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database.
 
-**Dependencies:**  Python 3
+**Requirements:**  Python 3
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install virtualenv.
+**Dependencies:**  bs4, grequests
+
+
+We suggest the use of the package manager [pip](https://pip.pypa.io/en/stable/) to install the virtual environment (* *virtualenv* *)
+
 
 ```bash
 pip install virtualenv
