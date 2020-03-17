@@ -11,13 +11,13 @@ import sys
 from urllib.request import urlopen
 
 from MultipleRequests import MultipleRequests
-from aux import *
+from OrtScraper.src.aux import *
 
 # from keggscraper import __version__
 
 __author__ = "MartaLopesGomes"
-__copyright__ = "MartaLopesGomes"
-__license__ = "mit"
+__copyright__ = "msdsufz"
+__license__ = "gnu"
 
 _logger = logging.getLogger(__name__)
 
@@ -39,7 +39,7 @@ def parse_args(args):
     parser.add_argument(
         "--version",
         action="version"# ,
-        # version="KEGGScraper {ver}".format(ver=__version__))
+        # version="OrtScraper {ver}".format(ver=__version__))
     )
     parser.add_argument(
         "-o",
