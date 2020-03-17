@@ -38,14 +38,14 @@ if __name__ == "__main__":
           install_requires=[],
           entry_points={
               'console_scripts':
-                  ['create_project=OrtAn/src.create_project:run',
-                   'delete_project=OrtAn/src.delete_project:run',
-                   'relaxed_search=OrtAn/src.relaxed_search:run',
-                   'restrictive_search=OrtAn/src.restrictive_search:run',
-                   'check_projects=OrtAn/src.check_projects:run',
-                   'annotation=OrtAn/src.annotation:run',
-                   'create_db=OrtAn/src.create_db:run',
-                   'download_kos=OrtScraper/src.download_kos:run'
+                  ['create_project=OrtAn.src.create_project:run',
+                   'delete_project=OrtAn.src.delete_project:run',
+                   'relaxed_search=OrtAn.src.relaxed_search:run',
+                   'restrictive_search=OrtAn.src.restrictive_search:run',
+                   'check_projects=OrtAn.src.check_projects:run',
+                   'annotation=OrtAn.src.annotation:run',
+                   'create_db=OrtAn.src.create_db:run',
+                   'download_kos=OrtScraper.src.download_kos:run'
                    ],
           },
           # Data - see this better
