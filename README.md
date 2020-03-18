@@ -79,6 +79,36 @@ python3 setup.py install
 Once the installation is finished the tool should be ready to use.
 
 
+OrthoFinder
+=====
+
+Install OrthoFinder (Available here: https://github.com/davidemms/OrthoFinder)
+```bash
+Download latest version: wget https://github.com/davidemms/OrthoFinder/releases/latest/download/OrthoFinder.tar.gz 
+Decompress file: tar xzf OrthoFinder.tar.gz (to your desired directory)
+Testing: ./OrthoFinder/orthofinder -h (help menu)
+```
+Dependencies of OrthoFinder
+
+*MCL*
+
+The mcl clustering algorithm is available in the repositories can be installed as any other package.
+```bash
+sudo apt-get install mcl
+```
+
+*Note* - No other dependency of OrthoFinder is required to run OrtSuite since we only use it to perform the clustering of orthologs. 
+
+
+DIAMOND
+====
+
+Install DIAMOND ((Available here: https://github.com/bbuchfink/diamond/releases)
+```bash
+Download latest version: wget https://github.com/bbuchfink/diamond/releases/download/v0.9.22/diamond-linux64.tar.gz
+Decompress file: tar xzf diamond-linux64.tar.gz
+Copy DIAMOND to your local directory: sudo cp diamond /usr/local/bin
+```
 
 Usage
 =====
