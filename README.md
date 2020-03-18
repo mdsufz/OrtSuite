@@ -198,17 +198,27 @@ OrtAn
 This tool uses the output from [OrthoFinder](https://github.com/davidemms/OrthoFinder) to perform the annotation of the generated clusters of orthologs based on the user-defined ORAdb.
 
 Overview of OrtAn:
-```bash
-Create Project: OrtAn receives the information of the ORAdb database and creates the working directory structure necessary for the subsequent tasks.
 
-Relaxed Search: This task takes the OrthoFinder information and runs a first relaxed search with DIAMOND to identify the associations between the returned clusters of orthologs and the different functions of the ORA database.
+>Create Project: OrtAn receives the information of the ORAdb database
+>               and creates the working directory structure necessary for the subsequent tasks.
 
-Restrictive Search: This task performs a restrictive search only between the clusters of orthologs and groups of functions from the ORA database that were related during the relaxed_search.
+>Relaxed Search: This task takes the OrthoFinder information and runs 
+>               a first relaxed search with DIAMOND to identify the associations 
+>               between the returned clusters of orthologs and the different functions of the ORA database.
 
-Annotation: This task consists in the annotation of the sequences present in the clusters of orthologs after performing the restrictive_search. Additionally the user has the possibility to create a new database with the results or update the user-defined ORAdb (````create_db```).
+>Restrictive Search: This task performs a restrictive search only between 
+>               the clusters of orthologs and groups of functions from the ORA 
+>               database that were related during the relaxed_search.
 
-Identification of putative microbial interactions: This task allows the user to extract the putative microbial interactions based on different sets of constraints (e.g. number of interacting species, ability to perform complete pathways, groups of interactions where a single species is responsible for a subset of reactions in the pathway).
-```
+>Annotation: This task consists in the annotation of the sequences present
+>           in the clusters of orthologs after performing the restrictive_search.
+>           Additionally the user has the possibility to create a new database with
+>           the results or update the user-defined ORAdb (*create_db*).
+
+>Identification of putative microbial interactions: This task allows the user to extract
+>           the putative microbial interactions based on different sets of constraints 
+>           (e.g. number of interacting species, ability to perform complete pathways, 
+>           groups of interactions where a single species is responsible for a subset of reactions in the pathway).
 
 ### Inputs:
 
@@ -435,9 +445,9 @@ All the results and outputs from this project will be stored in the folder indic
 create_project -out $work_dir -db $database
 ```
 
-Run the relaxed_search step, using only 2 cores to run, an identity cutoff of 80% and using as input the OrthoFinder results present in the folder indicated in the variable ```$ortho```.
+Run the relaxed_search step, using only 2 cores to run, an identity cutoff of 50% and using as input the OrthoFinder results present in the folder indicated in the variable ```$orthof```.
 
-80% identity cutoff means that all the pair of sequences with an identity percent less than 50 are discarded.
+50% identity cutoff means that all the pair of sequences with an identity percent less than 50 are discarded.
 
 ```bash
 relaxed_search -wd $work_dir -of $orthof -t 2 -ident 50
@@ -457,7 +467,7 @@ Run annotation with thresholds of 95 for identity percent, 99 for positive match
 annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -tc 90
 ```
 
-Run create_db in a new directory (the one indicated in the variable new_db) adding to the initial database the annotated sequences in the previous step.
+Run *create_db* in a new directory adding to the initial database the annotated sequences in the previous step.
 
 ```bash
 create_db -wd $work_dir -o $new_db
