@@ -200,9 +200,13 @@ This tool uses the output from [OrthoFinder](https://github.com/davidemms/OrthoF
 Overview of OrtAn
 ```bash
 Create Project: OrtAn receives the information of the ORAdb database and creates the working directory structure necessary for the subsequent tasks.
+
 Relaxed Search: This task takes the OrthoFinder information and runs a first relaxed search with DIAMOND to identify the associations between the returned clusters of orthologs and the different functions of the ORA database.
+
 Restrictive Search: This task performs a restrictive search only between the clusters of orthologs and groups of functions from the ORA database that were related during the relaxed_search.
+
 Annotation: This task consists in the annotation of the sequences present in the clusters of orthologs after performing the restrictive_search.
+
 Identification of putative microbial interactions: This task allows the user to extract the putative microbial interactions based on different sets of constraints (e.g. number of interacting species, ability to perform complete pathways, groups of interactions where a single species is responsible for a subset of reactions in the pathway).
 ```
 
