@@ -16,6 +16,7 @@ First make a directory:
 Download all sequences associated with provided list of reactions and generate ORAdb:
 >download_kos -o ~/test_OrtSuite/test_database -r /OrtSuite/examples/rx.txt
 
+![download_kos](https://github.com/msdsufz/OrtSuite/download_kos.png)
 
 2: Clustering of Orthologs
 ====
