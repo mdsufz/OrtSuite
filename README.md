@@ -115,7 +115,7 @@ Copy DIAMOND to your local directory: sudo cp diamond /usr/local/bin
 Usage
 =====
 
-Please view the OrtSuite tutorial for detailed instructions and examples.
+Please view the OrtSuite [tutorial](https://github.com/msdsufz/OrtSuite/tutorial.md) for detailed instructions and examples.
 
 Once installation of OrtSuite and all dependencies are completed the different commands can be called independently.
 
