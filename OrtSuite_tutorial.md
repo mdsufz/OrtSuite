@@ -8,47 +8,62 @@ Briefly, OrtSuite consists of **1:** Generating the Ortholog Reaction-Associatio
 ====
 
 Download all sequences associated with the list of enzyme commission numbers:
-```bash
 
 First make a directory: 
-mkdir test_Ortsuite
 
-download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+>mkdir test_Ortsuite
 
-```
+>download_kos -o ~/test_OrtSuite/ -r /OrtSuite/examples/rx.txt
+
+
 2: Clustering of Orthologs
 ====
 
-Download all sequences associated with the list of enzyme commission numbers:
-```bash
+Perform clustering of genome sequences of interest with OrthoFinder :
 
-First make a directory: 
-mkdir test_Ortsuite
+>cd OrthoFinder
 
-download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+>orthofinder -f ~/Documents/Test_genomes/ -o ~/test_OrtSuite/orthofinder_res/ -og
 
-```
+
 3: Functional annotation of clusters of orthologs
 ====
 
-Download all sequences associated with the list of enzyme commission numbers:
-```bash
+Define the variables for input:
 
-First make a directory: 
-mkdir test_Ortsuite
+>work_dir="~/test_OrtSuite/ortan_results/
+>database="~/test_OrtSuite/test_database/"
+>orthof="~/test_OrtSuite/orthofinder_res/Results_Mar17_6/"
+>new_db="~/test_OrtSuite/new_db/"
 
-download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+Create the necessary directories:
+>mkdir work_dir
+>mkdir new_db
 
-```
+Create project:
+>create_project -out $work_dir -db $database
+ 
+Perform relaxed search:
+>relaxed_search -wd $work_dir -of $orthof -t 2 -ident 50
+
+Perform restrictive search:
+>restrictive_search -wd $work_dir -t 2
+
+Assign function to sequences in clusters of orthologs:
+>annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90
+
+
 4: Identification of putative microbial interactions
 ====
 
-Download all sequences associated with the list of enzyme commission numbers:
+Extract all microbial interactions with complete potential:
 ```bash
 
-First make a directory: 
-mkdir test_Ortsuite
+Still missing.
 
-download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+```
+Add constraints to reduce search space:
 
+```
+Still missing
 ```
