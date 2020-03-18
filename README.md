@@ -10,16 +10,17 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 # Overview of OrtSuite
 
-**OrtScraper:** Bulk download of protein sequences for populating a user-defined database
 
 **OrthoFinder:** Clustering of orthologs
+
+**OrtScraper:** Bulk download of protein sequences for populating a user-defined database
 
 **OrtAn:** Functional annotation of clusters of orthologs
 
 
 # System Requirements
 
-Resources for Ortsuite will vary depending on the amount of data being processed. Nevertheless, we recommend a minimum of 4 cores and 8GB of RAM for small datasets (<50 identifiers). OrtSuite officially supports only Linux OS. 
+Resources for Ortsuite will vary depending on the amount of data being processed. In the example provided (consisting of 7 reactions with 16 associated KEGG Ortholog identifiers), we used an Intel Core i5-6200U 2.3GHz with 4 cores and 16 Gb of RAM. OrtSuite officially supports only Linux OS. 
 
 
 
@@ -27,13 +28,14 @@ Installation
 ============
 
 
-# OrtScraper
+# OrtSuite
 
-OrtScraper is a python tool used to request information in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database.
+OrtSuite is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
+Generation of clusters of orthologs is performed by OrthoFinder.
 
 **Requirements:**  Python 3
 
-**Dependencies:**  bs4, grequests
+**Dependencies:**  bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond)
 
 
 We suggest the use of the package manager [pip](https://pip.pypa.io/en/stable/) to install the virtual environment (*virtualenv*).
@@ -46,13 +48,13 @@ pip install virtualenv
 Create a virtual environment.
 
 ```bash
-virtualenv venv_OrtScraper
+virtualenv venv_OrtSuite
 ```
 
 Activate the virtual environment.
 
 ```bash
-source venv_OrtScraper/bin/activate
+source venv_OrtSuite/bin/activate
 ```
 
 Install dependencies
@@ -62,16 +64,16 @@ pip install grequests
 pip install bs4
 ```
 
-Next move to the folder where the file setup.py from the OrtScraper tool is located.
+Next move to the folder where the file setup.py from the OrtSuite tool is located.
 
 ```bash
-cd /path/to/OrtScraper
+cd /path/to/OrtSuite
 ```
 
 Run the command:
 
 ```bash
-python setup.py install
+python3 setup.py install
 ```
 
 Once the installation is finished the tool should be ready to use.
