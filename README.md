@@ -197,7 +197,7 @@ OrtAn
 
 This tool uses the output from [OrthoFinder](https://github.com/davidemms/OrthoFinder) to perform the annotation of the generated clusters of orthologs based on the user-defined ORAdb.
 
-Overview of OrtAn
+Overview of OrtAn:
 ```bash
 Create Project: OrtAn receives the information of the ORAdb database and creates the working directory structure necessary for the subsequent tasks.
 
@@ -205,7 +205,7 @@ Relaxed Search: This task takes the OrthoFinder information and runs a first rel
 
 Restrictive Search: This task performs a restrictive search only between the clusters of orthologs and groups of functions from the ORA database that were related during the relaxed_search.
 
-Annotation: This task consists in the annotation of the sequences present in the clusters of orthologs after performing the restrictive_search.
+Annotation: This task consists in the annotation of the sequences present in the clusters of orthologs after performing the restrictive_search. Additionally the user has the possibility to create a new database with the results or update the user-defined ORAdb (````create_db```).
 
 Identification of putative microbial interactions: This task allows the user to extract the putative microbial interactions based on different sets of constraints (e.g. number of interacting species, ability to perform complete pathways, groups of interactions where a single species is responsible for a subset of reactions in the pathway).
 ```
@@ -217,13 +217,13 @@ Identification of putative microbial interactions: This task allows the user to 
 - ORAdb
 
 
-# Pipeline
+#
 
 Before running OrtAn you need to:
 - Run OrthoFinder with the input genomes;
 - Prepare the database with the necessary format.
 
-### OrthoFinder required files and directories:
+### Required files and directories from OrthoFinder output:
 
 ```/Orthogroups/Orthogroups.txt```
 
@@ -325,7 +325,7 @@ optional arguments:
 ## Annotation
 
 Annotation of sequences in the clusters of orthologs takes into consideration the following parameters:
-```bash
+
 
 **% Identity** - the percentage of identical matches in the range of alignment. Default: 95.
 
@@ -334,7 +334,8 @@ Annotation of sequences in the clusters of orthologs takes into consideration th
 **% Query Coverage** - percent of the query sequence involved in the range of alignment.Default: 90.
 
 **% Target Coverage** - percent of the target sequence (sequence in the database) involved in the range of alignment.Default: 90.
-```
+
+
 
 Run ```annotation -h``` to see the usage of this command.
 
@@ -369,27 +370,52 @@ optional arguments:
   -v, --verbose         set loglevel to DEBUG
 ```
 
-## Create Database
 
-With this command, you have the option to update your initial database adding the newly annotated sequences from the input genomes.
+## Create/Update ORA database
+
+With this task, you have the option to update your initial database adding the newly annotated sequences from the input genomes.
 You can have the option to create a new database in a folder of your choice, or simply add the new sequences to the given database.
 
 Run ```create_db -h``` to see the usage of this command.
 
-
-
-
-## Run the pipeline
-
-**Note:** You can try this with the example data.
-
-Define the important paths you need:
+usage: create_db [-h] -wd WORKINGDIRECTORY (-o OUTPUT | -up) [-l] [-v]
 
 ```bash
-work_dir="/path/to/output/folder/"
-database="/path/to/database/"
-orthof="/path/to/orthofinder/results/folder"
-new_db="/path/to/output/folder/new_db/"
+Runs the create database step - the annotated sequences are added to the
+previous database.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -wd WORKINGDIRECTORY, --workingDir WORKINGDIRECTORY
+                        Working Directory
+  -o OUTPUT, --out OUTPUT
+                        Output directory to create new database (initial
+                        database + new annotated sequences).
+  -up, --update         Use this option to update the initial database with
+                        the new annotated sequences. ATTENTION: If you use
+                        this option the initial database will be changed
+                        permanently
+  -l, --logfile         To send log messages to a file int the output
+                        directory
+  -v, --verbose         set loglevel to DEBUG
+
+```
+## Identification of putative microbial interactions
+
+The user can extract the complete list of species combinations or add durther constraints to reduce the number of microbial interactions to be retrieved.
+
+
+
+
+## Runing the pipeline
+
+Define the paths you need:
+
+```bash
+work_dir="/path/to/output/folder/" # location where you want to store the results
+database="/path/to/database/" # location of the ORAdb
+orthof="/path/to/orthofinder/results/folder" # location of the folders with the results from OrthoFinder
+new_db="/path/to/output/folder/new_db/" # location where the new database should stored
 ```
 
 Create the necessary directories to store the results:
@@ -411,13 +437,13 @@ create_project -out $work_dir -db $database
 
 Run the relaxed_search step, using only 2 cores to run, an identity cutoff of 80% and using as input the OrthoFinder results present in the folder indicated in the variable ```$ortho```.
 
-80% identity cutoff means that all the pair of sequences with an identity percent less than 80 are discarded.
+80% identity cutoff means that all the pair of sequences with an identity percent less than 50 are discarded.
 
 ```bash
-relaxed_search -wd $work_dir -of $orthof -t 2 -ident 80
+relaxed_search -wd $work_dir -of $orthof -t 2 -ident 50
 ```
 
-**Note:** Number of threads should not exceed the one available in your machine. If you don't specify the number the tool will use all the available cores in the machine.
+**Note:** Number of threads should not exceed those available in your machine. If you don't specify the number the tool will use all the available cores in the machine.
 
 Run the restrictive_search step using 2 cores to run.
 
@@ -439,9 +465,9 @@ create_db -wd $work_dir -o $new_db
 
 ## Output
 
-From relaxed_search step, a text file (```/Results/Associations.txt```) is generated containing the associations between the clusters of orthologs and the ORAdb functions.
+From the *relaxed_search* task, a text file (```/Results/Associations.txt```) is generated containing the associations between the clusters of orthologs and the ORAdb functions.
 
-From the annotation we obtain 6 different text files:
+From the *restrictive_search* task we obtain 6 different text files:
 
 ```/Results/Annotation_Function_Protein.txt``` - Shows in the first column the functions and in the second the sequences annotated with those functions (one association per line).
 
@@ -454,6 +480,7 @@ From the annotation we obtain 6 different text files:
 ```/Results/Orthogroups_Annotation.csv``` - This file shows how many sequences in each cluster of orthologs were annotated and to which function.
 
 ```/Results/Species_Annotation.csv``` - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function).
+
 
 
 
