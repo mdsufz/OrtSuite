@@ -16,3 +16,39 @@ mkdir test_Ortsuite
 download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
 
 ```
+2: Clustering of Orthologs
+====
+
+Download all sequences associated with the list of enzyme commission numbers:
+```bash
+
+First make a directory: 
+mkdir test_Ortsuite
+
+download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+
+```
+3: Functional annotation of clusters of orthologs
+====
+
+Download all sequences associated with the list of enzyme commission numbers:
+```bash
+
+First make a directory: 
+mkdir test_Ortsuite
+
+download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+
+```
+4: Identification of putative microbial interactions
+====
+
+Download all sequences associated with the list of enzyme commission numbers:
+```bash
+
+First make a directory: 
+mkdir test_Ortsuite
+
+download_kos -o ~/test_OrtSuite/ -e /OrtSuite/examples/ecs.txt
+
+```
