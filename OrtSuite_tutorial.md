@@ -38,6 +38,7 @@ Define the variables for input:
 >database="~/test_OrtSuite/test_database/"
 
 >orthof="~/test_OrtSuite/orthofinder_res/Results_Mar17_6/"
+
 **Note:** In this example a directory *orthofinder_res* was created to where the results from Orthofinder were copied. This is optional. 
 
 >new_db="~/test_OrtSuite/new_db/"
