@@ -198,12 +198,13 @@ OrtAn
 This tool uses the output from [OrthoFinder](https://github.com/davidemms/OrthoFinder) to perform the annotation of the generated clusters of orthologs based on the user-defined ORAdb.
 
 Overview of OrtAn
-Create Project
-Relaxed Search
-Restrictive Search
-Annotation
-Identification of putative microbial interactions
- 
+```bash
+Create Project: OrtAn receives the information of the ORAdb database and creates the working directory structure necessary for the subsequent tasks.
+Relaxed Search: This task takes the OrthoFinder information and runs a first relaxed search with DIAMOND to identify the associations between the returned clusters of orthologs and the different functions of the ORA database.
+Restrictive Search: This task performs a restrictive search only between the clusters of orthologs and groups of functions from the ORA database that were related during the relaxed_search.
+Annotation: This task consists in the annotation of the sequences present in the clusters of orthologs after performing the restrictive_search.
+Identification of putative microbial interactions: This task allows the user to extract the putative microbial interactions based on different sets of constraints (e.g. number of interacting species, ability to perform complete pathways, groups of interactions where a single species is responsible for a subset of reactions in the pathway).
+```
 
 ### Inputs:
 
@@ -231,33 +232,95 @@ Before running OrtAn you need to:
 
 ## Create Project
 
-In this step, OrtAn receives the information of the input database and creates the working directory structure necessary for the following steps.
 
 **Note:** you should indicate always the same output/working directory in all the steps.
 
 Run ```create_project -h``` to see the usage of this command.
 
+```bash
+usage: create_project [-h] -out OUTPUT -db DATA [-l] [-v]
+
+Creates a new project and returns the working directory to use in the other
+steps of the pipline. (Necessary to access the temporary data that the tool
+stores)
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -out OUTPUT, --output OUTPUT
+                        Path to folder to store the output results
+  -db DATA, --data DATA
+                        Path to folder containing the fasta files with
+                        sequences from the functions of interest
+  -l, --logfile         To send log messages to a file int the output
+                        directory
+  -v, --verbose         set loglevel to DEBUG
+```
+
 ## Relaxed Search
 
-This step can only be performed after you have run OrthoFinder with the desired genomes.
+**Note** - This task can only be performed after you have run OrthoFinder to generate the clusters of orthologs.
 
-This command takes the OrthoFinder information and runs a first relaxed search with DIAMOND to identify the associations between the returned orthogroups and the different functions of the database.
-On this first search, only 1 random sequence per 10 in each orthogroup is used to get the associations, reducing the search space on the next step.
-Here you also can define the threshold of identity percent you want to use. Default: 80.
+Ten (10) percent of random sequences from each cluster is used to retrieve the associations which will reduce the search space on the second annotation *restrictive_search*.
+Default identity threshold: 50. (*The user also has the possibility to change the threshold*) 
 
 Run ```relaxed_search -h``` to see the usage of this command.
 
+```bash
+usage: relaxed_search [-h] -wd WORKINGDIRECTORY -of ORTHOFINDER [-ident IDENT]
+                      [-t N_CPU] [-del] [-l] [-v]
+
+Runs the relaxed search step - all the sequences from the database against
+representative sequences from the Orthofinder Orthgroups.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -wd WORKINGDIRECTORY, --workingDir WORKINGDIRECTORY
+                        Working Directory
+  -of ORTHOFINDER, --orthofinder ORTHOFINDER
+                        Path to OrthoFinder results directory. Inside that
+                        directory should be the Orthgroups,
+                        Orthogroup_Sequences and WorkingDirectory folders
+  -ident IDENT, --identity IDENT
+                        Identity threshold to filter the diamond results.
+                        DEFAULT: 50
+  -t N_CPU              Number of threads to use in the parallel processing.
+                        By default it uses all the cpu available on the
+                        machine
+  -del, --delete        To delete the results stored from diamond (use this
+                        option if you don't want to spend memory space,
+                        between steps)
+  -l, --logfile         To send log messages to a file in the output directory
+  -v, --verbose         set loglevel to DEBUG
+```
+
 ## Restrictive Search
 
-In this step, OrtAn performs a restrictive search only between the orthogroups and groups of functions from the database that we find to be possibly related in the first step.
 
 Run ```restrictive_search -h``` to see the usage of this command.
 
+```bash
+usage: restrictive_search [-h] -wd WORKINGDIRECTORY [-t N_CPU] [-ident IDENT]
+                          [-l] [-v]
+
+Runs the restrictive search step - all the sequences from the selected
+Orthgroups versus the functions associated with.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -wd WORKINGDIRECTORY, --workingDir WORKINGDIRECTORY
+                        Working Directory
+  -t N_CPU              Number of threads to use in the parallel processing.
+                        By default it uses all the cpu available on the
+                        machine.
+  -ident IDENT, --identity IDENT
+                        Identity threshold to filter the diamond results.
+  -l, --logfile         To send log messages to a file in the output directory
+  -v, --verbose         set loglevel to DEBUG
+```
 
 ## Annotation
 
-In this step, the tool uses the data created before to return the annotation of the sequences present in the orthogroups.
-Here you can decide the thresholds of the parameters that will give you the annotation of the unknown sequences.
+
 
 **% Identity** - the percentage of identical matches in the range of alignment. Default: 95.
 
@@ -278,39 +341,6 @@ You can have the option to create a new database in a folder of your choice, or 
 Run ```create_db -h``` to see the usage of this command.
 
 
-## Instalation
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install virtualenv.
-
-```bash
-pip install virtualenv
-```
-
-Create a virtual environment to use with this tool.
-
-```bash
-virtualenv orthoAnnotation
-```
-
-Activate the virtual environment.
-
-```bash
-source orthoAnnotation/bin/activate
-```
-
-Then move to the folder where the file setup.py from the OrtAn tool is located.
-
-```bash
-cd /path/to/OrtAn
-```
-
-Run the command:
-
-```bash
-python setup.py install
-```
-
-The tool should be ready to use.
 
 
 ## Run the pipeline
@@ -373,21 +403,21 @@ create_db -wd $work_dir -o $new_db
 
 ## Output
 
-From relaxed_search step, we get a text file (```/Results/Associations.txt```) containing the associations between the Orthogroups and the database functions.
+From relaxed_search step, a text file (```/Results/Associations.txt```) is generated containing the associations between the clusters of orthologs and the ORAdb functions.
 
-From the annotation step we get 6 different text files:
+From the annotation we obtain 6 different text files:
 
-```/Results/Annotation_Function_Protein.txt``` - Shows in the first column the functions and in the second the sequences annotated to that functions (one association per line).
+```/Results/Annotation_Function_Protein.txt``` - Shows in the first column the functions and in the second the sequences annotated with those functions (one association per line).
 
-```/Results/Annotation_Protein_Function.txt``` - Shows in the first column the sequences and the second the Functions for which the sequences were annotated for (one association per line).
+```/Results/Annotation_Protein_Function.txt``` - Shows in the first column the sequences and in the second the functions assigned (one association per line).
 
-```/Results/ConOG.txt``` - Consistent Orthogroups (Orthogroups where all the sequences were annotated to the same function). The function is also indicated.
+```/Results/ConOG.txt``` - Consistent Orthogroups (Clusters of orthologs where all the sequences were annotated to the same function). The function is also indicated.
 
-```/Results/DivOG.txt``` - Divergent Orthogroups (Orthogroups where not all the sequences were annotated to the same function). This means that the orthogroup could have sequences that were not annotated to any function or sequences annotated to different functions. The functions are also indicated in the file.
+```/Results/DivOG.txt``` - Divergent Orthogroups (Clusters of orthologs where not all the sequences were annotated to the same function). This means that the ortholog cluster could have sequences that were not annotated to any function or sequences annotated to different functions. These functions are also indicated in the file.
 
-```/Results/Orthogroups_Annotation.csv``` - This file shows how many sequences in each Orthogroup were annotated and to which function.
+```/Results/Orthogroups_Annotation.csv``` - This file shows how many sequences in each cluster of orthologs were annotated and to which function.
 
-```/Results/Species_Annotation.csv``` - This file shows which functions are present in which species (1 - at least one sequence annotated to the function, 0 - no sequences annotated to the function).
+```/Results/Species_Annotation.csv``` - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function).
 
 
 
