@@ -11,9 +11,10 @@ Download all sequences associated with the list of enzyme commission numbers:
 
 First make a directory: 
 
->mkdir test_Ortsuite
+>mkdir test_Ortsuite/test_database
 
->download_kos -o ~/test_OrtSuite/ -r /OrtSuite/examples/rx.txt
+Download all sequences associated with provided list of reactions and generate ORAdb:
+>download_kos -o ~/test_OrtSuite/test_database -r /OrtSuite/examples/rx.txt
 
 
 2: Clustering of Orthologs
@@ -29,11 +30,16 @@ Perform clustering of genome sequences of interest with OrthoFinder :
 3: Functional annotation of clusters of orthologs
 ====
 
+
 Define the variables for input:
 
->work_dir="~/test_OrtSuite/ortan_results/
+>work_dir="~/test_OrtSuite/ortan_results/"
+
 >database="~/test_OrtSuite/test_database/"
+
 >orthof="~/test_OrtSuite/orthofinder_res/Results_Mar17_6/"
+**Note:** In this example a directory *orthofinder_res* was created to where the results from Orthofinder were copied. This is optional. 
+
 >new_db="~/test_OrtSuite/new_db/"
 
 Create the necessary directories:
