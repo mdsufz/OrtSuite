@@ -135,7 +135,7 @@ The input can be:
 
 - List of EC (Enzyme commission) numbers
 
-Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations](https://github.com/msdsufz/OrtSuite/examples/associations.txt)
+Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](https://github.com/msdsufz/OrtSuite/examples/associations.txt)
 
 
 Run the command with the help option to see the usage and all the available options.
