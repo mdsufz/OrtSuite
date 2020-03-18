@@ -103,7 +103,7 @@ sudo apt-get install mcl
 DIAMOND
 ====
 
-Install DIAMOND ((Available here: https://github.com/bbuchfink/diamond/releases)
+Install DIAMOND (Available here: https://github.com/bbuchfink/diamond/releases)
 ```bash
 Download latest version: wget https://github.com/bbuchfink/diamond/releases/download/v0.9.22/diamond-linux64.tar.gz
 Decompress file: tar xzf diamond-linux64.tar.gz
@@ -135,7 +135,7 @@ The input can be:
 
 - List of EC (Enzyme commission) numbers
 
-Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](https://github.com/msdsufz/OrtSuite/examples/associations.txt)
+Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](https://github.com/msdsufz/OrtSuite/examples/associations.txt))
 
 
 Run the command with the help option -h to see the usage and all the available options.
@@ -320,7 +320,8 @@ optional arguments:
 
 ## Annotation
 
-
+Annotation of sequences in the clusters of orthologs takes into consideration the following parameters:
+```bash
 
 **% Identity** - the percentage of identical matches in the range of alignment. Default: 95.
 
@@ -329,9 +330,40 @@ optional arguments:
 **% Query Coverage** - percent of the query sequence involved in the range of alignment.Default: 90.
 
 **% Target Coverage** - percent of the target sequence (sequence in the database) involved in the range of alignment.Default: 90.
+```
 
 Run ```annotation -h``` to see the usage of this command.
 
+```bash
+usage: annotation [-h] -wd WORKINGDIRECTORY [-s SCORE] [-ident IDENT]
+                  [-qc QUERY_COV] [-sc SUBJECT_COV] [-ppos PPOS] [-l] [-v]
+
+Runs the annotation step - filter results from restrictive search and return
+the annotated sequences
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -wd WORKINGDIRECTORY, --workingDir WORKINGDIRECTORY
+                        Working Directory
+  -s SCORE, --score SCORE
+                        score threshold to filter the diamond results.
+                        Default: 90
+  -ident IDENT, --identity IDENT
+                        Identity threshold to filter the diamond results.
+  -qc QUERY_COV, --queryCoverage QUERY_COV
+                        Query sequence coverage threshold to filter the
+                        diamond results.
+  -sc SUBJECT_COV, --subjectCoverage SUBJECT_COV
+                        Subject sequence coverage threshold to filter the
+                        diamond results.
+  -ppos PPOS, --percPosMatches PPOS
+                        Percentage of positive matches threshold to filter the
+                        diamond results (should be higher than identity
+                        threshould).
+  -l, --logfile         To send log messages to a file int the output
+                        directory
+  -v, --verbose         set loglevel to DEBUG
+```
 
 ## Create Database
 
