@@ -92,7 +92,7 @@ Dependencies of OrthoFinder
 
 *MCL*
 
-The mcl clustering algorithm is available in the repositories can be installed as any other package.
+The mcl clustering algorithm is available in the repositories and can be installed as any other package.
 ```bash
 sudo apt-get install mcl
 ```
@@ -110,16 +110,24 @@ Decompress file: tar xzf diamond-linux64.tar.gz
 Copy DIAMOND to your local directory: sudo cp diamond /usr/local/bin
 ```
 
+
+
 Usage
 =====
 
+Please view the OrtSuite tutorial for detailed instructions and examples.
+
+Once installation of OrtSuite and all dependencies are completed the different commands can be called independently.
+
+
+
 ## download_kos
 
-Download all the sequences from each desired KO (KEGG Orthology) group to a FASTA file.
+Download all the sequences associated with the KO (KEGG Orthology) group to a FASTA file.
 
 The input can be:
 
-- KEGG pathway map ID
+- a KEGG pathway map ID
 
 - List of KO IDs
 
@@ -127,13 +135,38 @@ The input can be:
 
 - List of EC (Enzyme commission) numbers
 
-Note: The format of the input lists must be a txt file with only one ID per line.
+Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations](https://github.com/msdsufz/OrtSuite/examples/associations.txt)
 
 
 Run the command with the help option to see the usage and all the available options.
 
 ```bash
 download_kos -h
+
+usage: download_kos [-h] [--version] -o OUTPUT_DIR [-s SIZE]
+                    (-m MAP | -r REACTIONS | -e EC_NUMBERS | -k KOS) [-p | -g]
+                    [-v]
+
+Create a database with all the KO (KEGG Orthology) sequences associated with
+the give ID/s (KEGG pathway ID, KEGG Rections IDs, EC numers or KEGG orthology
+IDs)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --version      show program's version number and exit
+  -o OUTPUT_DIR  Output directory to store the database.
+  -s SIZE        Size - defines the number of requests that are made to the
+                 KEGG database at the same time. DEFAULT: 5
+  -m MAP         KEGG pathway ID
+  -r REACTIONS   Path to txt file containing KEGG reaction IDs (one per each
+                 line)
+  -e EC_NUMBERS  Path to txt file containing EC numbers (one per each line)
+  -k KOS         Path to txt file containing KEGG Orthology IDs (one per each
+                 line)
+  -p             Use this option if you want to download amino acid sequences.
+                 (DEFAULT)
+  -g             Use this option if you want to download nucleotide sequences.
+  -v, --verbose  set loglevel to DEBUG
 ```
 
 To test if the tool is working you can use the files contained in the examples folder.
