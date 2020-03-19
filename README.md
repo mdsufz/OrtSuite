@@ -464,7 +464,7 @@ restrictive_search -wd $work_dir -t 2
 Run annotation with thresholds of 95 for identity percent, 99 for positive matches percent and 90 of query and target coverage percent.
 
 ```bash
-annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -tc 90
+annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90 # remove flags if default values are used
 ```
 
 Run *create_db* in a new directory adding to the initial database the annotated sequences in the previous step.
