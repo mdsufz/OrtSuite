@@ -50,21 +50,21 @@ def parse_args(args):
         '--identity',
         dest='ident',
         type=float,
-        help='Identity threshold to filter the diamond results.'
+        help='Identity threshold to filter the diamond results. Default: 95'
     )
     parser.add_argument(
         '-qc',
         '--queryCoverage',
         dest='query_cov',
         type=float,
-        help='Query sequence coverage threshold to filter the diamond results.'
+        help='Query sequence coverage threshold to filter the diamond results. Default: 90'
     )
     parser.add_argument(
         '-sc',
         '--subjectCoverage',
         dest='subject_cov',
         type=float,
-        help='Subject sequence coverage threshold to filter the diamond results.'
+        help='Subject sequence coverage threshold to filter the diamond results. Default: 90'
     )
     parser.add_argument(
         '-ppos',
@@ -72,7 +72,7 @@ def parse_args(args):
         dest='ppos',
         type=float,
         help='Percentage of positive matches threshold to filter the diamond results (should be higher than identity '
-             'threshould).'
+             'threshould). Default: 99'
     )
     parser.add_argument(
         '-l',
@@ -150,24 +150,24 @@ def main(args):
     if args.ident:
         ident_t = args.ident
     else:
-        ident_t = 0
+        ident_t = 95.0
     # if ident_t < float(info['ident_rest']):
     #     ident_t = float(info['ident_rest'])
     _logger.debug('Identity set to {}.'.format(str(ident_t)))
     if args.query_cov:
         q_cov_t = args.query_cov
     else:
-        q_cov_t = 0
+        q_cov_t = 90.0
     _logger.debug('Query sequence coverage set to {}.'.format(str(q_cov_t)))
     if args.subject_cov:
         s_cov_t = args.subject_cov
     else:
-        s_cov_t = 0
+        s_cov_t = 90.0
     _logger.debug('Subject sequence coverage set to {}.'.format(str(s_cov_t)))
     if args.ppos:
         ppos_t = args.ppos
     else:
-        ppos_t = 0
+        ppos_t = 99.0
     _logger.debug('Percentage of positive matches set to {}.'.format(str(ppos_t)))
 
     _logger.debug('Open results from previous steps.')
