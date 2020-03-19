@@ -27,7 +27,7 @@ Perform clustering of genome sequences of interest with OrthoFinder :
 
 >orthofinder -f ~/Documents/Test_genomes/ -o ~/test_OrtSuite/orthofinder_res/ -og
 
-![orthofinder_results](https://github.com/msdsufz/OrtSuite/blob/master/orthofinder_results_folder.png)
+![orthofinder_results](https://github.com/msdsufz/OrtSuite/blob/master/orthofinder_result_folder.png)
 
 3: Functional annotation of clusters of orthologs
 ====
