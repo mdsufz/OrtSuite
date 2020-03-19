@@ -27,6 +27,7 @@ Perform clustering of genome sequences of interest with OrthoFinder :
 
 >orthofinder -f ~/Documents/Test_genomes/ -o ~/test_OrtSuite/orthofinder_res/ -og
 
+![orthofinder_results](https://github.com/msdsufz/OrtSuite/blob/master/orthofinder_results_folder.png)
 
 3: Functional annotation of clusters of orthologs
 ====
@@ -60,6 +61,7 @@ Perform restrictive search:
 Assign function to sequences in clusters of orthologs:
 >annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90
 
+![ortAn_results](https://github.com/msdsufz/OrtSuite/blob/master/ortAn_results_folder.png)
 
 4: Identification of putative microbial interactions
 ====
