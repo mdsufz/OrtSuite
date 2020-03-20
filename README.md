@@ -493,5 +493,19 @@ From the *restrictive_search* task we obtain 6 different text files:
 
 
 
+Citing OrtSuite
+====
 
+If you found OrtSuite usefull in your study, please cite: XXXX. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+
+Acknowledgements
+====
+
+Authors of pipeline: Marta Lopes and Joao Saraiva.
+
+Principal Investigator: Ulisses Nunes da Rocha
+
+Institution: Microbial Systems Data Science group, Helmholtz Center for Environmental Research, Department of Environmental Microbiology, Leipzig, Germany
+
+All feedback is welcome. For errors and bugs, please open a new Issue thread on this github page, and we will try to address them as soon as possible. For general feedback you can contact us at msds@ufz.de.
 
