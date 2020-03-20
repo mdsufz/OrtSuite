@@ -32,7 +32,7 @@ if __name__ == "__main__":
           author_email='msds@ufz.de',
           url='',
           # Commands
-          scripts=['src/aux.py', 'src/diamond_mp.py','src/MultipleRequests.py', 'src/aux.py'],
+          scripts=['src/aux.py', 'src/diamond_mp.py','src/MultipleRequests.py'],
           # classifiers=[],
           packages=find_packages(),
           install_requires=[],
