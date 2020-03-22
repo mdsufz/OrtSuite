@@ -97,7 +97,6 @@ The mcl clustering algorithm is available in the repositories and can be install
 sudo apt-get install mcl
 ```
 
-*Note* - No other dependency of OrthoFinder is required to run OrtSuite since we only use it to perform the clustering of orthologs. 
 
 
 DIAMOND
@@ -110,6 +109,17 @@ Decompress file: tar xzf diamond-linux64.tar.gz
 Copy DIAMOND to your local directory: sudo cp diamond /usr/local/bin
 ```
 
+BLAST+
+====
+
+Orthofinder allows the user to use BLAST+ instead of DIAMOND.
+To install BLAST+ use:
+
+```bash
+sudo apt-get install ncbi-blast+
+```
+
+*Note* - No other dependency of OrthoFinder is required to run OrtSuite since we only use it to perform the clustering of orthologs. 
 
 
 Usage
@@ -192,6 +202,11 @@ OrthoFinder takes as input a folder containing the FASTA sequences the user want
 ~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -og
 ```
 
+Note: If you wish to use BLAST+ instead of DIAMOND please use the following:
+
+```bash
+~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -S blast -og
+```
 
 OrtAn
 ====
@@ -228,9 +243,9 @@ Overview of OrtAn:
 - ORAdb
 
 
-#
 
 Before running OrtAn you need to:
+
 - Run OrthoFinder with the input genomes;
 - Prepare the database with the necessary format.
 
