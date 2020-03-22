@@ -121,9 +121,10 @@ Once installation of OrtSuite and all dependencies are completed the different c
 
 
 
-## download_kos
+## Ortholog Reaction-Assosiation database (ORAdb)
 
-Download all the sequences associated with the KO (KEGG Orthology) group to a FASTA file.
+
+The generation of a user-defined ortholog reaction-association database starts with the download of all the sequences associated with the KO (KEGG Orthology) group to a FASTA file.
 
 The input can be:
 
@@ -174,7 +175,7 @@ To test if the tool is working you can use the files contained in the examples f
 Note: Running this command may take some time and memory space.
 
 
-download_kos Output
+ORAdb Output
 ======
 In the output folder you will find one FASTA file for each selected KO.
 If you use -e or -r option, an additional file will be generated *associations.txt*, which indicates which kos where selected for download for each reaction/EC number.
