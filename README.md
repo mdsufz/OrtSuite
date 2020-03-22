@@ -428,7 +428,7 @@ optional arguments:
 ```
 ## Identification of putative microbial interactions
 
-The user can extract the complete list of species combinations or add durther constraints to reduce the number of microbial interactions to be retrieved.
+The user can extract the complete list of species combinations or add durther constraints to reduce the number of microbial interactions to be retrieved. (*Ongoing*)
 
 
 
