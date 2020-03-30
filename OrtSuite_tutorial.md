@@ -22,6 +22,8 @@ Extract GPR rules from KEGG:
 
 >sh ./examples/test_database/get_gpr.sh . kos_4_gpr.txt ~/OrtSuite/keggOrthologues.jar gpr.xlsx
 
+The spreadsheet file should look like the following:
+
 ![download_kos](https://github.com/msdsufz/OrtSuite/blob/master/GPR_file.png)
 
 
