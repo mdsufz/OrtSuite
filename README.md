@@ -122,6 +122,15 @@ sudo apt-get install ncbi-blast+
 *Note* - No other dependency of OrthoFinder is required to run OrtSuite since we only use it to perform the clustering of orthologs. 
 
 
+JAVA
+====
+
+To download the Gene-Protein-Reaction rules you need to have java installed. 
+
+```bash
+sudo apt install default-jre
+```
+
 Usage
 =====
 
@@ -191,7 +200,17 @@ In the output folder you will find one FASTA file for each selected KO.
 If you use -e or -r option, an additional file will be generated *associations.txt*, which indicates which kos where selected for download for each reaction/EC number.
 In the same folder a file *info_db.csv* contains a table with information regarding the KO's that were selected for download along with their name and associated EC numbers and Reactions IDs.
 
+Gene-Protein-Reation (GPR) rules
+====
 
+Once the FASTA files containing the sequences for the list of KOs is completed you can obtain the GPR rules.
+First, copy the *get_gpr.sh* to the ORAdb output folder and next run the following command:
+
+```bash
+sh get_gpr.sh path/to/ORAdb/output/folder/ path/to/folder/with/KO_gpr.txt /path/to//path/to/keggOrthologue.jar /path/to/folder/for/final_gpr.xlsx
+```
+
+Note: The final gpr.xlsx file needs to have the *xlsx* extension. 
 
 OrthoFinder
 ====
