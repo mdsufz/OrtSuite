@@ -450,12 +450,18 @@ optional arguments:
 
 The user can extract the complete list of species combinations or add further constraints to reduce the number of microbial interactions to be retrieved. Requirements include:
 
-> gpr.xlsx - generated from the XXX
+> gpr.xlsx - generated from running the *get_gpr.sh* script
+
 > Species_Annotation.csv - generated from OrtAn
+
 > *user_input.txt* - a file provided by the user defining the constraints of each path contained in ORAdb 
+
 > GP_rules.json - generated from the tool
+
 > path.json - generated from the tool 
+
 > species_exclude - generated form the tool
+
 
 Running the task consists of two commands:
 
