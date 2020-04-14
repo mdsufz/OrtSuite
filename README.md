@@ -209,6 +209,7 @@ First, copy the *get_gpr.sh* to the ORAdb output folder and next run the followi
 ```bash
 sh get_gpr.sh path/to/ORAdb/output/folder/ path/to/folder/with/KO_gpr.txt /path/to//path/to/keggOrthologue.jar /path/to/folder/for/final_gpr.xlsx
 ```
+where KO_gpr.txt is created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
 
 Note: The final gpr.xlsx file needs to have the *xlsx* extension. 
 

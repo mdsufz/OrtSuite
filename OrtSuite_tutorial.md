@@ -18,9 +18,14 @@ Download all sequences associated with provided list of reactions and generate O
 
 ![download_kos](https://github.com/msdsufz/OrtSuite/blob/master/download_kos.png)
 
-Generate GPR rules:
+Extract GPR rules from KEGG:
 
 >sh ./examples/test_database/get_gpr.sh . kos_4_gpr.txt ~/OrtSuite/keggOrthologues.jar gpr.xlsx
+
+The spreadsheet file should look like the following:
+
+![download_kos](https://github.com/msdsufz/OrtSuite/blob/master/GPR_file.png)
+
 
 2: Clustering of Orthologs
 ====
