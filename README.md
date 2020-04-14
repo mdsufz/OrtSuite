@@ -446,38 +446,6 @@ optional arguments:
   -v, --verbose         set loglevel to DEBUG
 
 ```
-## Identification of putative microbial interactions
-
-The user can extract the complete list of species combinations or add further constraints to reduce the number of microbial interactions to be retrieved. Requirements include:
-
-> gpr.xlsx - generated from running the *get_gpr.sh* script
-
-> Species_Annotation.csv - generated from OrtAn
-
-> *user_input.txt* - a file provided by the user defining the constraints of each path contained in ORAdb 
-
-> GP_rules.json - generated from the tool
-
-> path.json - generated from the tool 
-
-> species_exclude - generated form the tool
-
-
-Running the task consists of two commands:
-
-```bash
-
-sh microbial_interactions.sh /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
-
-```
-where *GP_rules.json, path.json* and *species_exclude.json* are generated.
-
-
-```bash 
-sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rules.json /path/to/folder/paths.json /path/to/folder/species_to_exclude.json > /path/to/folder/output_file_combinatinations.txt
-```
-**Note:** the name of the output file to store all possible species combinations is defined by the user.
-
 
 
 ## Runing the pipeline
@@ -553,6 +521,39 @@ From the *restrictive_search* task we obtain 6 different text files:
 ```/Results/Orthogroups_Annotation.csv``` - This file shows how many sequences in each cluster of orthologs were annotated and to which function.
 
 ```/Results/Species_Annotation.csv``` - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function).
+
+
+## Identification of putative microbial interactions
+
+The user can extract the complete list of species combinations or add further constraints to reduce the number of microbial interactions to be retrieved. Requirements include:
+
+> gpr.xlsx - generated from running the *get_gpr.sh* script
+
+> Species_Annotation.csv - generated from OrtAn
+
+> *user_input.txt* - a file provided by the user defining the constraints of each path contained in ORAdb 
+
+> GP_rules.json - generated from the tool
+
+> path.json - generated from the tool 
+
+> species_exclude - generated form the tool
+
+
+Running the task consists of two commands:
+
+```bash
+
+sh microbial_interactions.sh /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+
+```
+where *GP_rules.json, path.json* and *species_exclude.json* are generated.
+
+
+```bash 
+sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rules.json /path/to/folder/paths.json /path/to/folder/species_to_exclude.json > /path/to/folder/output_file_combinatinations.txt
+```
+**Note:** the name of the output file to store all possible species combinations is defined by the user.
 
 
 
