@@ -1,0 +1,7 @@
+$`Anaerobic benzoate-acetylCoA`
+[1] "No microbial interactions"
+
+$`Aerobic benzoate-acetylCoA`
+    
+1 NA
+
