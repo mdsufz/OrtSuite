@@ -78,6 +78,12 @@ python3.6 setup.py install
 
 Once the installation is finished the tool should be ready to use.
 
+**Note:** Some users might encounter an error related to SSL certificates. If this is the case then type the following in your temirnal:
+
+> sudo update-ca-certificates --fresh
+
+> export SSL_CERT_DIR=/etc/ssl/certs
+
 
 OrthoFinder
 =====
@@ -156,7 +162,7 @@ The input can be:
 - List of EC (Enzyme commission) numbers
 
 Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](examples/associations.txt))
-
+**Be aware that the output folder must exist!**
 
 Run the command with the help option -h to see the usage and all the available options.
 
