@@ -227,11 +227,11 @@ Once the FASTA files containing the sequences for the list of KOs is completed y
 First, copy the *get_gpr.sh* to the ORAdb output folder and next run the following command:
 
 ```bash
-sh get_gpr.sh path/to/ORAdb/output/folder/ path/to/folder/with/KO_gpr.txt /path/to//path/to/keggOrthologue.jar /path/to/folder/for/final_gpr.xlsx
+sh get_gpr.sh path/to/ORAdb/output/folder/ path/to/folder/with/KO_gpr.txt /path/to//path/to/keggOrthologues.jar /path/to/folder/for/final_gpr.xlsx
 ```
 where KO_gpr.txt is created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
 
-Note: The final gpr.xlsx file needs to have the *xlsx* extension. 
+**Note:** The final gpr.xlsx file needs to have the *xlsx* extension. Please be aware that the cache folder and cache.ccf file needs to stored in the same folder as keggOrthologues.jar.
 
 OrthoFinder
 ====
