@@ -239,14 +239,15 @@ OrthoFinder
 OrthoFinder takes as input a folder containing the FASTA sequences the user wants to cluster.
 
 ```bash
-~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -og
+~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -o /path/to/output/folder -og
 ```
 
 Note: If you wish to use BLAST+ instead of DIAMOND please use the following:
 
 ```bash
-~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -S blast -og
+~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -o /path/to/output/folder -S blast -og
 ```
+**Note:** OrthoFinder's output folder is generated automatically.
 
 OrtAn
 ====
