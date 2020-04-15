@@ -42,7 +42,7 @@ We suggest the use of the package manager [pip](https://pip.pypa.io/en/stable/) 
 
 
 ```bash
-pip install virtualenv
+python3.6 -m pip install virtualenv
 ```
 
 Create a virtual environment.
@@ -73,7 +73,7 @@ cd /path/to/OrtSuite
 Run the command:
 
 ```bash
-python3 setup.py install
+python3.6 setup.py install
 ```
 
 Once the installation is finished the tool should be ready to use.
