@@ -8,12 +8,18 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 **OrtAn workflow** - Protein sequence from samples supplied by the user are clustered using OrthoFinder 
 
-**(a)**. OrtScraper takes a text file containing a list of identifiers for each reaction in the pathway of interest supplied by the user to retrieve all protein sequences from KEGG 
-**(b)**. Sequences mapped to reactions are stored in ORAdb 
-**(c)**. Functional annotation 
-**(d)** consists of a two-stage process (relaxed and restrictive search). Relaxed search 
-**(e)** performs sequence alignments between 10% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 50% identity to sequences in reaction set(s) in ORAdb transition to the restrictive search 
-**(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit. Finally, the annotated sequences are used to identify putative microbial interactions based on their functional potential 
+**(a)**. OrtScraper takes a text file containing a list of identifiers for each reaction in the pathway of interest supplied by the user to retrieve all protein sequences from KEGG
+
+**(b)**. Sequences mapped to reactions are stored in ORAdb
+
+**(c)**. Functional annotation
+
+**(d)** consists of a two-stage process (relaxed and restrictive search). Relaxed search
+
+**(e)** performs sequence alignments between 10% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 50% identity to sequences in reaction set(s) in ORAdb transition to the restrictive search
+
+**(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit. Finally, the annotated sequences are used to identify putative microbial interactions based on their functional potential
+
 **(g and h)**. Additional constraints can be added to reduce the search space of microbial interactions **(rounded blue rectangles)**.
 
 
