@@ -366,18 +366,23 @@ def main(args):
 
         for ko in db_info:
             # Get associated OG
-            for og in func_og[ko]:
-                for line in db_info[ko]:
-                    line = [og] + [line]
+            if ko in func_og:
+                for og in func_og[ko]:
+                    for i, line in enumerate(db_info[ko]):
+                        db_info[ko][i] = [og] + [line]
+            else:
+                for i, line in enumerate(db_info[ko]):
+                    db_info[ko][i] = [''] + [line]
 
         with open(os.path.join(info['results'], 'orthogroups_more_info_db.csv'), 'w') as f:
             f.write('OG;KO;KO name;Ec number;Reaction')
-            for ko in info:
-                for line in info[ko]:
+            for ko in db_info:
+                for line in db_info[ko]:
                     f.write('\n' + ';'.join(line))
 
-    except IOError:
-        pass
+    except Exception as e:
+        _logger.warning('Failed to create orthogroups_more_info_db.csv file')
+        _logger.warning(e)
 
     _logger.info('Done!')
 
