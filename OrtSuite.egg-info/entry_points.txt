@@ -1,0 +1,10 @@
+[console_scripts]
+annotation = src.annotation:run
+check_projects = src.check_projects:run
+create_db = src.create_db:run
+create_project = src.create_project:run
+delete_project = src.delete_project:run
+download_kos = src.download_kos:run
+relaxed_search = src.relaxed_search:run
+restrictive_search = src.restrictive_search:run
+

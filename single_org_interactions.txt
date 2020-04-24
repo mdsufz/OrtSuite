@@ -1,5 +1,5 @@
 $`Anaerobic benzoate-acetylCoA`
-[1] "No microbial interactions"
+[1] "No microbial interactions possible under defined contraints"
 
 $`Aerobic benzoate-acetylCoA`
     

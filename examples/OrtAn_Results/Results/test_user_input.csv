@@ -1,3 +1,3 @@
 Pathway,Reactions,Single_org,Transporter
 Anaerobic benzoate-acetylCoA,"R02601,R00813,R02604,R00816","(R02601,R02604),(R00813,R00816)",(R00750:R02601)
-Aerobic benzoate-acetylCoA,"R02601,R00750,R00813",,
+Aerobic benzoate-acetylCoA,"R02601,R00750,R00813,R01778",,
