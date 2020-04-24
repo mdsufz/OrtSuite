@@ -565,21 +565,21 @@ The user can extract the complete list of species combinations or add further co
 
 Running the task consists of two commands shown below.
 
-The first command generates all necessary files for the extraction of microbial interactions based on the constraints defined by the user.
+The first command uses an Rscript to generate all necessary files for the extraction of microbial interactions based on the constraints defined by the user.
 
 Depending on the subsetting of reactions from ORAdb you can use the following:
 
 *Subsetting to a pathway*
 
-> sh user_constraints.sh -p /path/to/folder/pathway_list.txt /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
 
 *Subsetting to a module list*
 
-> sh user_constraints.sh -m /path/to/folder/module_list.txt /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
 
 *Using the complete ORAdb*
 
->sh user_constraints.sh -n /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+>Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
 
 During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated.
 
