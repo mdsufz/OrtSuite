@@ -1,6 +1,0 @@
-$`Anaerobic benzoate-acetylCoA`
-logical(0)
-
-$`Aerobic benzoate-acetylCoA`
-logical(0)
-
