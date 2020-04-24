@@ -227,7 +227,7 @@ Once the FASTA files containing the sequences for the list of KOs is completed y
 First, copy the *get_gpr.sh* to the ORAdb output folder and next run the following command:
 
 ```bash
-sh get_gpr.sh path/to/folder/with/KO_gpr.txt /path/to//path/to/keggOrthologues.jar /path/to/folder/for/final_gpr.xlsx
+sh get_gpr.sh path/to/folder/with/KO_gpr.txt /path/to/path/to/keggOrthologues.jar /path/to/folder/for/final_gpr.xlsx
 ```
 where KO_gpr.txt is created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
 
@@ -475,7 +475,7 @@ Define the paths you need:
 
 ```bash
 work_dir="/path/to/output/folder/" # location where you want to store the results
-database="/path/to/database/" # location of the ORAdb
+database="/path/to/database/" # location of the ORAdb (where the FASTA files are located)
 orthof="/path/to/orthofinder/results/folder" # location of the folders with the results from OrthoFinder
 new_db="/path/to/output/folder/new_db/" # location where the new database should stored
 ```
@@ -516,7 +516,7 @@ restrictive_search -wd $work_dir -t 2
 Run annotation with thresholds of 95 for identity percent, 99 for positive matches percent and 90 of query and target coverage percent.
 
 ```bash
-annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90 # remove flags if default values are used
+annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90 # remove everything after "$work_dir" if default values are to be used
 ```
 
 Run *create_db* in a new directory adding to the initial database the annotated sequences in the previous step.
@@ -560,16 +560,30 @@ The user can extract the complete list of species combinations or add further co
 
 > species_exclude - generated form the tool
 
+> module_list.txt / pathway_list.txt *(optional) - Additional subsetting of reactions from the ORAdb*
 
-Running the task consists of two commands:
 
-```bash
+Running the task consists of two commands shown below.
 
-sh microbial_interactions.sh /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+The first command generates all necessary files for the extraction of microbial interactions based on the constraints defined by the user.
 
-```
-where *GP_rules.json, path.json* and *species_exclude.json* are generated.
+Depending on the subsetting of reactions from ORAdb you can use the following:
 
+*Subsetting to a pathway*
+
+> sh user_constraints.sh -p /path/to/folder/pathway_list.txt /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+
+*Subsetting to a module list*
+
+> sh user_constraints.sh -m /path/to/folder/module_list.txt /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+
+*Using the complete ORAdb*
+
+>sh user_constraints.sh -n /path/to/folder/gpr.xlsx /path/to/folder/Species_Annotation.csv /path/to/folder/user_input.csv 
+
+During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated.
+
+The second command calculates all possible microbial interactions using the previously generated files.
 
 ```bash 
 sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rules.json /path/to/folder/paths.json /path/to/folder/species_to_exclude.json > /path/to/folder/output_file_combinatinations.txt
