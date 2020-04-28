@@ -1,18 +1,18 @@
-Total Orthogroups;21659
-KOs in the database;16
-(Relaxed Search) Selected orthogroups;7
-(Relaxed Search) % Selected orthogroups;0.0
-(Relaxed Search) Associated KOs;10
-(Relaxed Search) % Associated KOs;62.5
-(Restrictive Search) Orthogroups with annotated sequences;7
-(Restrictive Search) % of Orthogroups with annotated sequences;0.0
-(Restrictive Search) KOs with assigned sequences;10
-(Restrictive Search) % KOs with annotated sequences;62.5
-ConOG;1
-DivOG;6
-DivOG with more than one KO;3
+Total Orthogroups;52648
+KOs in the database;48
+(Relaxed Search) Selected orthogroups;59
+(Relaxed Search) % Selected orthogroups;0.1
+(Relaxed Search) Associated KOs;41
+(Relaxed Search) % Associated KOs;85.4
+(Restrictive Search) Orthogroups with annotated sequences;49
+(Restrictive Search) % of Orthogroups with annotated sequences;0.1
+(Restrictive Search) KOs with assigned sequences;38
+(Restrictive Search) % KOs with annotated sequences;79.2
+ConOG;22
+DivOG;27
+DivOG with more than one KO;12
 Relaxed Search to Restrictive Search 
-Lost orthogroups;0
-% Lost orthogroups;0.0
-Lost KOs;0
-% Lost KOs;0.0
+Lost orthogroups;10
+% Lost orthogroups;16.9
+Lost KOs;3
+% Lost KOs;7.3

@@ -489,7 +489,7 @@ for(path in 1:length(unique(test_csv$path))){
   paths_final <- paste(paths_final,collapse=",")
 }
 paths_final <- paste0("{",paths_final,"}")
-
+paths_final <- gsub(pattern = "\'",replacement = "\"",paths_final)
 
 sink("./paths.json")
 cat(paths_final)

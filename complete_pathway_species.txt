@@ -1,0 +1,7 @@
+$`Anaerobic benzoate-acetylCoA`
+[1] "adv.faa"  "bced.faa" "bvi.faa"  "cyq.faa"  "cza.faa"  "parb.faa" "rrz.faa" 
+[8] "tmz.faa" 
+
+$`Aerobic benzoate-acetylCoA`
+[1] "adv.faa"  "bced.faa" "bvi.faa"  "cyq.faa"  "cza.faa"  "parb.faa" "tmz.faa" 
+

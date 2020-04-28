@@ -1,0 +1,27 @@
+2020-04-24 14:47:55 : Started OrthoFinder version 2.3.11
+Command Line: /usr/local/bin/orthofinder -f /home/leonorfe/Documents/Test_genomes/orfs/ -o /home/leonorfe/Documents/Test_genomes/clusters/ -og
+
+WorkingDirectory_Base: /home/leonorfe/Documents/Test_genomes/clusters/Results_Apr24/WorkingDirectory/
+
+Species used: 
+0: adv.faa
+1: ath.faa
+2: aza.faa
+3: azd.faa
+4: azi.faa
+5: bced.faa
+6: bvi.faa
+7: cyq.faa
+8: cza.faa
+9: dor.faa
+10: eba.faa
+11: lcm.faa
+12: magx.faa
+13: parb.faa
+14: rrz.faa
+15: shd.faa
+16: sscu.faa
+17: tmz.faa
+
+FN_Orthogroups: /home/leonorfe/Documents/Test_genomes/clusters/Results_Apr24/WorkingDirectory/clusters_OrthoFinder_I1.5.txt_id_pairs.txt
+2020-04-24 15:41:37 : OrthoFinder run completed
