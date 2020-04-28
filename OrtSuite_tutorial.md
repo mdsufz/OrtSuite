@@ -11,16 +11,16 @@ Download all sequences associated with the list of enzyme commission numbers:
 
 First make a directory: 
 
->mkdir test_Ortsuite/test_database
+>mkdir examples/test_database # Make sure to be in the OrtSuite folder!
 
 Download all sequences associated with provided list of reactions and generate ORAdb:
->download_kos -o ~/test_OrtSuite/test_database -r /OrtSuite/examples/rx.txt
+>download_kos -o ~/examples/test_database -r /OrtSuite/examples/complete_bta_reactions.txt
 
 ![download_kos](https://github.com/msdsufz/OrtSuite/blob/master/download_kos.png)
 
 Extract GPR rules from KEGG:
 
->sh ./examples/test_database/get_gpr.sh . kos_4_gpr.txt ~/OrtSuite/keggOrthologues.jar gpr.xlsx
+>sh ./examples/test_database/get_gpr.sh ./examples/test_database/KO_gpr.txt ~/OrtSuite/keggOrthologues.jar ./examples/test_database/final_gpr.xlsx
 
 The spreadsheet file should look like the following:
 
@@ -32,11 +32,10 @@ The spreadsheet file should look like the following:
 
 Perform clustering of genome sequences of interest with OrthoFinder :
 
->cd OrthoFinder
-
->orthofinder -f ~/Documents/Test_genomes/ -o ~/test_OrtSuite/orthofinder_res/ -og
+>orthofinder -f ~/examples/orfs/ -o ~/examples/clusters/ -og
 
 ![orthofinder_results](https://github.com/msdsufz/OrtSuite/blob/master/orthofinder_result_folder.png)
+
 
 3: Functional annotation of clusters of orthologs
 ====
@@ -44,13 +43,13 @@ Perform clustering of genome sequences of interest with OrthoFinder :
 
 Define the variables for input:
 
->work_dir="~/test_OrtSuite/ortan_results/"
+>work_dir="~/examples/OrtAn_results/"
 
->database="~/test_OrtSuite/test_database/"
+>database="~/examples/test_database/"
 
->orthof="~/test_OrtSuite/orthofinder_res/Results_Mar17_6/"
+>orthof="~/examples/clusters/Results_Apr24/"
 
-**Note:** In this example a directory *orthofinder_res* was created to where the results from Orthofinder were copied. This is optional. 
+**Note:** In this example a directory *clusters* was created to where the results from Orthofinder were copied. This is optional. 
 
 >new_db="~/test_OrtSuite/new_db/"
 
@@ -78,11 +77,11 @@ Assign function to sequences in clusters of orthologs:
 Extract all microbial interactions with complete potential:
 ```bash
 
-Still missing.
+Rscript gpr_manipulation.R -n /home/leonorfe/Documents/Test_genomes/fasta_files/final_gpr.xlsx -s /home/leonorfe/Documents/Test_genomes/OrtAn_new/Results/Species_Annotation.csv -u ./examples/OrtAn_Results/Results/test_user_input.csv
 
 ```
 Add constraints to reduce search space:
 
 ```
-Still missing
+sh combinations.sh /home/leonorfe/Documents/Test_genomes/OrtAn_new/Results/Species_Annotation.csv ./GP_rules.json ./paths.json ./species_to_exclude.json > output_file_combinatinations.txt
 ```
