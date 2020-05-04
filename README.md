@@ -232,6 +232,7 @@ sh get_gpr.sh path/to/folder/with/KO_gpr.txt /path/to/path/to/keggOrthologues.ja
 where KO_gpr.txt is created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
 
 **Note:** The final gpr.xlsx file needs to have the *xlsx* extension. Please be aware that the cache folder and cache.ccf file needs to stored in the same folder as keggOrthologues.jar.
+**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the gpr_file.xlsx is advised! For a more comprehensive explanation please see the tutorial with an example.**
 
 OrthoFinder
 ====
@@ -571,17 +572,17 @@ Depending on the subsetting of reactions from ORAdb you can use the following:
 
 *Subsetting to a pathway*
 
-> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
+> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
 
 *Subsetting to a module list*
 
-> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
+> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
 
 *Using the complete ORAdb*
 
->Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
+>Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
 
-During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated.
+During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated and stored int output folder defined by the *-o* flag.
 
 The second command calculates all possible microbial interactions using the previously generated files.
 
