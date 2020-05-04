@@ -571,17 +571,17 @@ Depending on the subsetting of reactions from ORAdb you can use the following:
 
 *Subsetting to a pathway*
 
-> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
+> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
 
 *Subsetting to a module list*
 
-> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
+> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
 
 *Using the complete ORAdb*
 
->Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv 
+>Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
 
-During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated.
+During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated and stored int output folder defined by the *-o* flag.
 
 The second command calculates all possible microbial interactions using the previously generated files.
 
