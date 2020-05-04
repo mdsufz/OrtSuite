@@ -11,9 +11,9 @@ library(reshape)
 library(reticulate)
 library(optparse)
 
-#output_ortan <- read.csv("~/OrtSuite/examples/OrtAn_Results/Results/Species_Annotation.csv",header=T,sep=";",row.names = 1) # Read in output file from OrtAn
-#gpr_file <- read_xlsx("~/Documents/total_bta/final_gpr.xlsx") # read in gpr file generated from .sh script
-#user_input <- read.csv("~/OrtSuite/examples/OrtAn_Results/Results/test_user_input.csv",header = T) # read in user input file for constraints 
+#output_ortan <- read.csv("/home/leonorfe/Documents/Test_genomes/total_bta/OrtAn_results/Results/Species_Annotation.csv",header=T,sep=";",row.names = 1) # Read in output file from OrtAn
+#gpr_file <- read_xlsx("~/Documents/Test_genomes/total_bta/ORAdb/final_gpr.xlsx") # read in gpr file generated from .sh script
+#user_input <- read.csv("~/Documents/Test_genomes/user_input.csv",header = T) # read in user input file for constraints 
 
 ###### ARGUMENT PARSING ######
 
@@ -42,6 +42,11 @@ option_list = list(
               type="character",
               default=NULL,
               help="file with user-defined constraints [default=%default]",
+              metavar="character"),
+  make_option(c("-o", "--output"),
+              type="character",
+              default=NULL,
+              help="output folder of resulting files [default=%default]",
               metavar="character"))
 
 
@@ -68,7 +73,7 @@ m_file <- opt$module_list # module file path
 final_gpr_file <- opt$gpr_file # gpr_file path
 output_ortan_file <- opt$output_ortan_file # Species_Annotation_file
 user_input_file <- opt$user_input # user defined constraints file
-
+output_folder <- opt$output #output folder for json files and combinations
 
 
 output_ortan <- read.table(file=as.character(output_ortan_file),header=T,sep=";",row.names = 1) 
@@ -440,7 +445,7 @@ csv2 <- user_input[,c(1:2)]
 temp_csv <- matrix(ncol = 1)
 test_csv_path <- c()
 
-for(l in 1:length(csv2)){
+for(l in 1:nrow(csv2)){
   z <- unlist(strsplit(toString(csv2[[2]][l]),split = ","))
   for(ll in 1:length(z)){
     temp_csv <- rbind(temp_csv,z[ll])
@@ -491,7 +496,7 @@ for(path in 1:length(unique(test_csv$path))){
 paths_final <- paste0("{",paths_final,"}")
 paths_final <- gsub(pattern = "\'",replacement = "\"",paths_final)
 
-sink("./paths.json")
+sink(paste0(output_folder,"/paths.json",collapse = ""))
 cat(paths_final)
 sink()
 
@@ -585,7 +590,7 @@ ec_file <- paste0("{",ec_file,"}")
 
   
   
-sink("./GP_rules.json")
+sink(paste0(output_folder,"/GP_rules.json",collapse = ""))
 cat(ec_file)
 sink()
 
@@ -614,7 +619,7 @@ for(i in 1:nrow(reaction_species)){
         for(list in 1:length(temp_x)){
           if(grepl("\\[",temp_x[list])==F){
             z <- as.character(strsplit(temp_x[[list]]," "))
-            if(sum(species_results[which(rownames(species_results) %in% z[[1]])]) >= 1){ 
+            if(sum(species_results[which(rownames(species_results) %in% z)]) >= 1){ 
               reaction_species[i,j] <- 1
             }else{
               reaction_species[i,j] <- 0
@@ -623,7 +628,7 @@ for(i in 1:nrow(reaction_species)){
             z <- as.character(strsplit(temp_x[[list]]," "))
             z <- gsub("\\[","",z) 
             z <- gsub("\\]","",z) 
-            if(sum(species_results[which(rownames(species_results) %in% z[[1]])]) == length(z)){ 
+            if(sum(species_results[which(rownames(species_results) %in% z)]) == length(z)){ 
                reaction_species[i,j] <- 1 
             }else{
                reaction_species[i,j] <- 0
@@ -643,7 +648,7 @@ for(i in 1:nrow(reaction_species)){
 }
 
 
-write.csv(reaction_species,file="Reactions_mapped_to_species.txt")
+write.csv(reaction_species,file=paste0(output_folder,"/Reactions_mapped_to_species.txt",collapse = ""))
 
 
 
@@ -689,6 +694,8 @@ for(i in 1:length(extract_total_reactions)){
       temp_total_reactions <- rbind(temp_total_reactions,transporters[[tp]][1]) 
     }
     
+    ind_na <- apply(temp_total_reactions,1,function(x) all(is.na(x)))
+    temp_total_reactions <- as.matrix(temp_total_reactions[!ind_na,])
     
     for(j in 1:ncol(reaction_species)){ 
       if(sum(reaction_species[,j][which(rownames(reaction_species) %in% temp_total_reactions[,1])]) == nrow(temp_total_reactions)){ 
@@ -710,7 +717,7 @@ for(list in 1:length(complete_pathways)){
   complete_pathways[[list]] <- complete_pathways[[list]][!ind,]
 }
 
-sink("./complete_pathway_species.txt") 
+sink(paste0(output_folder,"/complete_pathway_species.txt",collapse = "")) 
 print(complete_pathways)
 sink() 
 
@@ -809,7 +816,7 @@ for(i in 1:length(complete_subsets)){
 }
 names(single_org_interactions) <- names(complete_subsets) 
 
-sink("./single_org_interactions.txt") 
+sink(paste0(output_folder,"/single_org_interactions.txt",collapse = "")) 
 print(single_org_interactions)
 sink()
 
