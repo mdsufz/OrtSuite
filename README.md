@@ -232,6 +232,7 @@ sh get_gpr.sh path/to/folder/with/KO_gpr.txt /path/to/path/to/keggOrthologues.ja
 where KO_gpr.txt is created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
 
 **Note:** The final gpr.xlsx file needs to have the *xlsx* extension. Please be aware that the cache folder and cache.ccf file needs to stored in the same folder as keggOrthologues.jar.
+**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the gpr_file.xlsx is advised! For a more comprehensive explanation please see the tutorial with an example.**
 
 OrthoFinder
 ====
