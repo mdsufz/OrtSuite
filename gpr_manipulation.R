@@ -534,6 +534,7 @@ for(ec in 1:length(unique(rownames(final_ec_table)))){
         temp_ko_ids <- paste0("[", temp_ko_ids, "]")
         
       } else{
+        if(grepl("\\[\\[", ko_ids[[1]][i])==0){
         temp_ko_ids <- strsplit(ko_ids[[1]][i],split=",")
         temp_ko_ids <-gsub("\\[","",temp_ko_ids)
         temp_ko_ids <-gsub("\\]","",temp_ko_ids)
@@ -542,7 +543,17 @@ for(ec in 1:length(unique(rownames(final_ec_table)))){
         temp_ko_ids <-gsub(pattern = "\\)",replacement = "",x = temp_ko_ids)
         
         temp_ko_ids <- paste0("[", temp_ko_ids, "]")
-      } 
+        }else{
+          temp_ko_ids <- strsplit(ko_ids[[1]][i],split=",")
+          temp_ko_ids <-gsub("\\[","",temp_ko_ids)
+          temp_ko_ids <-gsub("\\]","",temp_ko_ids)
+          
+          temp_ko_ids <-gsub(pattern = "c\\(",replacement = "",x = temp_ko_ids)
+          temp_ko_ids <-gsub(pattern = "\\)",replacement = "",x = temp_ko_ids)
+          
+          temp_ko_ids <- paste0("[[", temp_ko_ids, "]]")
+        } 
+      }
       temp_ko_and <- append(temp_ko_and,temp_ko_ids,after = length(temp_ko_and))
     }
      temp_ko_and <- paste0(temp_ko_and,collapse = ",")
@@ -574,7 +585,7 @@ for(ec in 1:length(unique(rownames(final_ec_table)))){
       temp_ko_ids <-gsub(pattern = "c\\(",replacement = "",x = temp_ko_ids)
       temp_ko_ids <-gsub(pattern = "\\)",replacement = "",x = temp_ko_ids)
       
-      temp_ko_ids <- paste0("[", temp_ko_ids, "]")
+      temp_ko_ids <- paste0("[[", temp_ko_ids, "]]")
   }
   temp_ko_final <- paste0("\"",ec_ids[ec], "\": ",temp_ko_ids)
   ec_file <- append(ec_file,temp_ko_final,after = length(ec_file))
@@ -630,6 +641,7 @@ for(i in 1:nrow(reaction_species)){
             z <- gsub("\\]","",z) 
             if(sum(species_results[which(rownames(species_results) %in% z)]) == length(z)){ 
                reaction_species[i,j] <- 1 
+               break
             }else{
                reaction_species[i,j] <- 0
             }
@@ -648,7 +660,7 @@ for(i in 1:nrow(reaction_species)){
 }
 
 
-write.csv(reaction_species,file=paste0(output_folder,"/Reactions_mapped_to_species.txt",collapse = ""))
+write.csv(reaction_species,file=paste0(output_folder,"/Reactions_mapped_to_species.csv",collapse = ""))
 
 
 
@@ -721,6 +733,37 @@ sink(paste0(output_folder,"/complete_pathway_species.txt",collapse = ""))
 print(complete_pathways)
 sink() 
 
+#### Get all potential microbial interactions (excluding those with the ability to perform complete pathways) based solely on the reaction presence
+
+for(list in 1:length(complete_pathways)){ 
+  
+  if(length(complete_pathways[[list]])!=0){ 
+    complete_species <- reaction_species[,-which(colnames(reaction_species) %in% complete_pathways[[list]])] 
+  }else{
+    complete_species <- reaction_species
+  }
+  
+  ## subset table to only include the reactions in pathway
+  complete_species <- as.matrix(complete_species[rownames(complete_species) %in% extract_total_reactions[[list]],])
+  
+  # First, get all combinations of column names, with varying lengths (vary from 1 to 18 columns), and put into a list.
+  lst <- do.call(c, lapply(seq_along(colnames(complete_species)), combn, x = colnames(complete_species), simplify = FALSE))
+ 
+  # Second, would go through that list, and create matrices for those selected columns.
+  lst2 <- lapply(lst, function(x) matrix(complete_species[,x], ncol = length(x)))
+  
+  # Third, would name the list based on the column names and remove the quotes.
+  names(lst2) <- gsub('[\"]', '', lst)
+  
+  # Fourth, would check each matrix in the list where (a) any column in a row has a 1, and (b) all rows meet criteria (a).
+  reaction_comb_species <- names(which(lapply(lst2, function(x) { all(apply(x, 1, function(y) any(y > 0))) } ) == TRUE))
+  
+  # Write combinations that meet the criteria to file.
+  write.csv(reaction_comb_species,file=paste0(output_folder,"/",names(complete_pathways[list]),"_interactions.csv",collapse = ""))
+   
+}
+  
+
 
 ##### Script to obtain species capable of performing subsets of reactions ##########
 
@@ -736,7 +779,7 @@ for(list in 1:length(complete_pathways)){
     temp_complete <- reaction_species
   }
   
-  temp_complete <- reaction_species
+  
   
   subsets_reactions <- strsplit(extract_subset_single_org[[list]],",") 
   
@@ -816,8 +859,10 @@ for(i in 1:length(complete_subsets)){
 }
 names(single_org_interactions) <- names(complete_subsets) 
 
-sink(paste0(output_folder,"/single_org_interactions.txt",collapse = "")) 
+sink(paste0(output_folder,"/single_org_subset_interactions.txt",collapse = "")) 
 print(single_org_interactions)
 sink()
+
+####
 
 
