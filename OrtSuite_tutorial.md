@@ -61,13 +61,13 @@ Create project:
 >create_project -out $work_dir -db $database
  
 Perform relaxed search:
->relaxed_search -wd $work_dir -of $orthof -t 2 -ident 50
+>relaxed_search -wd $work_dir -of $orthof -t 2 -ident 40
 
 Perform restrictive search:
->restrictive_search -wd $work_dir -t 2
+>restrictive_search -wd $work_dir -t 2 -ident 70
 
 Assign function to sequences in clusters of orthologs:
->annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90
+>annotation -wd $work_dir
 
 ![ortAn_results](https://github.com/msdsufz/OrtSuite/blob/master/ortAn_results_folder.png)
 
@@ -77,11 +77,11 @@ Assign function to sequences in clusters of orthologs:
 Extract all microbial interactions with complete potential:
 ```bash
 
-Rscript gpr_manipulation.R -n /home/leonorfe/Documents/Test_genomes/fasta_files/final_gpr.xlsx -s /home/leonorfe/Documents/Test_genomes/OrtAn_new/Results/Species_Annotation.csv -u ./examples/OrtAn_Results/Results/test_user_input.csv
+Rscript gpr_manipulation.R -n ~/exmaples/test_database/final_gpr.xlsx -s ~/examples/OrtAn_new/Results/Species_Annotation.csv -u ~/examples/OrtAn_Results/Results/test_user_input.csv -o ~/examples/
 
 ```
 Add constraints to reduce search space:
 
 ```
-sh combinations.sh /home/leonorfe/Documents/Test_genomes/OrtAn_new/Results/Species_Annotation.csv ./GP_rules.json ./paths.json ./species_to_exclude.json > output_file_combinatinations.txt
+sh combinations.sh ~/examples/OrtAn_new/Results/Species_Annotation.csv ./GP_rules.json ./paths.json ./species_to_exclude.json > ~/examples/output_file_combinatinations.txt
 ```
