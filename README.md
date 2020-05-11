@@ -564,33 +564,30 @@ The user can extract the complete list of species combinations or add further co
 > module_list.txt / pathway_list.txt *(optional) - Additional subsetting of reactions from the ORAdb*
 
 
-Running the task consists of two commands shown below.
+Identification of species with the genetic potential to perform complete pathways individually or by interactions with other requires the execution of the two commands shown below.
 
-The first command uses an Rscript to generate all necessary files for the extraction of microbial interactions based on the constraints defined by the user.
 
 Depending on the subsetting of reactions from ORAdb you can use the following:
 
 *Subsetting to a pathway*
 
-> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
+> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder/
 
 *Subsetting to a module list*
 
-> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
+> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder/
 
 *Using the complete ORAdb*
 
->Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/folder/output_json_files/
+>Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder/
 
 During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated and stored int output folder defined by the *-o* flag.
-
-The second command calculates all possible microbial interactions using the previously generated files.
+.
 
 ```bash 
 sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rules.json /path/to/folder/paths.json /path/to/folder/species_to_exclude.json > /path/to/folder/output_file_combinatinations.txt
 ```
-**Note:** the name of the output file to store all possible species combinations is defined by the user.
-
+**Note:** the name of the output file to store all possible species combinations is defined by the user. Two sets of interspecies interactions files are generated (one based on the ability to perform all reactions individually and one based on the combination of KOs). For further explanation please see XXX. 
 
 
 Citing OrtSuite
