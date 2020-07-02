@@ -1,12 +1,12 @@
-# OrtSuite - a flexible pipeline for annotation of ecosystem processes and prediction of putative microbial interactions
+# OrtSuite1.0 - a flexible pipeline for annotation of ecosystem processes and prediction of putative microbial interactions
 
-OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. 
+OrtSuite1.0 was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. 
 
 
 
-![workflow](https://github.com/msdsufz/OrtSuite/blob/master/workflow_ortSuite.png)
+![workflow](https://github.com/msdsufz/OrtSuite1.0/blob/master/workflow_ortSuite.png)
 
-**OrtAn workflow** - 
+**OrtSuite1.0 workflow** - 
 
 **(a)** Protein sequence from samples supplied by the user are clustered using OrthoFinder. 
 
@@ -21,7 +21,7 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 **(rounded blue rectangles)** Additional constraints can be added to reduce the search space of microbial interactions.
 
 
-# Overview of OrtSuite
+# Overview of OrtSuite1.0
 
 
 **OrthoFinder:** Clustering of orthologs
@@ -33,7 +33,7 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 # System Requirements
 
-Resources for Ortsuite will vary depending on the amount of data being processed. In the example provided (consisting of 7 reactions with 16 associated KEGG Ortholog identifiers), we used an Intel Core i5-6200U 2.3GHz with 4 cores and 16 Gb of RAM. OrtSuite officially supports only Linux OS. 
+Resources for Ortsuite1.0 will vary depending on the amount of data being processed. In the example provided (consisting of 7 reactions with 16 associated KEGG Ortholog identifiers), we used an Intel Core i5-6200U 2.3GHz with 4 cores and 16 Gb of RAM. OrtSuite1.0 officially supports only Linux OS. 
 
 
 
@@ -41,9 +41,9 @@ Installation
 ============
 
 
-# OrtSuite
+# OrtSuite1.0
 
-OrtSuite is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
+OrtSuite1.0 is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
 Generation of clusters of orthologs is performed by OrthoFinder.
 
 **Requirements:**  Python 3.6
@@ -138,7 +138,7 @@ To install BLAST+ use:
 sudo apt-get install ncbi-blast+
 ```
 
-*Note* - No other dependency of OrthoFinder is required to run OrtSuite since we only use it to perform the clustering of orthologs. 
+*Note* - No other dependency of OrthoFinder is required to run OrtSuite1.0 since we only use it to perform the clustering of orthologs. 
 
 
 JAVA
@@ -155,7 +155,7 @@ Usage
 
 Please view the OrtSuite [tutorial](OrtSuite_tutorial.md) for detailed instructions and examples.
 
-Once installation of OrtSuite and all dependencies are completed the different commands can be called independently.
+Once installation of OrtSuite1.0 and all dependencies are completed the different commands can be called independently.
 
 
 
@@ -590,10 +590,10 @@ sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rul
 **Note:** the name of the output file to store all possible species combinations is defined by the user. Two sets of interspecies interactions files are generated (one based on the ability to perform all reactions individually and one based on the combination of KOs). For further explanation please see XXX. 
 
 
-Citing OrtSuite
+Citing OrtSuite1.0
 ====
 
-If you found OrtSuite usefull in your study, please cite: XXXX. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+OrtSuite1.0 will be submitted to BioxRiv by the end of July and alink will be added at that time. If other software contained and used by OrtSuite1.0 was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
 
 Acknowledgements
 ====
@@ -604,5 +604,5 @@ Principal Investigator: Ulisses Nunes da Rocha
 
 Institution: Microbial Systems Data Science group, Helmholtz Center for Environmental Research, Department of Environmental Microbiology, Leipzig, Germany
 
-All feedback is welcome. For errors and bugs, please open a new Issue thread on this github page, and we will try to address them as soon as possible. For general feedback you can contact us at msds@ufz.de.
+All feedback is welcome. For errors and bugs, please open a new Issue thread on this github page, and we will try to address them as soon as possible. For general feedback you can contact us at mds@ufz.de.
 
