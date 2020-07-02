@@ -4,7 +4,7 @@ OrtSuite1.0 was developed with the goal to facilitate annotation of ecosystem pr
 
 
 
-![workflow](https://github.com/msdsufz/OrtSuite1.0/blob/master/workflow_ortSuite.png)
+![workflow](https://github.com/mdsufz/OrtSuite1.0/blob/master/workflow_ortSuite.png)
 
 **OrtSuite1.0 workflow** - 
 
