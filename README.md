@@ -35,8 +35,7 @@ OrtSuite1.0 was developed with the goal to facilitate annotation of ecosystem pr
 
 Resources for Ortsuite1.0 will vary depending on the amount of data being processed. In the example provided (consisting of 7 reactions with 16 associated KEGG Ortholog identifiers), we used an Intel Core i5-6200U 2.3GHz with 4 cores and 16 Gb of RAM. OrtSuite1.0 officially supports only Linux OS. 
 
-
-
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Installation
 ============
 
@@ -149,34 +148,32 @@ To download the Gene-Protein-Reaction rules you need to have java installed.
 ```bash
 sudo apt install default-jre
 ```
-
-Usage
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Using OrtSuite1.0
 =====
 
-Please view the OrtSuite [tutorial](OrtSuite_tutorial.md) for detailed instructions and examples.
+***For viewing an example of how to use OrtSuite1.0 please click [tutorial](OrtSuite_tutorial.md).***
 
 Once installation of OrtSuite1.0 and all dependencies are completed the different commands can be called independently.
 
 
 
-## Ortholog Reaction-Assosiation database (ORAdb)
+## Step 1) Generating the Ortholog Reaction-Assosiation database (ORAdb)
 
 
 The generation of a user-defined ortholog reaction-association database starts with the download of all the sequences associated with the KO (KEGG Orthology) group to a FASTA file.
 
 The input can be:
 
-- a KEGG pathway map ID
+- [a KEGG pathway map ID]()
 
-- List of KO IDs
+- [List of KO IDs]()
 
-- List of KEGG Reaction IDs
+- [List of KEGG Reaction IDs]()
 
-- List of EC (Enzyme commission) numbers
+- [List of EC (Enzyme commission) numbers]()
 
-Note: The format of the input lists must be a txt file with only one ID per line. In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](examples/associations.txt)).
-
-**Be aware that the output folder must exist!**
+Note: The format of the input lists must be a txt file with only one ID per line. 
 
 Run the command with the help option -h to see the usage and all the available options.
 
@@ -209,6 +206,23 @@ optional arguments:
   -v, --verbose  set loglevel to DEBUG
 ```
 
+Examples: 
+====
+When using a single pathway map from KEGG
+>download_kos -o output_folder -m map00362
+
+When using reaction identifiers
+>download_kos -o output_folder -r reaction_list.txt 
+
+When using EC numbers
+>download_kos -o output_folder -e ec_list.txt
+
+When using KO identifiers
+>download_kos -o output_folder -k ko_list.txt
+
+
+**Be aware that the output_folder must be previously created by the user!**
+
 To test if the tool is working you can use the files contained in the examples folder.
 
 Note: Running this command may take some time and memory space.
@@ -216,20 +230,23 @@ Note: Running this command may take some time and memory space.
 
 ORAdb Output
 ======
-In the output folder you will find one FASTA file for each selected KO.
+A FASTA format file for each selected KO will be placed in the output folder defined by the user.
 If you use -e or -r option, an additional file will be generated *associations.txt*, which indicates which kos where selected for download for each reaction/EC number.
-In the same folder a file *info_db.csv* contains a table with information regarding the KO's that were selected for download along with their name and associated EC numbers and Reactions IDs.
+In the same folder a file *info_db.csv* contains a table with information regarding the KO's that were selected for download along with their name and associated EC numbers and Reactions IDs. 
+In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](examples/associations.txt)).
 
-Gene-Protein-Reation (GPR) rules
+2)Downloading Gene-Protein-Reation (GPR) rules
 ====
 
 Once the FASTA files containing the sequences for the list of KOs is completed you can obtain the GPR rules.
-First, copy the *get_gpr.sh* to the ORAdb output folder and next run the following command:
+First, copy the *get_gpr.sh* to the ORAdb output_folder you previously created and run the following command:
 
 ```bash
 sh get_gpr.sh path/to/folder/with/KO_gpr.txt /path/to/path/to/keggOrthologues.jar /path/to/folder/for/final_gpr.xlsx
 ```
-where KO_gpr.txt is created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
+
+The get_pr.sh script 
+where KO_gpr.txt is a text file created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
 
 **Note:** The final gpr.xlsx file needs to have the *xlsx* extension. Please be aware that the cache folder and cache.ccf file needs to stored in the same folder as keggOrthologues.jar.
 **Due to the limited information in KEGG database concerning GPR rules, manual inspection of the gpr_file.xlsx is advised! For a more comprehensive explanation please see the tutorial with an example.**
