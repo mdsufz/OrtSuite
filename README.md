@@ -90,7 +90,7 @@ python3.6 setup.py install
 
 Once the installation is finished the tool should be ready to use.
 
-**Note:** Some users might encounter an error related to SSL certificates. If this is the case then type the following in your temirnal:
+**Note:** Some users might encounter an error related to SSL certificates. If this is the case then type the following in your terminal:
 
 > sudo update-ca-certificates --fresh
 
@@ -108,7 +108,8 @@ Testing: ./OrthoFinder/orthofinder -h (help menu)
 ```
 Dependencies of OrthoFinder
 
-*MCL*
+MCL
+====
 
 The mcl clustering algorithm is available in the repositories and can be installed as any other package.
 ```bash
@@ -165,13 +166,13 @@ The generation of a user-defined ortholog reaction-association database starts w
 
 The input can be:
 
-- [a KEGG pathway map ID]()
+- a KEGG pathway map ID (e.g. map00362)
 
-- [List of KO IDs]()
+- [List of KO IDs](https://github.com/mdsufz/OrtSuite1.0/blob/master/examples/kos.txt)
 
-- [List of KEGG Reaction IDs]()
+- [List of KEGG Reaction IDs](https://github.com/mdsufz/OrtSuite1.0/blob/master/examples/rx.txt)
 
-- [List of EC (Enzyme commission) numbers]()
+- [List of EC (Enzyme commission) numbers](https://github.com/mdsufz/OrtSuite1.0/blob/master/examples/ecs.txt)
 
 Note: The format of the input lists must be a txt file with only one ID per line. 
 
@@ -206,24 +207,27 @@ optional arguments:
   -v, --verbose  set loglevel to DEBUG
 ```
 
-Examples: 
+Examples of commands: 
 ====
 When using a single pathway map from KEGG
->download_kos -o output_folder -m map00362
-
+```bash
+download_kos -o output_folder -m map00362
+```
 When using reaction identifiers
->download_kos -o output_folder -r reaction_list.txt 
-
+```bash
+download_kos -o output_folder -r reaction_list.txt 
+```
 When using EC numbers
->download_kos -o output_folder -e ec_list.txt
-
+```bash
+download_kos -o output_folder -e ec_list.txt
+```
 When using KO identifiers
->download_kos -o output_folder -k ko_list.txt
-
-
+```bash
+download_kos -o output_folder -k ko_list.txt
+```
 **Be aware that the output_folder must be previously created by the user!**
 
-To test if the tool is working you can use the files contained in the examples folder.
+To test if the tool is working you can use the files contained in the [examples](https://github.com/mdsufz/OrtSuite1.0/blob/master/examples) folder.
 
 Note: Running this command may take some time and memory space.
 
@@ -235,7 +239,7 @@ If you use -e or -r option, an additional file will be generated *associations.t
 In the same folder a file *info_db.csv* contains a table with information regarding the KO's that were selected for download along with their name and associated EC numbers and Reactions IDs. 
 In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](examples/associations.txt)).
 
-2)Downloading Gene-Protein-Reation (GPR) rules
+Step 2) Downloading Gene-Protein-Reation (GPR) rules
 ====
 
 Once the FASTA files containing the sequences for the list of KOs is completed you can obtain the GPR rules.
@@ -245,13 +249,15 @@ First, copy the *get_gpr.sh* to the ORAdb output_folder you previously created a
 sh get_gpr.sh path/to/folder/with/KO_gpr.txt /path/to/path/to/keggOrthologues.jar /path/to/folder/for/final_gpr.xlsx
 ```
 
-The get_pr.sh script 
-where KO_gpr.txt is a text file created to store a list of all KOs in database and final_gpr.xlsx is a file created with the GPR rules.
+The get_pr.sh script reads all *.fa* files in the output_folder and calls an additional java script ([keggOrthologues.jar](keggOrthologues.jar)) which retrieves from KEGG Modules the respective KO-related GPR rules. *KO_gpr.txt* is a text file created by the script to store a list of all KOs in database and *final_gpr.xlsx* is a file created with the GPR rules.  
 
-**Note:** The final gpr.xlsx file needs to have the *xlsx* extension. Please be aware that the cache folder and cache.ccf file needs to stored in the same folder as keggOrthologues.jar.
-**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the gpr_file.xlsx is advised! For a more comprehensive explanation please see the tutorial with an example.**
+**Note 1:** Both *KO_gpr.txt* and *final_gpr.xlsx* are suggested filenames and can be altered by the user.  
+**Note 2:** The *final_gpr.xlsx* file needs to have the *xlsx* extension.  
+**Note 3:** Please be aware that the [cache folder](cache) and [cache.ccf](cache.ccf) file needs to stored in the same folder as [keggOrthologues.jar](keggOrthologues.jar). 
 
-OrthoFinder
+**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the final_gpr.xlsx is advised! For a more comprehensive explanation please see the tutorial with an example.**  
+
+Step 3) OrthoFinder
 ====
 
 OrthoFinder takes as input a folder containing the FASTA sequences the user wants to cluster.
@@ -265,12 +271,12 @@ Note: If you wish to use BLAST+ instead of DIAMOND please use the following:
 ```bash
 ~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -o /path/to/output/folder -S blast -og
 ```
-**Note:** OrthoFinder's output folder is generated automatically.
+**Note:** OrthoFinder's output folder is generated automatically. The user can, however, define the parent directory where to store the output folder (e.g. /Documents/).
 
-OrtAn
+Step 4) OrtAn
 ====
 
-This tool uses the output from [OrthoFinder](https://github.com/davidemms/OrthoFinder) to perform the annotation of the generated clusters of orthologs based on the user-defined ORAdb.
+OrtAn uses the output from [OrthoFinder](https://github.com/davidemms/OrthoFinder) to perform the annotation of the generated clusters of orthologs based on the user-defined ORAdb.
 
 Overview of OrtAn:
 
@@ -297,30 +303,29 @@ Overview of OrtAn:
 
 ### Inputs:
 
-- OrthoFinder output directories
-
-- ORAdb
-
+- OrthoFinder output directories    
+- ORAdb  
 
 
-Before running OrtAn you need to:
+Before running OrtAn you need to:  
 
-- Run OrthoFinder with the input genomes;
-- Prepare the database with the necessary format.
+- Run OrthoFinder with the input genomes  
+- Prepare the database with the necessary format.  
 
 ### Required files and directories from OrthoFinder output:
 
-```/Orthogroups/Orthogroups.txt```
+- [Orthogroups.txt](examples/Orthogroups/Orthogroups.txt)  ```(located in examples/Orthogroups/Orthogroups.txt)```
 
-```/WorkingDirectory/SpeciesIDs.txt```
+- [SpeciesIDs.txt](examples/WorkingDirectory/SpeciesIDs.txt)  ```(located in examples/WorkingDirectory/SpeciesIDs.txt)```
 
-```/WorkingDirectory/SequenceIDs.txt```
+- [SequenceIDs.txt](examples/WorkingDirectory/SequenceIDs.txt)  ```(located in examples/WorkingDirectory/SequenceIDs.txt)```
 
-```/Orthogroup_Sequences/```
+- [Orthogroup_Sequences](examples/Orthogroup_Sequences) folder  ```(located in examples/Orthogroup_Sequences/)```
 
 
 ## Create Project
 
+The first task in OrtAn is to create the folder where all the results will be stored. During this task the location of the ORAdb is also defined. 
 
 **Note:** you should indicate always the same output/working directory in all the steps.
 
@@ -345,12 +350,17 @@ optional arguments:
   -v, --verbose         set loglevel to DEBUG
 ```
 
+
 ## Relaxed Search
 
-**Note** - This task can only be performed after you have run OrthoFinder to generate the clusters of orthologs.
+The first annotation of sequences in the clusters (*relaxed search*) only requires the user to define the working folder (also used in *create_project*) and the location of the folders genertaed by OrthoFinder.  
 
 Ten (10) percent of random sequences from each cluster is used to retrieve the associations which will reduce the search space on the second annotation *restrictive_search*.
-Default identity threshold: 50. (*The user also has the possibility to change the threshold*) 
+Default identity threshold: 50. (*The user also has the possibility to change the threshold*)  
+
+**Note** - This task can only be performed after you have run OrthoFinder to generate the clusters of orthologs.  
+
+
 
 Run ```relaxed_search -h``` to see the usage of this command.
 
@@ -359,7 +369,7 @@ usage: relaxed_search [-h] -wd WORKINGDIRECTORY -of ORTHOFINDER [-ident IDENT]
                       [-t N_CPU] [-del] [-l] [-v]
 
 Runs the relaxed search step - all the sequences from the database against
-representative sequences from the Orthofinder Orthgroups.
+representative sequences from the Orthofinder Orthogroups.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -382,8 +392,9 @@ optional arguments:
   -v, --verbose         set loglevel to DEBUG
 ```
 
-## Restrictive Search
+## Restrictive Search  
 
+The second annotation (*restrictive search*) uses as inputs the outputs generated from the *relaxed search*.
 
 Run ```restrictive_search -h``` to see the usage of this command.
 
@@ -392,7 +403,7 @@ usage: restrictive_search [-h] -wd WORKINGDIRECTORY [-t N_CPU] [-ident IDENT]
                           [-l] [-v]
 
 Runs the restrictive search step - all the sequences from the selected
-Orthgroups versus the functions associated with.
+Orthgroups versus the functions associated with the matched ORAdb hits.
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -456,10 +467,10 @@ optional arguments:
 ```
 
 
-## Create/Update ORA database
+## Create/Update ORA database (optional)
 
 With this task, you have the option to update your initial database adding the newly annotated sequences from the input genomes.
-You can have the option to create a new database in a folder of your choice, or simply add the new sequences to the given database.
+You have the option to create a new database in a folder of your choice, or simply add the new sequences to the given database.
 
 Run ```create_db -h``` to see the usage of this command.
 
@@ -487,27 +498,35 @@ optional arguments:
 ```
 
 
-## Runing the pipeline
+## Runing OrtAn
 
-Define the paths you need:
+First define the paths of the files and folders you will need:
 
 ```bash
 work_dir="/path/to/output/folder/" # location where you want to store the results
 database="/path/to/database/" # location of the ORAdb (where the FASTA files are located)
 orthof="/path/to/orthofinder/results/folder" # location of the folders with the results from OrthoFinder
-new_db="/path/to/output/folder/new_db/" # location where the new database should stored
+new_db="/path/to/output/folder/new_db/" # location where the new database should stored (optional)
 ```
 
+Example:
+====
+
+```bash
+work_dir="examples/OrtAn_Results/"
+
+database="examples/test_database/"
+
+orthof="examples/" (all folders and files generated from OrthoFinder are located in this folder)
+```
 Create the necessary directories to store the results:
 
 ```bash
 mkdir $work_dir
-mkdir $new_db
+mkdir $new_db (optional)
 ```
 
-Run all the commands in order.
-
-Create a project using as input the database which the path is indicated in the variable database.
+Create a project using as input the database whose path is indicated in the variable database.
 
 All the results and outputs from this project will be stored in the folder indicated in the variable ```$work_dir```.
 
@@ -537,7 +556,7 @@ Run annotation with thresholds of 95 for identity percent, 99 for positive match
 annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90 # remove everything after "$work_dir" if default values are to be used
 ```
 
-Run *create_db* in a new directory adding to the initial database the annotated sequences in the previous step.
+Run *create_db* in a new directory adding to the initial database the annotated sequences in the previous step (optional).
 
 ```bash
 create_db -wd $work_dir -o $new_db
@@ -545,61 +564,61 @@ create_db -wd $work_dir -o $new_db
 
 ## Output
 
-From the *relaxed_search* task, a text file (```/Results/Associations.txt```) is generated containing the associations between the clusters of orthologs and the ORAdb functions.
+From the *relaxed_search* task, a text file [Associations.txt](examples/OrtAn_Results/Results/Associations.txt) (``` located in examples/OrtAn_Results/Results/Associations.txt```) is generated containing the associations between the clusters of orthologs and the ORAdb functions.
 
 From the *restrictive_search* task we obtain 6 different text files:
 
-```/Results/Annotation_Function_Protein.txt``` - Shows in the first column the functions and in the second the sequences annotated with those functions (one association per line).
+[Annotation_Function_Protein.txt](examples/OrtAn_Results/Results/Annotation_Function_Protein.txt) - Shows in the first column the functions and in the second the sequences annotated with those functions (one association per line) (```located in examples/OrtAn_Results/Results/Annotation_Function_Protein.txt```).  
 
-```/Results/Annotation_Protein_Function.txt``` - Shows in the first column the sequences and in the second the functions assigned (one association per line).
+[Annotation_Protein_Function.txt](examples/OrtAn_Results/Results/Annotation_Protein_Function.txt) - Shows in the first column the sequences and in the second the functions assigned (one association per line) (```located in examples/OrtAn_Results/Results/Annotation_Protein_Function.txt```).
 
-```/Results/ConOG.txt``` - Consistent Orthogroups (Clusters of orthologs where all the sequences were annotated to the same function). The function is also indicated.
+[ConOG.txt](examples/OrtAn_Results/Results/ConOG.txt) - Consistent Orthogroups (Clusters of orthologs where all the sequences were annotated to the same function). The function is also indicated (```located in examples/OrtAn_Results/Results/ConOG.txt```).
 
-```/Results/DivOG.txt``` - Divergent Orthogroups (Clusters of orthologs where not all the sequences were annotated to the same function). This means that the ortholog cluster could have sequences that were not annotated to any function or sequences annotated to different functions. These functions are also indicated in the file.
+[DivOG.txt](examples/OrtAn_Results/Results/DivOG.txt) - Divergent Orthogroups (Clusters of orthologs where not all the sequences were annotated to the same function). This means that the ortholog cluster could have sequences that were not annotated to any function or sequences annotated to different functions. These functions are also indicated in the file (```located in examples/OrtAn_Results/Results/DivOG.txt```).
 
-```/Results/Orthogroups_Annotation.csv``` - This file shows how many sequences in each cluster of orthologs were annotated and to which function.
+[Orthogroups_Annotation.csv](examples/OrtAn_Results/Results/Orthogroups_Annotation.csv) - This file shows how many sequences in each cluster of orthologs were annotated and to which function (```located in examples/OrtAn_Results/Results/Orthogroups_Annotation.csv```).
 
-```/Results/Species_Annotation.csv``` - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function).
+[Species_Annotation.csv](examples/OrtAn_Results/Results/Species_Annotation.csv) - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function) (```located in examples/OrtAn_Results/Results/Species_Annotation.csv```).
 
 
 ## Identification of putative microbial interactions
 
 The user can extract the complete list of species combinations or add further constraints to reduce the number of microbial interactions to be retrieved. Requirements include:
 
-> gpr.xlsx - generated from running the *get_gpr.sh* script
+-> [final_gpr.xlsx](examples/test_database/final_gpr.xlsx) - generated from running the *get_gpr.sh* script
 
-> Species_Annotation.csv - generated from OrtAn
+-> [Species_Annotation.csv](microbial_interactions/data/Species_Annotation.csv) - generated from OrtAn
 
-> *user_input.txt* - a file provided by the user defining the constraints of each path contained in ORAdb 
+-> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv) - a file provided by the user defining the constraints of each pathway or sets of reactions of interest contained in ORAdb 
 
-> GP_rules.json - generated from the tool
+-> [GP_rules.json](microbial_interactions/data/GP_rules.json) - generated from the tool
 
-> path.json - generated from the tool 
+-> [paths.json](microbial_interactions/data/paths.json) - generated from the tool 
 
-> species_exclude - generated form the tool
+-> [species_to_exclude](microbial_interactions/data/species_to_exclude.json) - generated form the tool
 
-> module_list.txt / pathway_list.txt *(optional) - Additional subsetting of reactions from the ORAdb*
+-> module_list.txt / pathway_list.txt - Additional subsetting of reactions from the ORAdb (optional)
 
 
 Identification of species with the genetic potential to perform complete pathways individually or by interactions with other requires the execution of the two commands shown below.
 
 
-Depending on the subsetting of reactions from ORAdb you can use the following:
+**Depending on the subsetting of reactions from ORAdb you can use the following:**
 
-*Subsetting to a pathway*
+*Subsetting to a pathway* - takes as inputs the pathway_list, final_grp.xlsx, Species_Annotation.csv and user_input.csv files. Output_folder is defined by the user.
 
-> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder/
+> Rscript /path/to/folder/gpr_manipulation.R  -p /path/to/folder/pathway_list.txt -n /path/to/folder/final_gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder
 
 *Subsetting to a module list*
 
-> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder/
+> Rscript /path/to/folder/gpr_manipulation.R -m /path/to/folder/module_list.txt -n /path/to/folder/final_gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder
 
-*Using the complete ORAdb*
+*Using the complete ORAdb (DEFAULT)*
 
->Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder/
+>Rscript /path/to/folder/gpr_manipulation.R -n /path/to/folder/final_gpr.xlsx -s /path/to/folder/Species_Annotation.csv -u /path/to/folder/user_input.csv -o /path/to/output_folder
 
-During this task the *GP_rules.json, path.json* and *species_exclude.json* are also generated and stored int output folder defined by the *-o* flag.
-.
+During this task the *GP_rules.json*, *paths.json* and *species_to_exclude.json* are also generated by the script and stored in the output_folder defined by the *-o* flag.
+
 
 ```bash 
 sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rules.json /path/to/folder/paths.json /path/to/folder/species_to_exclude.json > /path/to/folder/output_file_combinatinations.txt
@@ -610,7 +629,7 @@ sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rul
 Citing OrtSuite1.0
 ====
 
-OrtSuite1.0 will be submitted to BioxRiv by the end of July and alink will be added at that time. If other software contained and used by OrtSuite1.0 was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+OrtSuite1.0 will be submitted to BioxRiv by the end of July and a link will be added at that time. If other software contained and used by OrtSuite1.0 was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
 
 Acknowledgements
 ====
@@ -619,7 +638,7 @@ Authors of pipeline: Marta Lopes and Joao Saraiva.
 
 Principal Investigator: Ulisses Nunes da Rocha
 
-Institution: Microbial Systems Data Science group, Helmholtz Center for Environmental Research, Department of Environmental Microbiology, Leipzig, Germany
+Institution: Microbial Data Sciences group, Helmholtz Center for Environmental Research, Department of Environmental Microbiology, Leipzig, Germany
 
 All feedback is welcome. For errors and bugs, please open a new Issue thread on this github page, and we will try to address them as soon as possible. For general feedback you can contact us at mds@ufz.de.
 
