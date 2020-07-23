@@ -11,7 +11,7 @@ Download all sequences associated with the list of enzyme commission numbers:
 
 First make a directory: 
 
->mkdir examples/test_database # Make sure to be in the OrtSuite1.0 folder!
+>mkdir examples/test_database # Make sure to be in the OrtSuite folder!
 
 Download all sequences associated with provided list of reactions and generate ORAdb:
 >download_kos -o ~/examples/test_database -r /OrtSuite/examples/complete_bta_reactions.txt
@@ -74,14 +74,10 @@ Assign function to sequences in clusters of orthologs:
 4: Identification of putative microbial interactions
 ====
 
-Extract all microbial interactions with complete potential:
+Extract all microbial interactions with complete functional potential and using th constraints defined in *test_user_input.csv*:
 ```bash
 
 Rscript gpr_manipulation.R -n ~/examples/test_database/final_gpr.xlsx -s ~/examples/OrtAn_new/Results/Species_Annotation.csv -u ~/examples/OrtAn_Results/Results/test_user_input.csv -o ~/examples/
 
 ```
-Add constraints to reduce search space:
 
-```
-sh combinations.sh ~/examples/OrtAn_new/Results/Species_Annotation.csv ./GP_rules.json ./paths.json ./species_to_exclude.json > ~/examples/output_file_combinatinations.txt
-```
