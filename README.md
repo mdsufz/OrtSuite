@@ -1,12 +1,12 @@
-# OrtSuite v1.0 - a flexible pipeline for annotation of ecosystem processes and prediction of putative microbial interactions
+# OrtSuite - a flexible pipeline for annotation of ecosystem processes and prediction of putative microbial interactions
 
-OrtSuite v1.0 was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. 
+OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. 
 
 
 
-![workflow](https://github.com/mdsufz/OrtSuite_v1.0/blob/master/workflow_ortSuite.png)
+![workflow](https://github.com/mdsufz/OrtSuite/blob/master/workflow_ortSuite.png)
 
-**OrtSuite v1.0 workflow** - 
+**OrtSuite workflow** - 
 
 **(a)** Protein sequence from samples supplied by the user are clustered using OrthoFinder. 
 
@@ -21,7 +21,7 @@ OrtSuite v1.0 was developed with the goal to facilitate annotation of ecosystem 
 **(rounded blue rectangles)** Additional constraints can be added to reduce the search space of microbial interactions.
 
 
-# Overview of OrtSuite v1.0
+# Overview of OrtSuite
 
 
 **OrthoFinder:** Clustering of orthologs  
@@ -35,16 +35,16 @@ OrtSuite v1.0 was developed with the goal to facilitate annotation of ecosystem 
 
 # System Requirements
 
-Resources for Ortsuite v1.0 will vary depending on the amount of data being processed. In the example provided (consisting of 7 reactions with 16 associated KEGG Ortholog identifiers), we used an Intel Core i5-6200U 2.3GHz with 4 cores and 16 Gb of RAM. OrtSuite v1.0 officially supports only Linux OS. 
+Resources for Ortsuite will vary depending on the amount of data being processed. In the example provided (consisting of 7 reactions with 16 associated KEGG Ortholog identifiers), we used an Intel Core i5-6200U 2.3GHz with 4 cores and 16 Gb of RAM. OrtSuite officially supports only Linux OS. 
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Installation
 ============
 
 
-# OrtSuite v1.0
+# OrtSuite 
 
-OrtSuite v1.0 is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
+OrtSuite is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
 Generation of clusters of orthologs is performed by OrthoFinder.
 
 **Requirements:**  Python 3.6
@@ -152,12 +152,12 @@ To download the Gene-Protein-Reaction rules you need to have java installed.
 sudo apt install default-jre
 ```
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Using OrtSuite v1.0
+Using OrtSuite
 =====
 
-***For viewing an example of how to use OrtSuite v1.0 please click [tutorial](OrtSuite_tutorial.md).***
+***For viewing an example of how to use OrtSuite please click [tutorial](OrtSuite_tutorial.md).***
 
-Once installation of OrtSuite v1.0 and all dependencies are completed the different commands can be called independently.
+Once installation of OrtSuite and all dependencies are completed the different commands can be called independently.
 
 
 
@@ -170,11 +170,11 @@ The input can be:
 
 - a KEGG pathway map ID (e.g. map00362)
 
-- [List of KO IDs](https://github.com/mdsufz/OrtSuite_v1.0/blob/master/examples/kos.txt)
+- [List of KO IDs](https://github.com/mdsufz/OrtSuite/blob/master/examples/kos.txt)
 
-- [List of KEGG Reaction IDs](https://github.com/mdsufz/OrtSuite_v1.0/blob/master/examples/rx.txt)
+- [List of KEGG Reaction IDs](https://github.com/mdsufz/OrtSuite/blob/master/examples/rx.txt)
 
-- [List of EC (Enzyme commission) numbers](https://github.com/mdsufz/OrtSuite_v1.0/blob/master/examples/ecs.txt)
+- [List of EC (Enzyme commission) numbers](https://github.com/mdsufz/OrtSuite/blob/master/examples/ecs.txt)
 
 Note: The format of the input lists must be a txt file with only one ID per line. 
 
@@ -229,7 +229,7 @@ download_kos -o output_folder -k ko_list.txt
 ```
 **Be aware that the output_folder must be previously created by the user!**
 
-To test if the tool is working you can use the files contained in the [examples](https://github.com/mdsufz/OrtSuite_v1.0/blob/master/examples) folder.
+To test if the tool is working you can use the files contained in the [examples](https://github.com/mdsufz/OrtSuite/blob/master/examples) folder.
 
 Note: Running this command may take some time and memory space.
 
@@ -583,9 +583,12 @@ From the *restrictive_search* task we obtain 6 different text files:
 [Species_Annotation.csv](examples/OrtAn_Results/Results/Species_Annotation.csv) - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function) (```located in examples/OrtAn_Results/Results/Species_Annotation.csv```).
 
 
-## Identification of putative microbial interactions
+Step 5) Interspecies interactions
+==== 
 
-The user can extract the complete list of species combinations or add further constraints to reduce the number of microbial interactions to be retrieved. Requirements include:
+Identification of interspecies interactions can be performed only taking into account the individual species' functional potential or by adding constraints related to reaction subsets that need to be performed by single species or even the presence of transport reactions.
+
+Requirements include:
 
 -> [final_gpr.xlsx](examples/test_database/final_gpr.xlsx) - generated from running the *get_gpr.sh* script
 
@@ -622,16 +625,10 @@ Identification of species with the genetic potential to perform complete pathway
 During this task the *GP_rules.json*, *paths.json* and *species_to_exclude.json* are also generated by the script and stored in the output_folder defined by the *-o* flag.
 
 
-```bash 
-sh combinations.sh /path/to/folder/Species_Annotation.csv /path/to/folder/GP_rules.json /path/to/folder/paths.json /path/to/folder/species_to_exclude.json > /path/to/folder/output_file_combinatinations.txt
-```
-**Note:** the name of the output file to store all possible species combinations is defined by the user. Two sets of interspecies interactions files are generated (one based on the ability to perform all reactions individually and one based on the combination of KOs). For further explanation please see XXX. 
-
-
-Citing OrtSuite v1.0
+Citing OrtSuite
 ====
 
-OrtSuite v1.0 will be submitted to BioxRiv by the end of July and a link will be added at that time. If other software contained and used by OrtSuite v1.0 was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+OrtSuite will be submitted to BioxRiv by the end of July and a link will be added at that time. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
 
 Contributions
 ====
