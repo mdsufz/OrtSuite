@@ -6,7 +6,7 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 ![workflow](https://github.com/mdsufz/OrtSuite/blob/master/workflow_ortSuite.png)
 
-**OrtSuite workflow** - 
+**OrtSuite workflow** 
 
 **(a)** Protein sequence from samples supplied by the user are clustered using OrthoFinder. 
 
@@ -23,6 +23,9 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 # Overview of OrtSuite
 
+**Installation**
+
+**ORAdb construction:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database
 
 **OrthoFinder:** Clustering of orthologs  
 
