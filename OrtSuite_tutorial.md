@@ -77,7 +77,7 @@ Assign function to sequences in clusters of orthologs:
 Extract all microbial interactions with complete potential:
 ```bash
 
-Rscript gpr_manipulation.R -n ~/exmaples/test_database/final_gpr.xlsx -s ~/examples/OrtAn_new/Results/Species_Annotation.csv -u ~/examples/OrtAn_Results/Results/test_user_input.csv -o ~/examples/
+Rscript gpr_manipulation.R -n ~/examples/test_database/final_gpr.xlsx -s ~/examples/OrtAn_new/Results/Species_Annotation.csv -u ~/examples/OrtAn_Results/Results/test_user_input.csv -o ~/examples/
 
 ```
 Add constraints to reduce search space:
