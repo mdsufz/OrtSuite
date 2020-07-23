@@ -241,7 +241,7 @@ If you use -e or -r option, an additional file will be generated *associations.t
 In the same folder a file *info_db.csv* contains a table with information regarding the KO's that were selected for download along with their name and associated EC numbers and Reactions IDs. 
 In the case of using KO identifiers the file associations.txt must be manually added (for an example please see [associations.txt](examples/associations.txt)).
 
-Step 2) Downloading Gene-Protein-Reation (GPR) rules
+Step 2) Downloading Gene-Protein-Reaction (GPR) rules
 ====
 
 Once the FASTA files containing the sequences for the list of KOs is completed you can obtain the GPR rules.
