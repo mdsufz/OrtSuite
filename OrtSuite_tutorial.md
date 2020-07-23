@@ -1,7 +1,7 @@
-Guide to predict putative microbial interactions with OrtSuite1.0
+Guide to predict putative microbial interactions with OrtSuite
 ====
 
-Briefly, OrtSuite1.0 consists of **1:** Generating the Ortholog Reaction-Association database (*ORAdb*), **2:** Clustering of Orthologs, **3:** Functional annotation of clusters of orthologs, and **4:** Identification of putative microbial interactions.
+Briefly, OrtSuite consists of **1:** Generating the Ortholog Reaction-Association database (*ORAdb*), **2:** Clustering of Orthologs, **3:** Functional annotation of clusters of orthologs, and **4:** Identification of putative microbial interactions.
 
 
 1: Generating the Ortholog Reaction-Association database
@@ -16,7 +16,7 @@ First make a directory:
 Download all sequences associated with provided list of reactions and generate ORAdb:
 >download_kos -o ~/examples/test_database -r /OrtSuite/examples/complete_bta_reactions.txt
 
-![download_kos](https://github.com/mdsufz/OrtSuite1.0/blob/master/download_kos.png)
+![download_kos](https://github.com/mdsufz/OrtSuite/blob/master/download_kos.png)
 
 Extract GPR rules from KEGG:
 
@@ -24,7 +24,7 @@ Extract GPR rules from KEGG:
 
 The spreadsheet file should look like the following:
 
-![download_kos](https://github.com/mdsufz/OrtSuite1.0/blob/master/GPR_file.png)
+![download_kos](https://github.com/mdsufz/OrtSuite/blob/master/GPR_file.png)
 
 
 2: Clustering of Orthologs
@@ -34,7 +34,7 @@ Perform clustering of genome sequences of interest with OrthoFinder :
 
 >orthofinder -f ~/examples/orfs/ -o ~/examples/clusters/ -og
 
-![orthofinder_results](https://github.com/mdsufz/OrtSuite1.0/blob/master/orthofinder_result_folder.png)
+![orthofinder_results](https://github.com/mdsufz/OrtSuite/blob/master/orthofinder_result_folder.png)
 
 
 3: Functional annotation of clusters of orthologs
@@ -51,11 +51,11 @@ Define the variables for input:
 
 **Note:** In this example a directory *clusters* was created to where the results from Orthofinder were copied. This is optional. 
 
->new_db="~/test_OrtSuite/new_db/"
+>new_db="~/test_OrtSuite/new_db/" (optional)
 
 Create the necessary directories:
 >mkdir work_dir
->mkdir new_db
+>mkdir new_db (optional)
 
 Create project:
 >create_project -out $work_dir -db $database
@@ -69,7 +69,7 @@ Perform restrictive search:
 Assign function to sequences in clusters of orthologs:
 >annotation -wd $work_dir
 
-![ortAn_results](https://github.com/mdsufz/OrtSuite1.0/blob/master/ortAn_results_folder.png)
+![ortAn_results](https://github.com/mdsufz/OrtSuite/blob/master/ortAn_results_folder.png)
 
 4: Identification of putative microbial interactions
 ====
