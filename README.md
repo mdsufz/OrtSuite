@@ -605,7 +605,7 @@ Requirements include:
 
 -> [species_to_exclude](microbial_interactions/data/species_to_exclude.json) - generated from the tool
 
--> module_list.txt / pathway_list.txt - Additional subsetting of reactions from the ORAdb (optional)
+-> [module_list.txt](module_list.txt) / [pathway_list.txt](pathway_list.txt) - Additional subsetting of reactions from the ORAdb (optional)
 
 
 Identification of species with the genetic potential to perform complete pathways individually or by interactions with other requires the execution of the commands shown below.
