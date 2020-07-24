@@ -634,7 +634,7 @@ During this task the omplete list of files generated in the output_folder are:
 - [paths.json](paths.json) : A copy of the composition of pathways (for backtracking).
 - [Reactions_mapped_to_species.csv](Reactions_mapped_to_species.csv) : A binary table showing species that possess the genomic content to encode proteins involved in each reaction in ORAdb (1- present, 0 - absent).
 - [single_org_subset_interactions.txt](single_org_subset_interactions.txt) :  where the interspecies interactions that fulfill the constraint of reaction subsets required to be performed by individual species (e.g. reactions X and Y have to be present in a single organism) are shown.
-- A file containing all interspecies interactions whose combined functional potential allow a complete pathway of interest (defined in *test_user_input.csv*). As an example: [Aerobic conversion of benzoate to acetyl-CoA](Aerobic benzoate-acetylCoA_interactions.csv)
+- A file containing all interspecies interactions whose combined functional potential allow a complete pathway of interest (defined in *test_user_input.csv*). As an example: [Aerobic conversion of benzoate to acetyl-CoA](Aerobic_benzoate-acetylCoA_interactions.csv)
 
 Citing OrtSuite
 ====
