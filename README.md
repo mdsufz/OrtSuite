@@ -639,7 +639,7 @@ During this task the omplete list of files generated in the output_folder are:
 Citing OrtSuite
 ====
 
-OrtSuite will be submitted to BioxRiv by the end of July and a link will be added at that time. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+A preprint version of OrtSuite is available [here](https://www.researchsquare.com/article/rs-52281/v1). A link to the published manuscript will be provided as soon as possible. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
 
 Contributions
 ====
