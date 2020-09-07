@@ -55,6 +55,7 @@ Define the variables for input:
 
 Create the necessary directories:
 >mkdir work_dir
+
 >mkdir new_db (optional)
 
 Create project:
