@@ -14,7 +14,7 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 **(c)** Sequences mapped to reactions are stored in ORAdb.
 
-**(d)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search **(e)** performs sequence alignments between 10% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 30% identity to sequences in reaction set(s) in ORAdb transition to the restrictive search **(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit. 
+**(d)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search **(e)** performs sequence alignments between 10% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 30% identity to sequences in reaction set(s) in ORAdb transition to the restrictive search **(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit (Default identity threshold of 40%). 
 
 **(g and h)** The annotated sequences are used to identify putative microbial interactions based on their functional potential.
 
