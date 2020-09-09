@@ -14,9 +14,9 @@ from aux import overview
 
 # from tool import __version__
 
-__author__ = "MartaLopesGomes"
-__copyright__ = "MartaLopesGomes"
-__license__ = "mit"
+__author__ = "JoaoSaraiva"
+__copyright__ = "JoaoSaraiva"
+__license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 
@@ -40,31 +40,31 @@ def parse_args(args):
         help="Working Directory",
         required=True
     )
-    parser.add_argument('-s',
+    """parser.add_argument('-s',
                         '--score',
                         dest='score',
                         type=float,
-                        help='score threshold to filter the diamond results. Default: 90')
+                        help='score threshold to filter the diamond results. Default: 90')"""
     parser.add_argument(
         '-ident',
         '--identity',
         dest='ident',
         type=float,
-        help='Identity threshold to filter the diamond results. Default: 95'
+        help='Identity threshold to filter the diamond results. Default: 40'
     )
     parser.add_argument(
         '-qc',
         '--queryCoverage',
         dest='query_cov',
         type=float,
-        help='Query sequence coverage threshold to filter the diamond results. Default: 90'
+        help='Query sequence coverage threshold to filter the diamond results. Default: 70'
     )
     parser.add_argument(
         '-sc',
         '--subjectCoverage',
         dest='subject_cov',
         type=float,
-        help='Subject sequence coverage threshold to filter the diamond results. Default: 90'
+        help='Subject sequence coverage threshold to filter the diamond results. Default: 70'
     )
     parser.add_argument(
         '-ppos',
@@ -72,7 +72,7 @@ def parse_args(args):
         dest='ppos',
         type=float,
         help='Percentage of positive matches threshold to filter the diamond results (should be higher than identity '
-             'threshould). Default: 99'
+             'threshould). Default: 80'
     )
     parser.add_argument(
         '-l',
@@ -142,32 +142,32 @@ def main(args):
 
     # Get the thresholds to use
     _logger.debug('Setting the thresholds to use.')
-    if args.score:
+    """if args.score:
         score_t = args.score
     else:
         score_t = 90.0
-    _logger.debug('Score set to {}.'.format(str(score_t)))
+    _logger.debug('Score set to {}.'.format(str(score_t)))"""
     if args.ident:
         ident_t = args.ident
     else:
-        ident_t = 95.0
+        ident_t = 40.0
     # if ident_t < float(info['ident_rest']):
     #     ident_t = float(info['ident_rest'])
     _logger.debug('Identity set to {}.'.format(str(ident_t)))
     if args.query_cov:
         q_cov_t = args.query_cov
     else:
-        q_cov_t = 90.0
+        q_cov_t = 70.0
     _logger.debug('Query sequence coverage set to {}.'.format(str(q_cov_t)))
     if args.subject_cov:
         s_cov_t = args.subject_cov
     else:
-        s_cov_t = 90.0
+        s_cov_t = 70.0
     _logger.debug('Subject sequence coverage set to {}.'.format(str(s_cov_t)))
     if args.ppos:
         ppos_t = args.ppos
     else:
-        ppos_t = 99.0
+        ppos_t = 80.0
     _logger.debug('Percentage of positive matches set to {}.'.format(str(ppos_t)))
 
     _logger.debug('Open results from previous steps.')
@@ -397,9 +397,9 @@ def filter(func, og, query, target, ident, ppos, qlen, slen, qstart, qend, sstar
            ident_t, ppos_t, q_cov_t, s_cov_t, score_t):
     q_cov = get_coverage(qend, qstart, qlen)
     s_cov = get_coverage(send, sstart, slen)
-    mean = ident + ppos + q_cov + s_cov
-    mean = mean / 4
-    if mean >= score_t and ident >= ident_t and ppos >= ppos_t and q_cov >= q_cov_t and s_cov >= s_cov_t:
+    #mean = ident + ppos + q_cov + s_cov
+    #mean = mean / 4
+    if ident >= ident_t and ppos >= ppos_t and q_cov >= q_cov_t and s_cov >= s_cov_t:
         if query not in prot_func:
             prot_func[query] = set()
         prot_func[query].add(func)
