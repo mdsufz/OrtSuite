@@ -226,7 +226,7 @@ def main(args):
             prot_func, func_prot, func_og = filter(db, og, query, target, float(ident), float(ppos), int(qlen),
                                                    int(slen), int(qstart), int(qend),
                                                    int(sstart), int(send), prot_func, func_prot, func_og,
-                                                   ident_t, ppos_t, q_cov_t, s_cov_t, score_t)
+                                                   ident_t, ppos_t, q_cov_t, s_cov_t)
     # Add results of single og
     for og in single_res:
         og_prot_func[og] = {}
@@ -238,7 +238,7 @@ def main(args):
             prot_func, func_prot, func_og = filter(db, og, query, target, float(ident), float(ppos), int(qlen),
                                                    int(slen), int(qstart), int(qend),
                                                    int(sstart), int(send), prot_func, func_prot, func_og,
-                                                   ident_t, ppos_t, q_cov_t, s_cov_t, score_t)
+                                                   ident_t, ppos_t, q_cov_t, s_cov_t)
 
     # add total number of proteins to og and get og_func_prot to use on create_db
     og_to_del = []
@@ -394,7 +394,7 @@ def get_coverage(end, start, lenght):
 
 
 def filter(func, og, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, prot_func, func_prot, func_og,
-           ident_t, ppos_t, q_cov_t, s_cov_t, score_t):
+           ident_t, ppos_t, q_cov_t, s_cov_t):
     q_cov = get_coverage(qend, qstart, qlen)
     s_cov = get_coverage(send, sstart, slen)
     #mean = ident + ppos + q_cov + s_cov
