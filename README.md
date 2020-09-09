@@ -14,7 +14,7 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 **(c)** Sequences mapped to reactions are stored in ORAdb.
 
-**(d)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search **(e)** performs sequence alignments between 10% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 50% identity to sequences in reaction set(s) in ORAdb transition to the restrictive search **(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit. 
+**(d)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search **(e)** performs sequence alignments between 10% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 30% identity to sequences in reaction set(s) in ORAdb transition to the restrictive search **(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit. 
 
 **(g and h)** The annotated sequences are used to identify putative microbial interactions based on their functional potential.
 
@@ -386,7 +386,7 @@ optional arguments:
                         Orthogroup_Sequences and WorkingDirectory folders
   -ident IDENT, --identity IDENT
                         Identity threshold to filter the diamond results.
-                        DEFAULT: 50
+                        DEFAULT: 30
   -t N_CPU              Number of threads to use in the parallel processing.
                         By default it uses all the cpu available on the
                         machine
@@ -418,7 +418,7 @@ optional arguments:
                         By default it uses all the cpu available on the
                         machine.
   -ident IDENT, --identity IDENT
-                        Identity threshold to filter the diamond results.
+                        Identity threshold to filter the diamond results. DEFAULT: 40 
   -l, --logfile         To send log messages to a file in the output directory
   -v, --verbose         set loglevel to DEBUG
 ```
@@ -428,13 +428,13 @@ optional arguments:
 Annotation of sequences in the clusters of orthologs takes into consideration the following parameters:
 
 
-**% Identity** - the percentage of identical matches in the range of alignment. Default: 95.
+**% Identity** - the percentage of identical matches in the range of alignment. Default: 40.
 
-**% Positive Matches** - percent of identical matches + positive matches in the range of alignment.Default: 99.
+**% Positive Matches** - percent of identical matches + positive matches in the range of alignment.Default: 80.
 
-**% Query Coverage** - percent of the query sequence involved in the range of alignment.Default: 90.
+**% Query Coverage** - percent of the query sequence involved in the range of alignment.Default: 70.
 
-**% Target Coverage** - percent of the target sequence (sequence in the database) involved in the range of alignment.Default: 90.
+**% Target Coverage** - percent of the target sequence (sequence in the database) involved in the range of alignment.Default: 70.
 
 
 
@@ -451,11 +451,8 @@ optional arguments:
   -h, --help            show this help message and exit
   -wd WORKINGDIRECTORY, --workingDir WORKINGDIRECTORY
                         Working Directory
-  -s SCORE, --score SCORE
-                        score threshold to filter the diamond results.
-                        Default: 90
   -ident IDENT, --identity IDENT
-                        Identity threshold to filter the diamond results.
+                        Identity threshold to filter the diamond results. DEFAULT: 40
   -qc QUERY_COV, --queryCoverage QUERY_COV
                         Query sequence coverage threshold to filter the
                         diamond results.
@@ -465,7 +462,7 @@ optional arguments:
   -ppos PPOS, --percPosMatches PPOS
                         Percentage of positive matches threshold to filter the
                         diamond results (should be higher than identity
-                        threshould).
+                        threshould). DEFAULT: 80
   -l, --logfile         To send log messages to a file int the output
                         directory
   -v, --verbose         set loglevel to DEBUG
@@ -539,12 +536,12 @@ All the results and outputs from this project will be stored in the folder indic
 create_project -out $work_dir -db $database
 ```
 
-Run the relaxed_search step, using only 2 cores to run, an identity cutoff of 50% and using as input the OrthoFinder results present in the folder indicated in the variable ```$orthof```.
+Run the relaxed_search step, using only 2 cores to run, an identity cutoff of 30% and using as input the OrthoFinder results present in the folder indicated in the variable ```$orthof```.
 
 50% identity cutoff means that all the pair of sequences with an identity percent less than 50 are discarded.
 
 ```bash
-relaxed_search -wd $work_dir -of $orthof -t 2 -ident 50
+relaxed_search -wd $work_dir -of $orthof -t 2 -ident 30
 ```
 
 **Note:** Number of threads should not exceed those available in your machine. If you don't specify the number the tool will use all the available cores in the machine.
@@ -555,10 +552,10 @@ Run the restrictive_search step using 2 cores to run.
 restrictive_search -wd $work_dir -t 2
 ```
 
-Run annotation with thresholds of 95 for identity percent, 99 for positive matches percent and 90 of query and target coverage percent.
+Run annotation with thresholds of 40 for identity percent, 80 for positive matches percent and 70 of query and target coverage percent.
 
 ```bash
-annotation -wd $work_dir -ident 95 -ppos 99 -qc 90 -sc 90 # remove everything after "$work_dir" if default values are to be used
+annotation -wd $work_dir -ident 40 -ppos 80 -qc 70 -sc 70 # remove everything after "$work_dir" if default values are to be used
 ```
 
 Run *create_db* in a new directory adding to the initial database the annotated sequences in the previous step (optional).
