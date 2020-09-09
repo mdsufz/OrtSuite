@@ -17,8 +17,8 @@ import diamond_mp
 
 # from tool import __version__
 
-__author__ = "MartaLopesGomes"
-__copyright__ = "MartaLopesGomes"
+__author__ = "JoaoSaraiva"
+__copyright__ = "JoaoSaraiva"
 __license__ = "mit"
 
 _logger = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ def parse_args(args):
         '--identity',
         dest='ident',
         type=int,
-        help='Identity threshold to filter the diamond results.'
+        help='Identity threshold to filter the diamond results. DEFAULT: 40'
     )
     parser.add_argument(
         '-l',
@@ -152,7 +152,7 @@ def main(args):
     if args.ident:
         ident_t = str(args.ident)
     else:
-        ident_t = '90'
+        ident_t = '40'
 
     if float(ident_t) < float(info['ident_relax']):
         ident_t = info['ident_relax']
