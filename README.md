@@ -260,7 +260,9 @@ The get_pr.sh script reads all *.fa* files in the output_folder and calls an add
 **Note 2:** The *final_gpr.xlsx* file needs to have the *xlsx* extension.  
 **Note 3:** Please be aware that the [cache folder](cache) and [cache.ccf](cache.ccf) file needs to stored in the same folder as [keggOrthologues.jar](keggOrthologues.jar). 
 
-**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the final_gpr.xlsx is advised! For a more comprehensive explanation please see the tutorial with an example.**  
+**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the final_gpr.xlsx is advised.
+The script generates a table with the GPR rules for all reaction-enzyme pairs. Since the same reaction can occur in different modules with different gene rules, the user should edit this file so that it only includes ONE unique rule per REACTION according to the target pathway.
+For a more comprehensive explanation please see the tutorial with an example.**  
 
 Step 3) OrthoFinder
 ====
