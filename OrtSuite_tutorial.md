@@ -24,12 +24,12 @@ Extract GPR rules from KEGG:
 
 The generated spreadsheet file should look like the following:
 
-![download_kos](https://github.com/mdsufz/OrtSuite/blob/master/GPR_file.png)
+![gpr_pre_edit](https://github.com/mdsufz/OrtSuite/blob/master/gpr_pre_edit.png)
 
 **In the table reactions can appear multiples times in different modules thus requiring manual editing.**
 
 The spreadsheet looks like the following:
-![gpr_file_edited.png]()
+![gpr_file_edited.png](https://github.com/mdsufz/OrtSuite/blob/master/gpr_post_edit.png)
 
 
 2: Clustering of Orthologs
