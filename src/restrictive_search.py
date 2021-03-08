@@ -62,7 +62,11 @@ def parse_args(args):
         '--evalue',
         dest='evalue',
         type=float,
+<<<<<<< HEAD
         help='Maximum expected value to filter the diamond results. Default: 0.0001'
+=======
+        help='Maximum expected value to filter the diamond results. Default: 0.001'
+>>>>>>> c10f1a175d76a51518d47ff5ced3453bf063ac7f
     )
 #    parser.add_argument(
 #        '-bitscore',
