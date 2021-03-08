@@ -10,9 +10,9 @@ import logging
 import os
 import sys
 
-__author__ = "MartaLopesGomes"
-__copyright__ = "MartaLopesGomes"
-__license__ = "mit"
+__author__ = "JoaoSaraiva"
+__copyright__ = "JoaoSaraiva"
+__license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 

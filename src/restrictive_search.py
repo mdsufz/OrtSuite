@@ -50,13 +50,27 @@ def parse_args(args):
         help='Number of threads to use in the parallel processing. By default it uses all the cpu available on the '
              'machine.'
     )
+#    parser.add_argument(
+#        '-ident',
+#        '--identity',
+#        dest='ident',
+#        type=int,
+#        help='Identity threshold to filter the diamond results. DEFAULT: 40'
+#    )
     parser.add_argument(
-        '-ident',
-        '--identity',
-        dest='ident',
-        type=int,
-        help='Identity threshold to filter the diamond results. DEFAULT: 40'
+        '-evalue',
+        '--evalue',
+        dest='evalue',
+        type=float,
+        help='Maximum expected value to filter the diamond results. Default: 0.0001'
     )
+#    parser.add_argument(
+#        '-bitscore',
+#        '--bitscore',
+#        dest='bitscore',
+#        type=int,
+#        help='Required bit-score to filter the diamond results. Default: 20'
+#    )
     parser.add_argument(
         '-l',
         '--logfile',
@@ -148,14 +162,33 @@ def main(args):
     else:
         cpu = None
 
-    # Get the identity threshold to use
-    if args.ident:
-        ident_t = str(args.ident)
-    else:
-        ident_t = '40'
+#    # Get the identity threshold to use
+#    if args.ident:
+#        ident_t = str(args.ident)
+#    else:
+#        ident_t = '40'
+#
+#    if float(ident_t) < float(info['ident_relax']):
+#        ident_t = info['ident_relax']
 
-    if float(ident_t) < float(info['ident_relax']):
-        ident_t = info['ident_relax']
+    # Get the evalue threshold to use
+    if args.evalue:
+        evalue_t = str(args.evalue)
+    else:
+        evalue_t = '0.0001'
+
+    if float(evalue_t) < float(info['evalue_relax']):
+        evalue_t = info['evalue_relax']
+
+    # Get the bitscore threshold to use
+
+#    if args.bitscore:
+#        bitscore_t = str(args.bitscore)
+#    else:
+#        bitscore_t = '0'
+#
+#    if float(bitscore_t) < float(info['bitscore_relax']):
+#        bitscore_t = info['bitscore_relax']
 
 
     pairs = []
@@ -172,9 +205,14 @@ def main(args):
                 query_files_ids['_'.join(db_og[db])] = str(id_count)
             dif_results_files.append(query_files_ids[ogs_name] + '|' + db)
             id_count += 1
-    diamond_mp.run(False, pairs, info['diamond_res_rest'], info['diamond_dbs'], cpu, ident_t,
+    diamond_mp.run(False, pairs, info['diamond_res_rest'], info['diamond_dbs'], cpu, evalue_t,
                    create_db=info['need_to_create_db'], create_query=True, delete_db=False, delete_query=False,
                    query_dir_in=info['og_sequences_dir'], query_dir_out=info['data'], ids_dic=query_files_ids)
+
+#    diamond_mp.run(False, pairs, info['diamond_res_rest'], info['diamond_dbs'], cpu, ident_t, #evalue_t, bitscore_t,
+#                   create_db=info['need_to_create_db'], create_query=True, delete_db=False, #delete_query=False,
+#                   query_dir_in=info['og_sequences_dir'], query_dir_out=info['data'], #ids_dic=query_files_ids)
+
     # diamond_mp.run(pairs, info['diamond_res_rest'], info['diamond_dbs'], cpu, ident_t,
     #               create_db=True, create_query=True, delete_db=True, delete_query=False,
     #               query_dir_in=info['og_sequences_dir'], query_dir_out=info['data'], ids_dic=query_files_ids)
@@ -202,7 +240,9 @@ def main(args):
 
     # Updating general info dic
     info['restrictive_search'] = True
-    info['ident_rest'] = ident_t
+#    info['ident_rest'] = ident_t
+    info['evalue_rest'] = evalue_t
+#    info['bitscore_rest'] = bitscore_t
     # Storing general info dic updated
     with open(os.path.join(info['jsons'], 'general_info.json'), 'w') as handle:
         json.dump(info, handle)

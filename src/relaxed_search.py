@@ -20,7 +20,7 @@ import diamond_mp
 
 __author__ = "JoaoSaraiva"
 __copyright__ = "JoaoSaraiva"
-__license__ = "mit"
+__license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 
@@ -53,11 +53,11 @@ def parse_args(args):
         required=True
     )
     parser.add_argument(
-        '-ident',
-        '--identity',
-        dest='ident',
-        type=int,
-        help='Identity threshold to filter the diamond results. DEFAULT: 30'
+        '-evalue',
+        '--evalue',
+        dest='evalue',
+        type=float,
+        help='Maximum expected value to filter the diamond results. Default: 0.001'
     )
     parser.add_argument(
         '-t',
@@ -73,7 +73,7 @@ def parse_args(args):
         help='To delete the results stored from diamond (use this option if you don\'t want to spend memory space, '
              'between steps)',
         action='store_const',
-        const=True
+        const=False
     )
     parser.add_argument(
         '-l',
@@ -193,7 +193,7 @@ def main(args):
     for og in orthogroups:
         n_seqs = len(orthogroups[og])
         # select one representative for each 10 sequences
-        n_reps = math.ceil(n_seqs/10)
+        n_reps = math.ceil(n_seqs/2)
         rand = sample(range(n_seqs), n_reps)
         # open orthogroup file to get the aa sequences
         file = os.path.join(args.orthofinder, 'Orthogroup_Sequences/', og + '.fa')
@@ -222,12 +222,23 @@ def main(args):
     else:
         cpu = None
 
-    # Get the identity threshold to use
-    if args.ident:
-        ident_t = str(args.ident)
-    else:
-        ident_t = '30'
+#    # Get the identity threshold to use
+#    if args.ident:
+#        ident_t = str(args.ident)
+#    else:
+#        ident_t = '30'
 
+    # Get the evalue threshold to use
+    if args.evalue:
+        evalue_t = str(args.evalue)
+    else:
+        evalue_t = '0.001'
+
+#    # Get the bitscore threshold to use
+#    if args.bitscore:
+#        bitscore_t = str(args.bitscore)
+#    else:
+#        bitscore_t = '0'
 
     # Prepare pairs and parameters for DIAMOND runs
     pairs = []
@@ -243,8 +254,11 @@ def main(args):
         del_db = False
 
     # DIAMOND runs
-    diamond_mp.run(True, pairs, output, db_storage, cpu, ident_t,
+    diamond_mp.run(True, pairs, output, db_storage, cpu, evalue_t, 
                    create_db=True, create_query=False, delete_db=del_db, delete_query=False)
+
+#    diamond_mp.run(True, pairs, output, db_storage, cpu, ident_t, evalue_t, bitscore_t,
+#                   create_db=True, create_query=False, delete_db=del_db, delete_query=False)
 
     # Get associations between OG and functions
     _logger.info('Storing the associations between the Orthogroups and DB functions')
@@ -283,8 +297,9 @@ def main(args):
     info['relaxed_search'] = True
     info['og_sequences_dir'] = os.path.join(args.orthofinder, 'Orthogroup_Sequences/')
     info['need_to_create_db'] = del_db
-    info['ident_relax'] = ident_t
-
+#    info['ident_relax'] = ident_t
+    info['evalue_relax'] = evalue_t
+#    info['bitscore_relax'] = bitscore_t
     with open(os.path.join(info['jsons'], 'general_info.json'), 'w') as handle:
         json.dump(info, handle)
 

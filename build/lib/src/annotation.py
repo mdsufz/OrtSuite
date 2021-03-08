@@ -14,9 +14,9 @@ from aux import overview
 
 # from tool import __version__
 
-__author__ = "MartaLopesGomes"
-__copyright__ = "MartaLopesGomes"
-__license__ = "mit"
+__author__ = "JoaoSaraiva"
+__copyright__ = "JoaoSaraiva"
+__license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 
@@ -40,40 +40,54 @@ def parse_args(args):
         help="Working Directory",
         required=True
     )
-    parser.add_argument('-s',
+    """parser.add_argument('-s',
                         '--score',
                         dest='score',
                         type=float,
-                        help='score threshold to filter the diamond results. Default: 90')
+                        help='score threshold to filter the diamond results. Default: 90')"""
+#    parser.add_argument(
+#        '-ident',
+#        '--identity',
+#        dest='ident',
+#        type=float,
+#        help='Identity threshold to filter the diamond results. Default: 40'
+#    )
     parser.add_argument(
-        '-ident',
-        '--identity',
-        dest='ident',
+        '-evalue',
+        '--evalue',
+        dest='evalue',
         type=float,
-        help='Identity threshold to filter the diamond results. Default: 95'
+        help='Maximum expected value to filter the diamond results. Default: 0.0001'
     )
     parser.add_argument(
-        '-qc',
-        '--queryCoverage',
-        dest='query_cov',
+        '-bitscore',
+        '--bitscore',
+        dest='bitscore',
         type=float,
-        help='Query sequence coverage threshold to filter the diamond results. Default: 90'
+        help='Required bit-score to filter the diamond results. Default: 50'
     )
-    parser.add_argument(
-        '-sc',
-        '--subjectCoverage',
-        dest='subject_cov',
-        type=float,
-        help='Subject sequence coverage threshold to filter the diamond results. Default: 90'
-    )
-    parser.add_argument(
-        '-ppos',
-        '--percPosMatches',
-        dest='ppos',
-        type=float,
-        help='Percentage of positive matches threshold to filter the diamond results (should be higher than identity '
-             'threshould). Default: 99'
-    )
+#    parser.add_argument(
+#        '-qc',
+#        '--queryCoverage',
+#        dest='query_cov',
+#        type=float,
+#        help='Query sequence coverage threshold to filter the diamond results. Default: 70'
+#    )
+#    parser.add_argument(
+#        '-sc',
+#        '--subjectCoverage',
+#        dest='subject_cov',
+#        type=float,
+#        help='Subject sequence coverage threshold to filter the diamond results. Default: 70'
+#    )
+#    parser.add_argument(
+#        '-ppos',
+#        '--percPosMatches',
+#        dest='ppos',
+#        type=float,
+#        help='Percentage of positive matches threshold to filter the diamond results (should be #higher than identity '
+#             'threshould). Default: 80'
+#)
     parser.add_argument(
         '-l',
         '--logfile',
@@ -142,35 +156,45 @@ def main(args):
 
     # Get the thresholds to use
     _logger.debug('Setting the thresholds to use.')
-    if args.score:
+    """if args.score:
         score_t = args.score
     else:
         score_t = 90.0
-    _logger.debug('Score set to {}.'.format(str(score_t)))
-    if args.ident:
-        ident_t = args.ident
-    else:
-        ident_t = 95.0
+    _logger.debug('Score set to {}.'.format(str(score_t)))"""
+#    if args.ident:
+#        ident_t = args.ident
+#    else:
+#        ident_t = 40.0
     # if ident_t < float(info['ident_rest']):
     #     ident_t = float(info['ident_rest'])
-    _logger.debug('Identity set to {}.'.format(str(ident_t)))
-    if args.query_cov:
-        q_cov_t = args.query_cov
+#    _logger.debug('Identity set to {}.'.format(str(ident_t)))
+    if args.evalue:
+        evalue_t = args.evalue
     else:
-        q_cov_t = 90.0
-    _logger.debug('Query sequence coverage set to {}.'.format(str(q_cov_t)))
-    if args.subject_cov:
-        s_cov_t = args.subject_cov
+        evalue_t = 0.0001
+    _logger.debug('E-value set to {}.'.format(str(evalue_t)))
+    if args.bitscore:
+        bitscore_t = args.bitscore
     else:
-        s_cov_t = 90.0
-    _logger.debug('Subject sequence coverage set to {}.'.format(str(s_cov_t)))
-    if args.ppos:
-        ppos_t = args.ppos
-    else:
-        ppos_t = 99.0
-    _logger.debug('Percentage of positive matches set to {}.'.format(str(ppos_t)))
-
+        bitscore_t = 50.0
+    _logger.debug('Bit-score set to {}.'.format(str(bitscore_t)))
+#    if args.query_cov:
+#        q_cov_t = args.query_cov
+#    else:
+#        q_cov_t = 70.0
+#    _logger.debug('Query sequence coverage set to {}.'.format(str(q_cov_t)))
+#    if args.subject_cov:
+#        s_cov_t = args.subject_cov
+#    else:
+#        s_cov_t = 70.0
+#    _logger.debug('Subject sequence coverage set to {}.'.format(str(s_cov_t)))
+#    if args.ppos:
+#        ppos_t = args.ppos
+#    else:
+#        ppos_t = 80.0
+#    _logger.debug('Percentage of positive matches set to {}.'.format(str(ppos_t)))
     _logger.debug('Open results from previous steps.')
+
     # Restrictive search results
     with open(os.path.join(info['jsons'], 'diamond_res_rest.json'), 'r') as handle:
         rest_res = json.load(handle)
@@ -196,17 +220,30 @@ def main(args):
         index_to_keep = []
         for i in range(len(rest_res[og])):
             query = rest_res[og][i][1]
-            # identity will be the tiebreaker
-            ident = float(rest_res[og][i][3])
+            # evalue will be the tiebreaker
+            evalue = float(rest_res[og][i][3])
             if query not in querys:
-                querys[query] = [i, ident]
+                querys[query] = [i, evalue]
                 index_to_keep.append(i)
             # in case the current hit has a better value, change the hit
-            elif querys[query][1] < ident:
+            elif querys[query][1] < evalue:
                 # del hits[querys[query][0]]
                 index_to_keep.remove(querys[query][0])
                 index_to_keep.append(i)
-                querys[query] = [i, ident]
+                querys[query] = [i, evalue]
+
+####### CHECK IF WE NEED TO ADD to evalue and bitscore. 
+#            # identity will be the tiebreaker
+#            ident = float(rest_res[og][i][3])
+#            if query not in querys:
+#                querys[query] = [i, ident]
+#                index_to_keep.append(i)
+#            # in case the current hit has a better value, change the hit
+#            elif querys[query][1] < ident:
+#                # del hits[querys[query][0]]
+#                index_to_keep.remove(querys[query][0])
+#                index_to_keep.append(i)
+#                querys[query] = [i, ident]
 
         keep_hits = []
         for i in index_to_keep:
@@ -222,23 +259,38 @@ def main(args):
         og_prot_func[og] = {}
         og_func_prot[og] = {}
         for hit in rest_res[og]:
-            db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send = hit
-            prot_func, func_prot, func_og = filter(db, og, query, target, float(ident), float(ppos), int(qlen),
-                                                   int(slen), int(qstart), int(qend),
-                                                   int(sstart), int(send), prot_func, func_prot, func_og,
-                                                   ident_t, ppos_t, q_cov_t, s_cov_t, score_t)
+            db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore = hit
+            prot_func, func_prot, func_og = filter(db, og, query, target, 
+                                                   float(evalue),  float(bitscore), prot_func, func_prot, func_og,
+                                                   evalue_t, bitscore_t)
+
+#            db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore #= hit
+#            prot_func, func_prot, func_og = filter(db, og, query, target, float(ident), float(ppos), #int(qlen),
+#                                                   int(slen), int(qstart), int(qend),
+#                                                   int(sstart), int(send), float(evalue),  int(bitscore), prot_func, #func_prot, func_og,
+#                                                   ident_t, ppos_t, q_cov_t, s_cov_t, evalue_t, bitscore_t)
+
     # Add results of single og
     for og in single_res:
         og_prot_func[og] = {}
         og_func_prot[og] = {}
         #print(single_res[og])
         for hit in single_res[og]:
-            db, q, target, ident, ppos, qlen, slen, qstart, qend, sstart, send = hit
+            db, q, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore = hit
             query = orthogroups[og][0]
-            prot_func, func_prot, func_og = filter(db, og, query, target, float(ident), float(ppos), int(qlen),
-                                                   int(slen), int(qstart), int(qend),
-                                                   int(sstart), int(send), prot_func, func_prot, func_og,
-                                                   ident_t, ppos_t, q_cov_t, s_cov_t, score_t)
+            prot_func, func_prot, func_og = filter(db, og, query, target, 
+                                                   float(evalue), float(bitscore), prot_func, func_prot, func_og,
+                                                   evalue_t, bitscore_t)
+
+
+#        #print(single_res[og])
+#        for hit in single_res[og]:
+#            db, q, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore = hit
+#            query = orthogroups[og][0]
+#            prot_func, func_prot, func_og = filter(db, og, query, target, float(ident), float(ppos), #int(qlen),
+#                                                   int(slen), int(qstart), int(qend),
+#                                                   int(sstart), int(send), float(evalue), int(bitscore), prot_func, #func_prot, func_og,
+#                                                   ident_t, ppos_t, q_cov_t, s_cov_t, evalue_t, bitscore_t)
 
     # add total number of proteins to og and get og_func_prot to use on create_db
     og_to_del = []
@@ -393,13 +445,20 @@ def get_coverage(end, start, lenght):
     return ((end-start)/lenght)*100
 
 
-def filter(func, og, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, prot_func, func_prot, func_og,
-           ident_t, ppos_t, q_cov_t, s_cov_t, score_t):
-    q_cov = get_coverage(qend, qstart, qlen)
-    s_cov = get_coverage(send, sstart, slen)
-    mean = ident + ppos + q_cov + s_cov
-    mean = mean / 4
-    if mean >= score_t and ident >= ident_t and ppos >= ppos_t and q_cov >= q_cov_t and s_cov >= s_cov_t:
+def filter(func, og, query, target, evalue, bitscore, prot_func, func_prot, func_og,
+           evalue_t, bitscore_t):
+
+
+#def filter(func, og, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, prot_func, func_prot, func_og,
+#           ident_t, ppos_t, q_cov_t, s_cov_t):
+#           ident_t, evalue_t, bitscore_t, ppos_t, q_cov_t, s_cov_t):
+#    q_cov = get_coverage(qend, qstart, qlen)
+#    s_cov = get_coverage(send, sstart, slen)
+
+#    #mean = ident + ppos + q_cov + s_cov
+#    #mean = mean / 4
+#    if ident >= ident_t and ppos >= ppos_t and q_cov >= q_cov_t and s_cov >= s_cov_t:
+    if evalue <= evalue_t and bitscore >= bitscore_t:
         if query not in prot_func:
             prot_func[query] = set()
         prot_func[query].add(func)

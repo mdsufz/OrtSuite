@@ -1,4 +1,4 @@
-#!/home/leonorfe/venv_OrtSuite/bin/python3.6
+#!/home/leonorfe/Desktop/venv_benchmark/bin/python3.6
 # -*- coding: utf-8 -*-
 """
 """
@@ -6,22 +6,23 @@
 import os
 from bs4 import BeautifulSoup as bs
 
+
 def get_reps(file, index):
     res = {}
     with open(file, 'r') as f:
         lines = f.readlines()
     i = 0
-    #stop = False
+    # stop = False
     i_seq = 0
-    while i < len(lines): # and not stop:
+    while i < len(lines):  # and not stop:
         if len(index) == 0:
-            #stop = True
+            # stop = True
             break
         if len(lines[i]) > 0:
             if lines[i][0] == '>':
                 i_seq += 1
-                if i_seq-1 in index:
-                    index.remove(i_seq-1)
+                if i_seq - 1 in index:
+                    index.remove(i_seq - 1)
                     is_seq = True
                     seq = ''
                     def_line = lines[i]
@@ -54,15 +55,23 @@ def get_associations_relaxs(dir_in):
             hits = f.readlines()
         for hit in hits:
             # query, target, ident = hit.split()
-            query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send = hit.split()
+            query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore = hit.split()
+
+            #        for hit in hits:
+            #            # query, target, ident = hit.split()
+            #            query, target, ident, evalue, bitscore, ppos, qlen, slen, qstart, qend, sstart, send = #hit.split()
+
             og = query.split('_')[0]
             if og not in res:
                 res[og] = [db]
-                diamond[og] = [[db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send]]
+                diamond[og] = [
+                    [db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore]]
             elif db not in res[og]:
                 res[og].append(db)
-                diamond[og].append([db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send])
+                diamond[og].append(
+                    [db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore])
     return res, diamond
+
 
 def change_def_lines(file, og):
     with open(file, 'r') as f:
@@ -75,6 +84,7 @@ def change_def_lines(file, og):
             text[i] = new_def_line
     return text
 
+
 def dict_diamond_res(dir, file, multiple_og, previous_dic):
     if not multiple_og:
         og_id, db = file.split('|')
@@ -83,18 +93,24 @@ def dict_diamond_res(dir, file, multiple_og, previous_dic):
     with open(os.path.join(dir, file), 'r') as f:
         hits = f.readlines()
     for hit in hits:
-        query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send = hit.split()
+        query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore = hit.split()
+
+
+
         if multiple_og:
             og = query.split('_')[0]
             db = file.split('|')[1]
             query = '_'.join(query.split('_')[1:])
             if og not in previous_dic:
                 previous_dic[og] = []
-            previous_dic[og].append([db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send])
+            previous_dic[og].append(
+                [db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore])
         else:
-            query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send = hit.split()
-            previous_dic[og_id].append([db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send])
+            query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore = hit.split()
+            previous_dic[og_id].append(
+                [db, query, target, ident, ppos, qlen, slen, qstart, qend, sstart, send, evalue, bitscore])
     return previous_dic
+
 
 
 def orthogroups_to_dic(file):
@@ -207,8 +223,6 @@ def overview(total_og, total_kos, og_ko, cog, dog, name):
         csv_f.write('% Lost KOs;' + str(round(((len(ko_og) - len(rest_ko)) / len(ko_og)) * 100, 1)) + '\n')
 
 
-
-
 def parser_ids(file):
     res = []
     with open(file, 'r') as f:
@@ -308,7 +322,7 @@ def get_ids(response):
         html = response.text
         b = bs(html, features="html.parser")
         links = b.find_all('a')
-        valid_link = lambda x: 'www_bget' in x.get('href')
+        valid_link = lambda x: True if x.get('href') and 'www_bget' in x.get('href') else False
         links = filter(valid_link, links)
         lista = [link.text for link in links]
         return lista
@@ -316,7 +330,7 @@ def get_ids(response):
         html = response.read()
         b = bs(html, features="html.parser")
         links = b.find_all('a')
-        valid_link = lambda x: 'www_bget' in x.get('href')
+        valid_link = lambda x: True if x.get('href') and 'www_bget' in x.get('href') else False
         links = filter(valid_link, links)
         lista = [link.text for link in links]
         return lista

@@ -11,9 +11,9 @@ library(reshape)
 library(reticulate)
 library(optparse)
 
-#output_ortan <- read.csv("/home/leonorfe/Documents/Test_genomes/total_bta/OrtAn_results/Results/Species_Annotation.csv",header=T,sep=";",row.names = 1) # Read in output file from OrtAn
-#gpr_file <- read_xlsx("~/Documents/Test_genomes/total_bta/ORAdb/final_gpr.xlsx") # read in gpr file generated from .sh script
-#user_input <- read.csv("~/Documents/Test_genomes/user_input.csv",header = T) # read in user input file for constraints 
+#output_ortan <- read.csv("/home/leonorfe/Desktop/washington/annotation/Results/Species_Annotation.csv",header=T,sep=";",row.names = 1) # Read in output file from OrtAn
+#gpr_file <- read_xlsx("/home/leonorfe/Desktop/washington/database/final_gpr_washington.xlsx") # read in gpr file generated from .sh script
+#user_input <- read.csv("/home/leonorfe/Desktop/washington/user_input_washington.csv",header = T) # read in user input file for constraints 
 
 ###### ARGUMENT PARSING ######
 
@@ -54,7 +54,7 @@ option_list = list(
 opt_parser = OptionParser(
   usage = "usage: %prog [options]",
   option_list=option_list,
-  prog = "gpr_manipulation.R"
+  prog = "gpr_manipulation_new.R"
 );
 
 opt = parse_args(opt_parser);
@@ -379,7 +379,7 @@ if(is.null(opt$p) & is.null(opt$m)){
 ###################################################################################
 ##         Create json files for Marta's tool                                   ###
 ##################################################################################
-
+'
 # Transform table with output to json format files (path:reaction:enzyme)
 
 csv2 <- user_input[,c(1:2)]
@@ -452,10 +452,10 @@ ec_file=c()
 for(ec in 1:length(unique(rownames(final_ec_table)))){
   ec_ids <- unique(rownames(final_ec_table))
   x <- final_ec_table[rownames(final_ec_table) %in% ec_ids[ec],]
-  
-  ko_ids <- gsub(" ","",x) 
-  ko_ids <- sub('^.(.*).$','\\1',ko_ids) 
-  
+'
+#  ko_ids <- gsub(" ","",x) 
+#  ko_ids <- sub('^.(.*).$','\\1',ko_ids) 
+ ' 
   ko_ids <- strsplit(ko_ids,split="\\],") 
   temp_ec_file <- c()
   
@@ -547,7 +547,7 @@ ec_file <- paste0("{",ec_file,"}")
 sink(paste0(output_folder,"/GP_rules.json",collapse = ""))
 cat(ec_file)
 sink()
-
+'
 #######################################################################
 
 
@@ -678,34 +678,106 @@ sink()
 
 #### Get all potential microbial interactions (excluding those with the ability to perform complete pathways) based solely on the reaction presence
 
+#### Alex's version
+# set max possible version
+max_combs = 10^8
 for(list in 1:length(complete_pathways)){ 
   
   if(length(complete_pathways[[list]])!=0){ 
     complete_species <- reaction_species[,-which(colnames(reaction_species) %in% complete_pathways[[list]])] 
+    
   }else{
     complete_species <- reaction_species
   }
   
-  ## subset table to only include the reactions in pathway
-  complete_species <- as.matrix(complete_species[rownames(complete_species) %in% extract_total_reactions[[list]],])
-  
-  # First, get all combinations of column names, with varying lengths (vary from 1 to 18 columns), and put into a list.
-  lst <- do.call(c, lapply(seq_along(colnames(complete_species)), combn, x = colnames(complete_species), simplify = FALSE))
- 
-  # Second, would go through that list, and create matrices for those selected columns.
-  lst2 <- lapply(lst, function(x) matrix(complete_species[,x], ncol = length(x)))
-  
-  # Third, would name the list based on the column names and remove the quotes.
-  names(lst2) <- gsub('[\"]', '', lst)
-  
-  # Fourth, would check each matrix in the list where (a) any column in a row has a 1, and (b) all rows meet criteria (a).
-  reaction_comb_species <- names(which(lapply(lst2, function(x) { all(apply(x, 1, function(y) any(y > 0))) } ) == TRUE))
-  
-  # Write combinations that meet the criteria to file.
-  write.csv(reaction_comb_species,file=paste0(output_folder,"/",names(complete_pathways[list]),"_interactions.csv",collapse = ""))
-   
+  print("Number of species without complete potential")
+  print(ncol(complete_species))
+  if(length(complete_species)==0){
+    write.csv(paste("all species complete"),file=paste0(output_folder,"/",names(complete_pathways[list]),"_interactions.csv",collapse = ""))
+  }else{
+    
+    
+    ## subset table to only include the reactions in pathway
+    complete_species <- as.matrix(complete_species[rownames(complete_species) %in% extract_total_reactions[[list]],])
+    if(length(complete_species)==0){
+      print("Check your reactions in the user input file!")
+    }else{
+      # Remove all columns with 0s in all reactions
+      
+      complete_species <- complete_species[,colSums(complete_species)!=0]
+      
+      print(paste0("number of species with at least 1 reaction in ",names(complete_pathways[list]), collapse = ""))
+      print(ncol(complete_species)) 
+      
+      if(ncol(complete_species)==0){
+        print(paste0(names(complete_pathways[list])," not performed by any of the species ", collapse = ""))
+      }else{
+      
+      
+      # some tests tables
+      reac_spec <- complete_species[extract_total_reactions[[list]],]
+      #reac_spec <- reaction_species[extract_total_reactions[[1]],]
+      #reac_spec <- reaction_species[1:3,]
+      
+      
+      # get present species for each reaction
+      spec_per_react <- list()
+      for(jj in 1:nrow(reac_spec)){
+        spec_per_react[[jj]] <- which(reac_spec[jj,]>0)
+      }
+      #names(spec_per_react) <- rownames(reac_spec) # optional naming of the list
+      spec_length <- unlist(lapply(spec_per_react,length)) # print length of unique species per reaction
+      names(spec_length) <- rownames(reac_spec)
+      sink(paste0(output_folder,"/",names(complete_pathways)[[list]],"_species_per_reactions.txt",collapse = ""))
+      print(spec_length)
+      sink()
+      
+      
+      ## Some checks
+      # check if there is minimum one species per reaction
+      if(!all(spec_length > 0)){
+        print(spec_length) # ToDo: could be better
+        cat(paste0(
+          'Pathway: ',names(complete_pathways)[[list]],'
+    Some reactions without any species!Pathway cannot be completed! Continuing 
+    with next pathway.\n\n'))
+        next
+      }
+      # check for maximal combination (! memory and cpu time)
+      if(prod(spec_length) > max_combs){
+        cat(paste0(
+          'Pathway: ',names(complete_pathways)[[list]],'
+    ',prod(spec_length),' combinations. More possibilities than set by max_combs
+    parameter. This might biologically not make sense. If you still want to run 
+    increase max_combs but be aware of high memory usage and computation time. 
+    Continuing with next pathway.\n\n'))
+        next
+      }
+      
+      ## generate combination and create final table
+      # get all possible combination
+      combs <- expand.grid(spec_per_react)
+      dim(reac_spec) # print dimensions
+      # create final tab with species combination that show all reactions and number of species
+      c_names <- colnames(reac_spec)
+      combs_final <- data.frame(t(apply(combs,1,function(x){
+        unique_spec <- unique(x) 
+        c(paste(c_names[unique_spec],collapse=', '),length(unique_spec))
+      })))
+      colnames(combs_final) <- c('species','number_of_species')
+      # optional: order by number of spec
+      combs_final <- combs_final[order(combs_final[,2]),]
+      
+      ## write
+      write.csv(
+        combs_final,
+        paste0(names(complete_pathways)[[list]],'.csv'),
+        row.names = F
+      )
+    }
+  }
 }
-  
+}
 
 
 ##### Script to obtain species capable of performing subsets of reactions ##########
