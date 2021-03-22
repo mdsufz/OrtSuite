@@ -260,7 +260,7 @@ The get_pr.sh script reads all *.fa* files in the output_folder and calls an add
 **Note 2:** The *final_gpr.xlsx* file needs to have the *xlsx* extension.  
 **Note 3:** Please be aware that the [cache folder](cache) and [cache.ccf](cache.ccf) file needs to stored in the same folder as [keggOrthologues.jar](keggOrthologues.jar). 
 
-**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the final_gpr.xlsx is advised.
+**Due to the limited information in KEGG database concerning GPR rules, manual inspection of the final_gpr.xlsx is strongly recommended.
 The script generates a table with the GPR rules for all reaction-enzyme pairs. Since the same reaction can occur in different modules with different gene rules, the user should edit this file so that it only includes ONE unique rule per REACTION according to the target pathway.
 For a more comprehensive explanation please see the [tutorial](OrtSuite_tutorial.md) with an example.**  
 
@@ -601,8 +601,6 @@ Requirements include:
 -> [GP_rules.json](microbial_interactions/data/GP_rules.json) - generated from the tool
 
 -> [paths.json](microbial_interactions/data/paths.json) - generated from the tool 
-
--> [species_to_exclude](microbial_interactions/data/species_to_exclude.json) - generated from the tool
 
 -> [module_list.txt](module_list.txt) / [pathway_list.txt](pathway_list.txt) - Additional subsetting of reactions from the ORAdb (optional)
 
