@@ -15,9 +15,9 @@ from aux import *
 
 # from keggscraper import __version__
 
-__author__ = "MartaLopesGomes"
-__copyright__ = "MartaLopesGomes"
-__license__ = "mit"
+__author__ = "Joao Saraiva"
+__copyright__ = "Joao Saraiva"
+__license__ = "MIT"
 
 _logger = logging.getLogger(__name__)
 
