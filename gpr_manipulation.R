@@ -54,7 +54,7 @@ option_list = list(
 opt_parser = OptionParser(
   usage = "usage: %prog [options]",
   option_list=option_list,
-  prog = "gpr_manipulation_new.R"
+  prog = "gpr_manipulation.R"
 );
 
 opt = parse_args(opt_parser);
