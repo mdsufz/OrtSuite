@@ -40,11 +40,7 @@ def parse_args(args):
         help="Working Directory",
         required=True
     )
-    """parser.add_argument('-s',
-                        '--score',
-                        dest='score',
-                        type=float,
-                        help='score threshold to filter the diamond results. Default: 90')"""
+ 
 #    parser.add_argument(
 #        '-ident',
 #        '--identity',
@@ -57,7 +53,7 @@ def parse_args(args):
         '--evalue',
         dest='evalue',
         type=float,
-        help='Maximum expected value to filter the diamond results. Default: 0.0001'
+        help='Maximum expected value to filter the diamond results. Default: 0.000000001'
     )
     parser.add_argument(
         '-bitscore',
@@ -171,7 +167,7 @@ def main(args):
     if args.evalue:
         evalue_t = args.evalue
     else:
-        evalue_t = 0.0001
+        evalue_t = 0.000000001
     _logger.debug('E-value set to {}.'.format(str(evalue_t)))
     if args.bitscore:
         bitscore_t = args.bitscore
