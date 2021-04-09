@@ -25,13 +25,13 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 **Installation**
 
-**ORAdb construction and GPR definition:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database and download of Gene-Protein-Reaction rules from KEGG.
+**Steps 1 and 2) ORAdb construction and GPR definition:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database and download of Gene-Protein-Reaction rules from KEGG.
 
-**Clustering of orthologs**   
+**Step 3) Clustering of orthologs**   
 
-**Functional annotation of clusters of orthologs**   
+**Step 4) Functional annotation of clusters of orthologs**   
 
-**Prediction of interspecies interactions based on the functional potential of individual species**   
+**Step 5) Prediction of interspecies interactions based on the functional potential of individual species**   
 
 
 # System Requirements
@@ -278,9 +278,9 @@ Overview of functional annotation:
 
 This script takes as inputs:
 
-##1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")  
-##2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")  
-##3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
+1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")  
+2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")  
+3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
 
 
 
@@ -303,17 +303,17 @@ From the *relaxed_search* task, a text file [Associations.txt](examples/OrtAn_Re
 
 From the *restrictive_search* task we obtain 6 different text files:
 
-[Annotation_Function_Protein.txt](examples/OrtAn_Results/Results/Annotation_Function_Protein.txt) - Shows in the first column the functions and in the second the sequences annotated with those functions (one association per line) (```located in examples/OrtAn_Results/Results/Annotation_Function_Protein.txt```).  
+- [Annotation_Function_Protein.txt](examples/OrtAn_Results/Results/Annotation_Function_Protein.txt) - Shows in the first column the functions and in the second the sequences annotated with those functions (one association per line) (```located in examples/OrtAn_Results/Results/Annotation_Function_Protein.txt```).  
 
-[Annotation_Protein_Function.txt](examples/OrtAn_Results/Results/Annotation_Protein_Function.txt) - Shows in the first column the sequences and in the second the functions assigned (one association per line) (```located in examples/OrtAn_Results/Results/Annotation_Protein_Function.txt```).
+- [Annotation_Protein_Function.txt](examples/OrtAn_Results/Results/Annotation_Protein_Function.txt) - Shows in the first column the sequences and in the second the functions assigned (one association per line) (```located in examples/OrtAn_Results/Results/Annotation_Protein_Function.txt```).
 
-[ConOG.txt](examples/OrtAn_Results/Results/ConOG.txt) - Consistent Orthogroups (Clusters of orthologs where all the sequences were annotated to the same function). The function is also indicated (```located in examples/OrtAn_Results/Results/ConOG.txt```).
+- [ConOG.txt](examples/OrtAn_Results/Results/ConOG.txt) - Consistent Orthogroups (Clusters of orthologs where all the sequences were annotated to the same function). The function is also indicated (```located in examples/OrtAn_Results/Results/ConOG.txt```).
 
-[DivOG.txt](examples/OrtAn_Results/Results/DivOG.txt) - Divergent Orthogroups (Clusters of orthologs where not all the sequences were annotated to the same function). This means that the ortholog cluster could have sequences that were not annotated to any function or sequences annotated to different functions. These functions are also indicated in the file (```located in examples/OrtAn_Results/Results/DivOG.txt```).
+- [DivOG.txt](examples/OrtAn_Results/Results/DivOG.txt) - Divergent Orthogroups (Clusters of orthologs where not all the sequences were annotated to the same function). This means that the ortholog cluster could have sequences that were not annotated to any function or sequences annotated to different functions. These functions are also indicated in the file (```located in examples/OrtAn_Results/Results/DivOG.txt```).
 
-[Orthogroups_Annotation.csv](examples/OrtAn_Results/Results/Orthogroups_Annotation.csv) - This file shows how many sequences in each cluster of orthologs were annotated and to which function (```located in examples/OrtAn_Results/Results/Orthogroups_Annotation.csv```).
+- [Orthogroups_Annotation.csv](examples/OrtAn_Results/Results/Orthogroups_Annotation.csv) - This file shows how many sequences in each cluster of orthologs were annotated and to which function (```located in examples/OrtAn_Results/Results/Orthogroups_Annotation.csv```).
 
-[Species_Annotation.csv](examples/OrtAn_Results/Results/Species_Annotation.csv) - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function) (```located in examples/OrtAn_Results/Results/Species_Annotation.csv```).
+- [Species_Annotation.csv](examples/OrtAn_Results/Results/Species_Annotation.csv) - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function) (```located in examples/OrtAn_Results/Results/Species_Annotation.csv```).
 
 ## Interspecies interactions output files
 
