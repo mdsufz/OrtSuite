@@ -176,36 +176,6 @@ The input can be:
 
 Note: The format of the input lists must be a txt file with only one ID per line. 
 
-Run the command with the help option -h to see the usage and all the available options.
-
-```bash
-download_kos -h
-
-usage: download_kos [-h] [--version] -o OUTPUT_DIR [-s SIZE]
-                    (-m MAP | -r REACTIONS | -e EC_NUMBERS | -k KOS) [-p | -g]
-                    [-v]
-
-Create a database with all the KO (KEGG Orthology) sequences associated with
-the give ID/s (KEGG pathway ID, KEGG Rections IDs, EC numers or KEGG orthology
-IDs)
-
-optional arguments:
-  -h, --help     show this help message and exit
-  --version      show program's version number and exit
-  -o OUTPUT_DIR  Output directory to store the database.
-  -s SIZE        Size - defines the number of requests that are made to the
-                 KEGG database at the same time. DEFAULT: 5
-  -m MAP         KEGG pathway ID
-  -r REACTIONS   Path to txt file containing KEGG reaction IDs (one per each
-                 line)
-  -e EC_NUMBERS  Path to txt file containing EC numbers (one per each line)
-  -k KOS         Path to txt file containing KEGG Orthology IDs (one per each
-                 line)
-  -p             Use this option if you want to download amino acid sequences.
-                 (DEFAULT)
-  -g             Use this option if you want to download nucleotide sequences.
-  -v, --verbose  set loglevel to DEBUG
-```
 
 ORAdb Output
 ======
@@ -225,9 +195,9 @@ Once the FASTA files containing the sequences for the list of KOs is completed t
 
 This script takes as inputs:
 
-1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")
-2 - the flag of the list (-m, -r, -e, or -k) 
-3 - full path of the list of identifiers
+##1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")
+##2 - the flag of the list (-m, -r, -e, or -k) 
+##3 - full path of the list of identifiers
 
 Examples of commands: 
 ====
@@ -308,9 +278,9 @@ Overview of functional annotation:
 
 This script takes as inputs:
 
-1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")
-2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")
-3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))
+##1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")
+##2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")
+##3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))
 
 
 
