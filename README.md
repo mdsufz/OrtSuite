@@ -195,9 +195,9 @@ Once the FASTA files containing the sequences for the list of KOs is completed t
 
 This script takes as inputs:
 
-##1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")
-##2 - the flag of the list (-m, -r, -e, or -k) 
-##3 - full path of the list of identifiers
+1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")  
+2 - the flag of the list (-m, -r, -e, or -k)  
+3 - full path of the list of identifiers  
 
 Examples of commands: 
 ====
@@ -278,9 +278,9 @@ Overview of functional annotation:
 
 This script takes as inputs:
 
-##1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")
-##2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")
-##3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))
+##1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")  
+##2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")  
+##3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
 
 
 
