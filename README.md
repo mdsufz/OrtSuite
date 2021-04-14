@@ -50,7 +50,7 @@ Generation of clusters of orthologs is performed by OrthoFinder.
 
 **Requirements:**  Python 3.6
 
-**Dependencies:**  Setuptools, bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond)
+**Dependencies:**  Setuptools, bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond), R
 
 
 We suggest the use of conda to install the virtual environment.
@@ -73,6 +73,7 @@ Install dependencies
 pip install -U Setuptools
 pip install grequests
 pip install BeautifulSoup4=4.8.2
+
 ```
 
 Next move to the folder where the file setup.py from the OrtSuite tool is located.
