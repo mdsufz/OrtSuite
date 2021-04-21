@@ -196,27 +196,28 @@ Once the FASTA files containing the sequences for the list of KOs is completed t
 
 This script takes as inputs:
 
-1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")  
+1 - project full path ("path/to/folder/PROJECT_NAME/")  
 2 - the flag of the list (-m, -r, -e, or -k)  
 3 - full path of the list of identifiers  
+4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/")  
 
 Examples of commands: 
 ====
 When using a single pathway map from KEGG
 ```bash
-sh DB_construction.sh ~/OrtSuite/PROJECT_NAME/ -m /path/to/folder/map00362
+sh DB_construction.sh /PROJECT_NAME/ -m /path/to/folder/map00362 ~/OrtSuite
 ```
 When using reaction identifiers
 ```bash
-sh DB_construction.sh ~/OrtSuite/PROJECT_NAME/ -r /path/to/folder/reaction_list.txt
+sh DB_construction.sh /PROJECT_NAME/ -r /path/to/folder/reaction_list.txt ~/OrtSuite
 ```
 When using EC numbers
 ```bash
-sh DB_construction.sh ~/OrtSuite/PROJECT_NAME/ -e /path/to/folder/ec_list.txt
+sh DB_construction.sh /PROJECT_NAME/ -e /path/to/folder/ec_list.txt ~/OrtSuite
 ```
 When using KO identifiers
 ```bash
-sh DB_construction.sh ~/OrtSuite/PROJECT_NAME/ -k /path/to/folder/ko_list.txt
+sh DB_construction.sh /PROJECT_NAME/ -k /path/to/folder/ko_list.txt ~/OrtSuite
 
 ```
 **An output_folder called *database* will be created in the project directory that the user provided.**
@@ -279,10 +280,10 @@ Overview of functional annotation:
 
 This script takes as inputs:
 
-1 - project full path (It needs to be inside the OrtSuite main folder. Ex: "~/OrtSuite/PROJECT_NAME/")  
+1 - project full path ( E.g."~/PROJECT_NAME/")  
 2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")  
 3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
-
+4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/") 
 
 
 **Before running OrtAn you need to:**
@@ -295,7 +296,7 @@ Example:
 ====
 
 ```bash
-sh annotate_and_predict.sh ~/OrtSuite/PROJECT_NAME/ ~/path/to/folder/orthofinder/Results_Jan31/ /path/to/folder/user_input.csv
+sh annotate_and_predict.sh /PROJECT_NAME/ ~/path/to/folder/orthofinder/Results_Jan31/ /path/to/folder/user_input.csv ~/OrtSuite/
 ```
 
 ## Functional annotation output files
