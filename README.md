@@ -282,7 +282,7 @@ This script takes as inputs:
 
 1 - project full path ( E.g."~/PROJECT_NAME/")  
 2 - full path to the results from Orthofinder (Step 3) (Ex: "/path/to/output/folder/Results")  
-3 - full path of the text file with the user-defined constraints (Ex: -> [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
+3 - full path of the text file with the user-defined constraints (Ex: [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
 4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/") 
 
 
