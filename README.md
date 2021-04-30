@@ -72,7 +72,7 @@ Install dependencies
 ```bash
 pip install -U Setuptools
 pip install grequests
-pip install beautifulsoup4=4.8.2
+pip install beautifulsoup4==4.8.2
 
 ```
 
