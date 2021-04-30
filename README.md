@@ -281,12 +281,11 @@ Overview of functional annotation:
 This script takes as inputs:
 
 1 - project full path ("path/to/folder/PROJECT_NAME/")  
-2 - the flag of the list (-m, -r, -e, or -k)  
+2 - full path to the results from Orthofinder (Step 3) ("/path/to/output/folder/Results")  
 3 - full path of the list of identifiers  
 4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/")  
+  
 
-1 - project full path (e.g."~/PROJECT_NAME/")  
-2 - full path to the results from Orthofinder (Step 3) (e.g. "/path/to/output/folder/Results")  
 3 - full path of the text file with the user-defined constraints (Ex: [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
 4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/") 
 
