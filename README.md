@@ -1,6 +1,6 @@
 # OrtSuite - a flexible pipeline for annotation of ecosystem processes and prediction of putative microbial interactions
 
-OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. 
+OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. OrtSuite only requires three commands to run (from database construction to clustering of orthologs, functional annotation and putative microbial synergistic interactions).
 
 
 
