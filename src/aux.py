@@ -322,7 +322,7 @@ def get_ids(response):
         html = response.text
         b = bs(html, features="html.parser")
         links = b.find_all('a')
-	valid_link = lambda x: True if x.get('href') and 'www_bget' in x.get('href') else False
+        valid_link = lambda x: True if x.get('href') and 'www_bget' in x.get('href') else False
         links = filter(valid_link, links)
         lista = [link.text for link in links]
         return lista
