@@ -4,7 +4,7 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 
 
-![workflow](https://github.com/mdsufz/OrtSuite/blob/master/workflow_github.png)
+![workflow](https://github.com/mdsufz/OrtSuite/blob/master/worflow_github.png)
 
 **OrtSuite workflow** 
 
