@@ -3,6 +3,7 @@
 # $1 - project folder's full path (ex: ~/OrtSuite/examples/ )
 # $2 - orthof results folder's full path
 # $3 - user_input.csv file's full path
+# $4 - user-defined reaction pairs full path (Optional)
  
 mkdir "$1"/work_dir
 printf "%s\n"
@@ -28,6 +29,9 @@ mkdir $work_dir/interactions
 printf "%s\n"
  
 Rscript "$1"/../gpr_manipulation.R -n $database/final_gpr.xlsx -s $work_dir/Results/Species_Annotation.csv -u $user_input -o $work_dir/interactions
+
+Rscript --vanilla "$1"/../network_visNetwork.R $work_dir/Results/Reactions_mapped_to_species.txt $4
+
 printf "%s\n" "Done" " "
  
 #Done
