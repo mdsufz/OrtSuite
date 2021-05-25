@@ -8,17 +8,13 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 **OrtSuite workflow** 
 
-**(a)** Protein sequence from samples supplied by the user are clustered using OrthoFinder. 
+**(Step 1+2)** OrtSuite takes a text file containing a list of identifiers for each reaction in the pathway of interest supplied by the user to retrieve all protein sequences from KEGG Orthology and are stored in ORAdb. Subsequently the same list of identifiers is used to obtain the Gene-Protein-Reaction (GPR) rules from KEGG Modules.
 
-**(b)** A text file is provided containing a list of identifiers for each reaction in the pathway of interest supplied by the user to retrieve all protein sequences from KEGG.
+**(Step 3)** Protein sequence from samples supplied by the user are clustered using OrthoFinder.
 
-**(c)** Sequences mapped to reactions are stored in ORAdb.
+**(Step 4)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search performs sequence alignments between 50% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum E-value of 0.001 to sequences in the reaction set(s) in ORAdb transition to the restrictive search . Here, all sequences from the cluster are aligned to all sequences in the corresponding reaction set(s) to which they had a hit (default E-value = 1e-9). Annotated sequences are further filtered to those with a bit score greater than 50.
 
-**(d)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search **(e)** performs sequence alignments between 50% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum 0.001 E-value to sequences in reaction set(s) in ORAdb transition to the restrictive search **(f)**. Here, all sequences from the cluster is aligned to all sequences in the corresponding reaction set(s) to which they had a hit (Default E-value threshold of 1E-9). 
-
-**(g and h)** The annotated sequences are used to identify putative microbial interactions based on their functional potential.
-
-**(rounded blue rectangles)** Additional constraints can be added to reduce the search space of microbial interactions.
+**(Step 5)** The annotated sequences are used to identify putative microbial interactions based on their functional potential. Additional constraints can be added to reduce the search space of microbial interactions (e.g. subsets of reactions required to be performed by single species, transport-related reactions). A graphical network based on the reaction set defined by user allows to visualize and filter interactively the results obtained.
 
 
 # Overview of OrtSuite
