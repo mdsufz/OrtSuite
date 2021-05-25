@@ -46,7 +46,7 @@ Generation of clusters of orthologs is performed by OrthoFinder.
 
 **Requirements:**  Python 3.6
 
-**Dependencies:**  Setuptools, bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond), R
+**Dependencies:**  Setuptools, bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond), R, [pandoc](https://pandoc.org/installing.html)  
 
 
 We suggest the use of conda to install the virtual environment.
@@ -145,6 +145,16 @@ To download the Gene-Protein-Reaction rules you need to have java installed.
 ```bash
 sudo apt install default-jre
 ```
+
+
+Pandoc
+====
+
+This library is needed to generate the interactive network.
+```bash
+sudo apt-get install pandoc
+```
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Using OrtSuite
 =====
@@ -280,6 +290,7 @@ This script takes as inputs:
 2 - full path to the results from Orthofinder (Step 3) ("/path/to/output/folder/Results")  
 3 - full path of the text file with the user-defined constraints (Ex: [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
 4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/")  
+5 - full path of the list of reaction pairs (separated by tab) for a directed network (optional)(e.g. "~/OrtSuite/reaction_pairs.tsv")
   
 
 **Before running OrtAn you need to:**
@@ -325,6 +336,7 @@ The complete list of files generated during prediction of interspecies interacti
 - [single_org_subset_interactions.txt](single_org_subset_interactions.txt) :  where the interspecies interactions that fulfill the constraint of reaction subsets required to be performed by individual species (e.g. reactions X and Y have to be present in a single organism) are shown.
 - Files containing the number of species with the functional potential to each reaction. For example, [Aerobic conversion of benzoate to acetyl-CoA_species_per_reactions.txt](Aerobic conversion of benzoate to acetyl-CoA_species_per_reactions.txt)
 - A file containing all interspecies interactions whose combined functional potential allow a complete pathway of interest (defined in *user_input.csv*). As an example: [Aerobic conversion of benzoate to acetyl-CoA](Aerobic_benzoate-acetylCoA.csv)
+- A HTML file containing the interactive network visulization for the pathway of interest. For example: [network_ortsuite.html](network_ortsuite.html)
 
 
 Citing OrtSuite
