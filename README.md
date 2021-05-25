@@ -336,7 +336,7 @@ The complete list of files generated during prediction of interspecies interacti
 - [single_org_subset_interactions.txt](single_org_subset_interactions.txt) :  where the interspecies interactions that fulfill the constraint of reaction subsets required to be performed by individual species (e.g. reactions X and Y have to be present in a single organism) are shown.
 - Files containing the number of species with the functional potential to each reaction. For example, [Aerobic conversion of benzoate to acetyl-CoA_species_per_reactions.txt](Aerobic conversion of benzoate to acetyl-CoA_species_per_reactions.txt)
 - A file containing all interspecies interactions whose combined functional potential allow a complete pathway of interest (defined in *user_input.csv*). As an example: [Aerobic conversion of benzoate to acetyl-CoA](Aerobic_benzoate-acetylCoA.csv)
-- A HTML file containing the interactive network visulization for the pathway of interest. For example: [network_ortsuite.html](network_ortsuite.html)
+- A HTML file containing the interactive network visulization for the pathway of interest. For example: [network_ortSuite.html](network_ortSuite.html)
 
 
 Citing OrtSuite
