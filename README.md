@@ -289,8 +289,8 @@ This script takes as inputs:
 1 - project full path ("path/to/folder/PROJECT_NAME/")  
 2 - full path to the results from Orthofinder (Step 3) ("/path/to/output/folder/Results")  
 3 - full path of the text file with the user-defined constraints (Ex: [user_input.csv](examples/OrtAn_Results/Results/test_user_input.csv))  
-4 - full path of the OrtSuite installation firectory (e.g. "~/OrtSuite/")  
-5 - full path of the list of reaction pairs (separated by tab) for a directed network (optional) (e.g. "~/OrtSuite/reaction_pairs.tsv")  
+4 - full path of the OrtSuite installation firectory (e.g. "/OrtSuite/")  
+5 - full path of the list of reaction pairs (separated by tab) for a directed network (optional) (e.g. "/OrtSuite/reaction_pairs.tsv")  
   
 
 **Before running OrtAn you need to:**
