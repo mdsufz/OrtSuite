@@ -4,30 +4,26 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 
 
-![workflow](https://github.com/mdsufz/OrtSuite/blob/master/worflow_github.png)
+![workflow](https://github.com/mdsufz/OrtSuite/blob/master/workflow.png)
 
 **OrtSuite workflow** 
 
-**(Step 1+2)** OrtSuite takes a text file containing a list of identifiers for each reaction in the pathway of interest supplied by the user to retrieve all protein sequences from KEGG Orthology and are stored in ORAdb. Subsequently the same list of identifiers is used to obtain the Gene-Protein-Reaction (GPR) rules from KEGG Modules.
+**(Step 1)** OrtSuite takes a text file containing a list of identifiers for each reaction in the pathway of interest supplied by the user to retrieve all protein sequences from KEGG Orthology and are stored in ORAdb. Subsequently the same list of identifiers is used to obtain the Gene-Protein-Reaction (GPR) rules from KEGG Modules.
 
-**(Step 3)** Protein sequence from samples supplied by the user are clustered using OrthoFinder.
+**(Step 2)** Protein sequence from samples supplied by the user are clustered using OrthoFinder.
 
-**(Step 4)** Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search performs sequence alignments between 50% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum E-value of 0.001 to sequences in the reaction set(s) in ORAdb transition to the restrictive search . Here, all sequences from the cluster are aligned to all sequences in the corresponding reaction set(s) to which they had a hit (default E-value = 1e-9). Annotated sequences are further filtered to those with a bit score greater than 50.
-
-**(Step 5)** The annotated sequences are used to identify putative microbial interactions based on their functional potential. Additional constraints can be added to reduce the search space of microbial interactions (e.g. subsets of reactions required to be performed by single species, transport-related reactions). A graphical network based on the reaction set defined by user allows to visualize and filter interactively the results obtained.
+**(Step 3)** Functional annotation, identification of synergistic species interactions and generation of a graphical visualization of the network. Functional annotation consists of a two-stage process (relaxed and restrictive search). Relaxed search performs sequence alignments between 50% of randomly selected sequences from each generated cluster. Clusters whose representative sequences share a minimum E-value of 0.001 to sequences in the reaction set(s) in ORAdb transition to the restrictive search . Here, all sequences from the cluster are aligned to all sequences in the corresponding reaction set(s) to which they had a hit (default E-value = 1e-9). Annotated sequences are further filtered to those with a bit score greater than 50. The annotated sequences are used to identify putative microbial interactions based on their functional potential. Additional constraints can be added to reduce the search space of microbial interactions (e.g. subsets of reactions required to be performed by single species, transport-related reactions). A graphical network based on the reaction set defined by user allows to visualize and filter, interactively, the results obtained.
 
 
 # Overview of OrtSuite
 
 **Installation**
 
-**Steps 1 and 2) ORAdb construction and GPR definition:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database and download of Gene-Protein-Reaction rules from KEGG.
+**Step 1) ORAdb construction and GPR definition:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database and download of Gene-Protein-Reaction rules from KEGG.
 
-**Step 3) Clustering of orthologs**   
+**Step 2) Clustering of orthologs**   
 
-**Step 4) Functional annotation of clusters of orthologs**   
-
-**Step 5) Prediction of interspecies interactions based on the functional potential of individual species**   
+**Step 3) Functional annotation of clusters of orthologs and Prediction of interspecies interactions based on the functional potential of individual species**   
 
 
 # System Requirements
@@ -165,7 +161,7 @@ Once installation of OrtSuite and all dependencies are completed the different c
 
 
 
-## Steps 1 and 2) Generating the Ortholog Reaction-Assosiation database (ORAdb) and download of Gene-Protein-Reaction (GPR) rules from KEGG.
+## Step 1) Generating the Ortholog Reaction-Assosiation database (ORAdb) and download of Gene-Protein-Reaction (GPR) rules from KEGG.
 
 
 The generation of a user-defined ortholog reaction-association database starts with the download of all the sequences associated with the KO (KEGG Orthology) group to a FASTA file.
@@ -236,7 +232,7 @@ Note: Running this command may take some time and memory space.
 The script generates a table with the GPR rules for all reaction-enzyme pairs. Since the same reaction can occur in different modules with different gene rules, the user should edit this file so that it only includes ONE unique rule per REACTION according to the target pathway.
 For a more comprehensive explanation please see the [tutorial](OrtSuite_tutorial.md) with an example.**  
 
-Step 3) Clustering of orthologs (OrthoFinder)
+Step 2) Clustering of orthologs (OrthoFinder)
 ====
 
 OrthoFinder takes as input a folder containing the FASTA sequences the user wants to cluster.
@@ -252,10 +248,10 @@ Note: If you wish to use BLAST+ instead of DIAMOND please use the following:
 ```
 **Note:** OrthoFinder's output folder is generated automatically. The user can, however, define the parent directory where to store the output folder (e.g. /Documents/).
 
-Steps 4 and 5) Functional annotation of clusters of orthologs and prediction of interspecies interactions
+Steps 3) Functional annotation of clusters of orthologs, prediction of interspecies interactions and graphical visualization of the network
 ====
 
-Functional annotation of clusters of orthologs generated from **Step 3** is based on the user-defined ORAdb generated in **Step 1**.
+Functional annotation of clusters of orthologs generated from **Step 2** is based on the user-defined ORAdb generated in **Step 1**.
 
 Overview of functional annotation:
 
@@ -282,7 +278,7 @@ Overview of functional annotation:
 
 
 
-**Functional annotation and prediction of interspecies interactions is performed by running the script *annotate_and_predict.sh*.**
+**All tasks included in Step 3 are performed by running the script *annotate_and_predict.sh*.**
 
 This script takes as inputs:
 
@@ -293,7 +289,7 @@ This script takes as inputs:
 5 - full path of the list of reaction pairs (separated by tab) for a directed network (optional) (e.g. "/OrtSuite/reaction_pairs.tsv")  
   
 
-**Before running OrtAn you need to:**
+**Before running this script you need to:**
 
 - Run OrthoFinder with the input genomes  
 - Prepare the database with the necessary format.  
@@ -324,7 +320,7 @@ From the *restrictive_search* task we obtain 6 different text files:
 
 - [Species_Annotation.csv](examples/OrtAn_Results/Results/Species_Annotation.csv) - This file shows which functions are present in which species (1 - at least one sequence of a species annotated to the function, 0 - no sequences annotated to the function) (```located in examples/OrtAn_Results/Results/Species_Annotation.csv```).
 
-## Interspecies interactions output files
+## Interspecies interactions output files and network visualization
 
 Interspecies interactions will be stored in a folder called *interactions* located inside the project folder (Ex: /project_folder/work_dir/interactions).
 
