@@ -336,7 +336,7 @@ The complete list of files generated during prediction of interspecies interacti
 Citing OrtSuite
 ====
 
-A preprint version of OrtSuite is available [here](https://www.researchsquare.com/article/rs-52281/v1). A link to the published manuscript will be provided as soon as possible. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+A preprint version of OrtSuite is available [here](https://www.biorxiv.org/content/10.1101/2021.06.04.447094v1). A link to the published manuscript will be provided as soon as possible. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
 
 Contributions
 ====
