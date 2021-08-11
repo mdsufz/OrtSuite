@@ -245,6 +245,13 @@ Note: If you wish to use BLAST+ instead of DIAMOND please use the following:
 ```bash
 ~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -o /path/to/output/folder -S blast -og
 ```
+
+Note: If you wish to use MMSeqs2 instead of DIAMOND please use the following:
+
+```bash
+~/OrthoFinder/orthofinder -f ~/path/to/sequence/folder -o /path/to/output/folder -S mmseqs -og
+```
+
 **Note:** OrthoFinder's output folder is generated automatically. The user can, however, define the parent directory where to store the output folder (e.g. /Documents/).
 
 Steps 3) Functional annotation of clusters of orthologs, prediction of interspecies interactions and graphical visualization of the network
