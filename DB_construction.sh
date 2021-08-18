@@ -18,10 +18,10 @@ printf "%s\n" " " "seq_download_finished" " "
 
 # if it is not in the main folder, run the command below:
 cp "$4"/examples/test_database/get_gpr.sh "$1"/database
-
+cd "$1"/database
 printf "%s\n" "Starting GPR collection" " "
 
-sh "$1"/database/get_gpr.sh "$1"/database/KO_grp.txt "$4"/../GPRKO.jar "$1"/database/final_gpr.xlsx
+sh get_gpr.sh KO_grp.txt "$4"/GPRKO.jar final_gpr.xlsx
  
 printf "%s\n" " " "Finished GPR collection - Do manual check of file" " "
  
