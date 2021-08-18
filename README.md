@@ -46,7 +46,7 @@ With Docker image
 For personal computers or High Perfomance Computers (HPCs) that accept docker images we recommend the following intallation guide:
 
 
-**Requirements:** [Docker](https://docs.docker.com/engine/install/ubuntu/) 
+**Requirements:** [Docker](https://docs.docker.com/engine/install/ubuntu/)  
 **To note: Installing via docker does not require you to install the remaining dependencies (e.g. OrthoFinder, pandoc)!!**
 
 Run the following command to pull the docker image
@@ -60,6 +60,7 @@ To execute the docker image run the following command in your terminal
 sudo docker run -it --name ortsuite_docker kasmanas/ortsuite bash
 cd OrtSuite
 ```
+***Note***: The location of OrthoFinder using the docker image is *app/OrthoFinder*.
 
 With Conda install
 =====
