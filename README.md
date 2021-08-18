@@ -40,35 +40,60 @@ Installation
 OrtSuite is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
 Generation of clusters of orthologs is performed by OrthoFinder.
 
+For personal computers or High Perfomance Computers (HPCs) that accept docker images we recommend the following intallation guide:
+
+**Requirements:** [Docker](https://docs.docker.com/engine/install/ubuntu/)
+
+Run the following command to pull the docker image
+
+```bash
+sudo docker pull kasmanas/ortsuite:latest
+```
+To execute the docker image run the following command in your terminal
+
+```bash
+sudo docker run -it --name ortsuite_docker kasmanas/ortsuite bash
+```
+
+**If you do not wish to use a docker image the following procedure is required.**
+
 **Requirements:**  Python 3.6
 
 **Dependencies:**  Setuptools, bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond), R, [pandoc](https://pandoc.org/installing.html)  
 
+**First you need to clone the OrtSuite [repository](https://github.com/mdsufz/OrtSuite)**
 
-We suggest the use of conda to install the virtual environment.
+We suggest the use of miniconda to install the virtual environment.
+
+Get Miniconda
+
+```bash
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+
+Run the following to allow for execution of Miniconda
+
+```bash
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+sh /Miniconda3-latest-Linux-x86_64.sh
+export PATH=~/miniconda/bin:$PATH
+```
+
+
 
 Create a virtual environment.
 
 ```bash
-conda create -n OrtSuite python=3.6
+conda env create -f ortsuite_env.yml -n ortsuite_env
 
 ```
 Activate the virtual environment.
 
 ```bash
-conda activate OrtSuite
+conda activate ortsuite_env
 ```
 
-Install dependencies
-
-```bash
-pip install -U Setuptools
-pip install grequests
-pip install beautifulsoup4==4.8.2
-
-```
-
-Next move to the folder where the file setup.py from the OrtSuite tool is located.
+Next move to the folder where the file setup.py from OrtSuite is located.
 
 ```bash
 cd /path/to/OrtSuite
