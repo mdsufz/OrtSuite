@@ -40,6 +40,9 @@ Installation
 OrtSuite is a python tool that performs functional annotation of clusters of orthologs and identifies putative microbial interactions. This tool automatically retrieves sequence data in bulk from KEGG (Kyoto Encyclopedia of Genes and Genomes) database to generate the Ortholog Reaction-Associated user-defined database (*ORAdb*).
 Generation of clusters of orthologs is performed by OrthoFinder.
 
+With Docker image
+=====
+
 For personal computers or High Perfomance Computers (HPCs) that accept docker images we recommend the following intallation guide:
 
 **Requirements:** [Docker](https://docs.docker.com/engine/install/ubuntu/)
@@ -55,11 +58,13 @@ To execute the docker image run the following command in your terminal
 sudo docker run -it --name ortsuite_docker kasmanas/ortsuite bash
 ```
 
+With Conda install
+=====
 **If you do not wish to use a docker image the following procedure is required.**
 
 **Requirements:**  Python 3.6
 
-**Dependencies:**  Setuptools, bs4, grequests, [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond), R, [pandoc](https://pandoc.org/installing.html)  
+**Dependencies:**  [OrthoFinder](https://github.com/davidemms/OrthoFinder), [DIAMOND](https://github.com/bbuchfink/diamond), R, [pandoc](https://pandoc.org/installing.html)  
 
 **First you need to clone the OrtSuite [repository](https://github.com/mdsufz/OrtSuite)**
 
@@ -78,7 +83,6 @@ chmod +x Miniconda3-latest-Linux-x86_64.sh
 sh /Miniconda3-latest-Linux-x86_64.sh
 export PATH=~/miniconda/bin:$PATH
 ```
-
 
 
 Create a virtual environment.
