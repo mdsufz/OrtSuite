@@ -52,12 +52,12 @@ For personal computers or High Perfomance Computers (HPCs) that accept docker im
 Run the following command to pull the docker image
 
 ```bash
-sudo docker pull kasmanas/ortsuite:latest
+sudo docker pull mdsufz/ortsuite:latest
 ```
 To execute the docker image run the following command in your terminal
 
 ```bash
-sudo docker run -it --name ortsuite_docker kasmanas/ortsuite bash
+sudo docker run -it --name ortsuite_docker mdsufz/ortsuite bash
 cd OrtSuite
 ```
 ***Note***: The location of OrthoFinder using the docker image is *app/OrthoFinder*.
