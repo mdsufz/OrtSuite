@@ -19,11 +19,11 @@ OrtSuite was developed with the goal to facilitate annotation of ecosystem proce
 
 **Installation**
 
-**Step 1) ORAdb construction and GPR definition:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database and download of Gene-Protein-Reaction rules from KEGG.
+**Task 1) ORAdb construction and GPR definition:** Generation of the user-defined Ortholog-Reaction Association (ORAdb) database and download of Gene-Protein-Reaction rules from KEGG.
 
-**Step 2) Clustering of orthologs**   
+**Task 2) Clustering of orthologs**   
 
-**Step 3) Functional annotation of clusters of orthologs and Prediction of interspecies interactions based on the functional potential of individual species**   
+**Task 3) Functional annotation of clusters of orthologs and Prediction of interspecies interactions based on the functional potential of individual species**   
 
 
 # System Requirements
@@ -193,7 +193,7 @@ Once installation of OrtSuite and all dependencies are completed the different c
 
 
 
-## Step 1) Generating the Ortholog Reaction-Assosiation database (ORAdb) and download of Gene-Protein-Reaction (GPR) rules from KEGG.
+## Task 1) Generating the Ortholog Reaction-Assosiation database (ORAdb) and download of Gene-Protein-Reaction (GPR) rules from KEGG.
 
 
 The generation of a user-defined ortholog reaction-association database starts with the download of all the sequences associated with the KO (KEGG Orthology) group to a FASTA file.
@@ -264,7 +264,7 @@ Note: Running this command may take some time and memory space.
 The script generates a table with the GPR rules for all reaction-enzyme pairs. Since the same reaction can occur in different modules with different gene rules, the user should edit this file so that it only includes ONE unique rule per REACTION according to the target pathway.
 
 
-Step 2) Clustering of orthologs (OrthoFinder)
+Task 2) Clustering of orthologs (OrthoFinder)
 ====
 
 OrthoFinder takes as input a folder containing the FASTA sequences the user wants to cluster.
@@ -287,10 +287,10 @@ Note: If you wish to use MMSeqs2 instead of DIAMOND please use the following:
 
 **Note:** OrthoFinder's output folder is generated automatically. The user can, however, define the parent directory where to store the output folder (e.g. /Documents/).
 
-Steps 3) Functional annotation of clusters of orthologs, prediction of interspecies interactions and graphical visualization of the network
+Task 3) Functional annotation of clusters of orthologs, prediction of interspecies interactions and graphical visualization of the network
 ====
 
-Functional annotation of clusters of orthologs generated from **Step 2** is based on the user-defined ORAdb generated in **Step 1**.
+Functional annotation of clusters of orthologs generated from **Task 2** is based on the user-defined ORAdb generated in **Task 1**.
 
 Overview of functional annotation:
 
@@ -317,7 +317,7 @@ Overview of functional annotation:
 
 
 
-**All tasks included in Step 3 are performed by running the script *annotate_and_predict.sh*.**
+**All steps included in Task 3 are performed by running the script *annotate_and_predict.sh*.**
 
 This script takes as inputs:
 
