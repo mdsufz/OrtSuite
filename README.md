@@ -373,10 +373,16 @@ The complete list of files generated during prediction of interspecies interacti
 - A file containing all interspecies interactions whose combined functional potential allow a complete pathway of interest (defined in *user_input.csv*). As an example: [Aerobic conversion of benzoate to acetyl-CoA](Aerobic_benzoate-acetylCoA.csv)
 - A HTML file containing the interactive network visulization for the pathway of interest. For example: [network_example](network_example.png). 
 
+Video tutorials
+===
+
+We also provide video tutorials briefling explaining how to use OrtSuite [here](https://xxxx).
+
+
 Citing OrtSuite
 ====
 
-A preprint version of OrtSuite is available [here](https://www.biorxiv.org/content/10.1101/2021.06.04.447094v1). A link to the published manuscript will be provided as soon as possible. If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
+Publication of OrtSuite is available [here](https://www.life-science-alliance.org/content/4/12/e202101167). If other software contained and used by OrtSuite was also useful in your research (e.g. DIAMOND, BLAST and OrthoFinder) please give them credit as well.
 
 Contributions
 ====
