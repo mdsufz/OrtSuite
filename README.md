@@ -1,6 +1,7 @@
 # OrtSuite - a flexible pipeline for annotation of ecosystem processes and prediction of putative microbial interactions
 
-OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. OrtSuite only requires three commands to run (from database construction to clustering of orthologs, functional annotation and putative microbial synergistic interactions).
+OrtSuite was developed with the goal to facilitate annotation of ecosystem processes and identify putative microbial interactions by automating the complete process from sequence retrieval, clustering of ortholog sequences, functional annotation, to putative microbial interactions prediction. OrtSuite only requires three commands to run (from database construction to clustering of orthologs, functional annotation and putative microbial synergistic interactions). 
+We provide video tutorials briefling explaining how to use OrtSuite [here](https://www.youtube.com/playlist?list=PLH4_1OSQOdnqTQY-olYX3vZss4DWtPkZj).
 
 
 
@@ -372,12 +373,6 @@ The complete list of files generated during prediction of interspecies interacti
 - Files containing the number of species with the functional potential to each reaction. For example, [Aerobic conversion of benzoate to acetyl-CoA_species_per_reactions.txt](Aerobic conversion of benzoate to acetyl-CoA_species_per_reactions.txt)
 - A file containing all interspecies interactions whose combined functional potential allow a complete pathway of interest (defined in *user_input.csv*). As an example: [Aerobic conversion of benzoate to acetyl-CoA](Aerobic_benzoate-acetylCoA.csv)
 - A HTML file containing the interactive network visulization for the pathway of interest. For example: [network_example](network_example.png). 
-
-Video tutorials
-===
-
-We also provide video tutorials briefling explaining how to use OrtSuite [here](https://xxxx).
-
 
 Citing OrtSuite
 ====
