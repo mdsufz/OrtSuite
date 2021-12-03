@@ -85,7 +85,7 @@ Run the following to allow for execution of Miniconda
 
 ```bash
 chmod +x Miniconda3-latest-Linux-x86_64.sh
-sh /Miniconda3-latest-Linux-x86_64.sh
+sh ./Miniconda3-latest-Linux-x86_64.sh
 export PATH=~/miniconda/bin:$PATH
 ```
 
