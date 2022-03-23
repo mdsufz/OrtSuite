@@ -347,6 +347,7 @@ def get_fastaProt(response):
 
 
 def get_ko_name(response):
+    definition = ""
     html = response.read()
     b = bs(html, features="html.parser")
     rows = b.findAll("tr")
